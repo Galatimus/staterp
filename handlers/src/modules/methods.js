@@ -4,11 +4,9 @@ let methods = {};
 
 import Menu from "./menu";
 import ctos from "./ctos";
-
 import enums from "../enums";
 import user from "../user";
 import menuList from "../menuList";
-
 import timer from "../manager/timer";
 import weather from "../manager/weather";
 

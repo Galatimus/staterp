@@ -1,6 +1,8 @@
 "use strict";
 
 const crypto = require('crypto');
+const fs = require('fs/promises');
+
 
 let Container = require('./data');
 let mysql = require('./mysql');
