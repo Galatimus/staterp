@@ -3978,21 +3978,6 @@ CREATE TABLE `promocode_list` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `promocode_top_list`
---
-
-CREATE TABLE `promocode_top_list` (
-  `id` int(11) NOT NULL,
-  `promocode` varchar(64) NOT NULL DEFAULT '',
-  `start` varchar(512) NOT NULL DEFAULT '{"money":1000}',
-  `end` varchar(512) NOT NULL DEFAULT '{"money":25000}',
-  `is_one` tinyint(1) NOT NULL DEFAULT '0',
-  `is_use` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `promocode_using`
 --
 
@@ -6497,12 +6482,6 @@ ALTER TABLE `promocode_list`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `promocode_top_list`
---
-ALTER TABLE `promocode_top_list`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Индексы таблицы `promocode_using`
 --
 ALTER TABLE `promocode_using`
@@ -6843,11 +6822,6 @@ ALTER TABLE `phone_sms`
 -- AUTO_INCREMENT для таблицы `promocode_list`
 --
 ALTER TABLE `promocode_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблицы `promocode_top_list`
---
-ALTER TABLE `promocode_top_list`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT для таблицы `promocode_using`
