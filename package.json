@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "description": "Ready to go backend development starter for RAGE multiplayer.",
     "main": "index.js",
-    "author": "ua.lifesheets <ua.lifesheets@wixcore.net>",
-    "license": "ISC",
+    "author": "ua.lifesheets@wixcore.net",
+    "license": "MIT",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "nodemon --watch packages --watch client_packages --exec \"./ragemp-server.exe\"",
