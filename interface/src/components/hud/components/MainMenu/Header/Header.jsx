@@ -42,21 +42,13 @@ const styles = {
 }
 
 export default function Header(props) {
-
-    /*if (props.banner)
-    {
-        styles.header.backgroundImage = `url(${require('../img/banners/' + props.banner + '.png')})`;
-        styles.header.backgroundPosition = 'center';
-    }*/
-
-
     return (
         <div>
-            <div className="mainmenu__header__container" style={{minHeight: props.banner ? '125px' : '', backgroundImage: props.banner ? `url('https://state-99.com/client/images/banners/${props.banner}.png')` : ''}}>
+            <div className="mainmenu__header__container" style={{ minHeight: props.banner ? '125px' : '', backgroundImage: props.banner ? `url('https://staterp.wixcore.net/assets/images/banners/${props.banner}.png')` : '' }}>
                 <span className="mainmenu__header__title">{props.headerText}</span>
             </div>
             <div style={styles.headerDataContainer}>
-                <div style={styles.headerDesc} dangerouslySetInnerHTML={{__html: parseText(props.headerDesc)}} />
+                <div style={styles.headerDesc} dangerouslySetInnerHTML={{ __html: parseText(props.headerDesc) }} />
                 <div style={styles.headerDescCount}>{props.headerData}</div>
             </div>
         </div>
