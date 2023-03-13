@@ -1556,13 +1556,13 @@ vehicles.lockStatus = (player, vehicle) => {
         return;
     try {
         vehicle.locked = !vehicle.locked;
-        //let lockStatus = !vSync.getLockState(vehicle);
         vSync.setLockStatus(vehicle, vehicle.locked);
-        if (!vehicle.locked)
+        vehicle.setVariable('locked', vehicle.locked);
+        if (!vehicle.locked) {
             player.notify('Вы ~g~открыли~s~ транспорт');
-        else
+        } else {
             player.notify('Вы ~r~закрыли~s~ транспорт');
-
+        }
         if (!player.vehicle) {
             user.playAnimation(player, "anim@mp_player_intmenu@key_fob@", "fob_click", 48);
             player.addAttachment('pickPick');
