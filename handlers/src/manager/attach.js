@@ -48,44 +48,30 @@ mp.attachmentMngr =
                                 , true, true, false, false, 2, true);
 
                             entity.__attachmentObjects[id] = object;
-                        }
-                        else {
+                        } else {
                             let object = mp.objects.new(attInfo.model, spawnPos, {dimension: entity.dimension});
-
-                            let boneIndex = (typeof attInfo.boneName === 'string') ?
-                                entity.getBoneIndexByName(attInfo.boneName) :
-                                entity.getBoneIndex(attInfo.boneName);
-
-                            object.attachTo(entity.handle, boneIndex,
-                                attInfo.offset.x, attInfo.offset.y, attInfo.offset.z,
-                                attInfo.rotation.x, attInfo.rotation.y, attInfo.rotation.z,
-                                false, false, attInfo.collision, false, 2, true);
-
+                            let boneIndex = (typeof attInfo.boneName === 'string') ? entity.getBoneIndexByName(attInfo.boneName) : entity.getBoneIndex(attInfo.boneName);
+                            setTimeout(function(){ 
+                                object.attachTo(entity.handle, boneIndex, attInfo.offset.x, attInfo.offset.y, attInfo.offset.z, attInfo.rotation.x, attInfo.rotation.y, attInfo.rotation.z, false, false, attInfo.collision, false, 2, true);
+                            }, 10);
                             if (attInfo.freeze) {
                                 object.freezePosition(true);
                             }
-
                             if (id === mp.game.joaat('music')) {
                                 object.setAlpha(0);
                                 object.setVisible(false, false);
-
                                 mp.game.invoke('0x651D3228960D08AF', "SE_Script_Placed_Prop_Emitter_Boombox", object.handle);
                                 mp.game.audio.setEmitterRadioStation("SE_Script_Placed_Prop_Emitter_Boombox", mp.game.audio.getRadioStationName(0));
                                 mp.game.audio.setStaticEmitterEnabled("SE_Script_Placed_Prop_Emitter_Boombox", true);
                             }
-
                             entity.__attachmentObjects[id] = object;
                         }
                     }
-                }
-                else
-                {
+                } else {
                     methods.debug(`Static Attachments Error: Unknown Attachment Used: ~w~0x${id.toString(16)}`);
                 }
-            }
-            catch (e) {
-                methods.error('ATTACH ERROR');
-                methods.error(e);
+            } catch (e) {
+                methods.error('ATTACH ERROR', e);
             }
         },
 
