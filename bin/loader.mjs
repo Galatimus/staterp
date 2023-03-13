@@ -14,7 +14,7 @@ x();
     for (let wixcore of mp.events.getAllOf("packagesLoaded")) {
         try {
             wixcore();
-        } catch (e) {
+        } catch (error) {
             successful = !1;
             console.error(`${'\x1b[31m'}[ERROR]${'\x1b[35m'} bin/loader:${'\x1b[0m'}`, error.message);
         }
