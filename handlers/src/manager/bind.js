@@ -641,8 +641,17 @@ for(let code in keyCodes) {
                 mp.events.callRemote('server:vehicle:lockStatus');
         }
         if (user.getCache('s_bind_engine') == parseInt(code)) {
-            if (!methods.isBlockKeys())
+            if (!methods.isBlockKeys()) {
+                if (Container.Data.HasLocally(mp.players.local.remoteId, "isBindEngineTimeout")) {
+                    mp.game.ui.notifications.show("~r~Нельзя так часто нажимать эту кнопку");
+                    return;
+                }
+                Container.Data.SetLocally(mp.players.local.remoteId, "isBindEngineTimeout", true);
                 vehicles.engineVehicle();
+                setTimeout(function () {
+                    Container.Data.ResetLocally(mp.players.local.remoteId, "isBindEngineTimeout");
+                }, 250);
+            }
         }
         if (user.getCache('s_bind_belt') == parseInt(code)) {
             if (!methods.isBlockKeys() && mp.players.local.vehicle) {
