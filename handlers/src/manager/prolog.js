@@ -288,10 +288,9 @@ prolog.timer = function() {
     pickupsPool.forEach(p => {
 
         try {
-            if (p.handle && mp.game.object.hasPickupBeenCollected(p.handle)) //Проверить сущестоввание
-            {
+            // Перший параметр - це дескриптор вибору, а другий параметр - ідентифікатор сцени.
+            if (p.handle && !mp.game.object.doesPickupExist(p.handle) && !mp.game.object.doesPickupObjectExist(p.handle)) { // doesPickupExist
                 if (p.fuel) {
-
                     inventory.takeNewItemJust(9, "{}", 1); //Канистра
                     ui.showDialog('Канистра лежит у вас в инвентаре, подойдите к транспорту и заправьте его через инвентарь. Нажмите I чтобы открыть инвентарь.', 'Информация');
                 }
