@@ -3159,7 +3159,7 @@ mp.events.addRemoteCounted('server:gr6:findPickup', (player, x, y, z) => {
         return;
     try {
 
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
 
             if (player.vehicle.getVariable('isStartDuty')) {
                 player.notify('~r~Вы уже получили задание');
@@ -3236,7 +3236,7 @@ mp.events.addRemoteCounted('server:gr6:unload', (player) => {
     if (!user.isLogin(player))
         return;
 
-    if (player.vehicle && player.seat == -1) {
+    if (player.vehicle && player.seat == 0) {
         try {
             let v = player.vehicle;
             if (vehicles.exists(v)) {
@@ -3346,7 +3346,7 @@ mp.events.addRemoteCounted('server:gr6:grab', (player) => {
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             if (player.vehicle.getVariable('job') == 10) {
                 user.showLoadDisplay(player);
                 let money = methods.parseFloat(player.vehicle.getVariable('gr6Money') / 90);
@@ -4912,10 +4912,11 @@ mp.events.addRemoteCounted('server:tradeMarket:buy', (player, id, price, name, o
 mp.events.addRemoteCounted("server:showVehMenu", (player) => {
     if (!user.isLogin(player))
         return;
-    if (player.vehicle && player.seat == -1)
+    if (player.vehicle && player.seat == 0) {
         player.call('client:menuList:showVehicleMenu', [Array.from(vehicles.getData(player.vehicle.getVariable('container')))]);
-    else
+    } else {
         player.notify('~r~Вы должны находиться в транспорте');
+    }       
 });
 
 mp.events.addRemoteCounted("server:vehicle:lockStatus:hack", (player, vId) => {
@@ -4944,7 +4945,7 @@ mp.events.addRemoteCounted("server:vehicle:lockStatus", (player) => {
         return;
 
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             vehicles.lockStatus(player, player.vehicle);
             return;
         }
@@ -8109,7 +8110,7 @@ mp.events.addRemoteCounted('server:vehicle:engineStatus', (player, status) => {
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             vehicles.engineStatus(player, player.vehicle, status);
         }
     }
@@ -8122,7 +8123,7 @@ mp.events.addRemoteCounted('server:vehicle:neonStatus', (player) => {
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             vehicles.neonStatus(player, player.vehicle);
         }
     }
@@ -8135,7 +8136,7 @@ mp.events.addRemoteCounted('server:vehicle:setColor', (player, color1, color2) =
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             player.vehicle.setColor(color1, color2);
         }
     }
@@ -8148,7 +8149,7 @@ mp.events.addRemoteCounted('server:vehicle:setColorP', (player, color) => {
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             player.vehicle.pearlescentColor = color;
         }
     }
@@ -8161,7 +8162,7 @@ mp.events.addRemoteCounted('server:vehicle:setColorW', (player, color) => {
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             player.vehicle.wheelColor = color;
         }
     }
@@ -8174,7 +8175,7 @@ mp.events.addRemoteCounted('server:vehicle:setColorI', (player, color) => {
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             vSync.setVehicleInteriorColor(player.vehicle, color);
         }
     }
@@ -8187,7 +8188,7 @@ mp.events.addRemoteCounted('server:vehicle:setColorD', (player, color) => {
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             vSync.setVehicleDashboardColor(player.vehicle, color);
         }
     }
@@ -8200,7 +8201,7 @@ mp.events.addRemoteCounted('server:vehicle:setLivery', (player, liv) => {
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             player.vehicle.livery = liv;
         }
     }
@@ -8795,7 +8796,7 @@ mp.events.addRemoteCounted('server:vehicle:setNeonColor', (player, r, g, b) => {
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             player.vehicle.setNeonColor(r, g, b);
             vehicles.set(player.vehicle.getVariable('container'), 'neon_r', r);
             vehicles.set(player.vehicle.getVariable('container'), 'neon_g', g);
@@ -8811,7 +8812,7 @@ mp.events.addRemoteCounted('server:vehicle:setLight', (player, cl) => {
     if (!user.isLogin(player))
         return;
     try {
-        if (player.vehicle && player.seat == -1) {
+        if (player.vehicle && player.seat == 0) {
             player.vehicle.data.headlightColor = cl;
             vehicles.set(player.vehicle.getVariable('container'), 'colorl', cl);
         }
