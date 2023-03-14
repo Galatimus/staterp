@@ -76,11 +76,15 @@ vSync.updateValues = function(entity, byEnter = false) {
                     }
                 }
 
-                //ntity.setEngineOn(actualData.Engine, true, false);
-                mp.game.invoke(methods.SET_VEHICLE_UNDRIVEABLE, entity.handle, true);
+                // Машина сама глушиться при виході зі стриму.
+                if(!actualData.Engine) {
+                    mp.game.invoke(methods.SET_VEHICLE_UNDRIVEABLE, entity.handle, true); 
+                }
 
-                if (!byEnter)
+                if (!byEnter) {
                     entity.setDirtLevel(actualData.Dirt);
+                }
+                    
                 entity.setIndicatorLights(1, actualData.IndicatorLeftToggle);
                 entity.setIndicatorLights(0, actualData.IndicatorRightToggle);
 
@@ -841,8 +845,6 @@ mp.events.add("entityStreamIn", (entity) => {
 
                 entity.trackVisibility();
                 entity.setTyresCanBurst(true);
-
-                mp.game.invoke(methods.SET_VEHICLE_UNDRIVEABLE, entity.handle, true);
                 vSync.updateValues(entity);
 
                 if (entity.getVariable('useless') === true) {
