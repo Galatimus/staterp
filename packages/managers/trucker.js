@@ -1666,15 +1666,17 @@ trucker.doneOffer = function (player, offerId) {
     }
     else {
 
-        let trailerId = player.vehicle.getVariable('trailer');
+        let trailer = null;
+        
+        mp.vehicles.forEach(function (v) {
+            if (v.getVariable('trOwner') == user.getId(player)) trailer = v;
+        });
 
         if (!trailerId) {
             trucker.notify(player, '~r~У Вас нет прицепа');
             trucker.removeOffer(offerId);
             return;
         }
-
-        let trailer = mp.vehicles.at(player.vehicle.getVariable('trailer'));
 
         if (!vehicles.exists(trailer)) {
             trucker.removeOffer(offerId);
