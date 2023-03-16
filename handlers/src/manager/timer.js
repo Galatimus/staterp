@@ -4,13 +4,10 @@ import inventory from "../inventory";
 import phone from "../phone";
 import enums from "../enums";
 import chat from "../chat";
-
 import methods from "../modules/methods";
 import Container from "../modules/data";
 import ui from "../modules/ui";
-
 import vehicles from "../property/vehicles";
-
 import vSync from "./vSync";
 import license from "./license";
 import weather from './weather';

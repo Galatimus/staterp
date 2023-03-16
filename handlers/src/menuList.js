@@ -17,7 +17,6 @@ import timer from "./manager/timer";
 import policeRadar from "./manager/policeRadar";
 import prolog from "./manager/prolog";
 import achievement from "./manager/achievement";
-
 import user from './user';
 import admin from './admin';
 import enums from './enums';
@@ -27,8 +26,6 @@ import inventory from './inventory';
 import weapons from './weapons';
 import chat from './chat';
 import shopMenu from './shopMenu';
-//import voice from './voice';
-
 import houses from './property/houses';
 import condos from './property/condos';
 import stocks from './property/stocks';
@@ -37,12 +34,10 @@ import vehicles from "./property/vehicles";
 import yachts from "./property/yachts";
 import fraction from "./property/fraction";
 import family from "./property/family";
-
 import cloth from './business/cloth';
 import vShop from "./business/vShop";
 import fuel from "./business/fuel";
 import tradeMarket from "./business/tradeMarket";
-
 import bus from "./jobs/bus";
 import gr6 from "./jobs/gr6";
 import mail from "./jobs/mail";

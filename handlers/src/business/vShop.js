@@ -1,7 +1,5 @@
 import methods from '../modules/methods';
-
 import user from '../user';
-import chat from "../chat";
 import ui from "../modules/ui";
 import Camera from "../manager/cameraRotator";
 

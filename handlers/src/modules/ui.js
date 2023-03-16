@@ -6,15 +6,12 @@ import user from "../user";
 import voiceRage from "../voiceRage";
 import chat from "../chat";
 import enums from "../enums";
-
 import weather from "../manager/weather";
 import shoot from "../manager/shoot";
 import quest from "../manager/quest";
 import prolog from "../manager/prolog";
-
 import vehicles from "../property/vehicles";
 import phone from "../phone";
-import admin from "../admin";
 
 let ui = {};
 let uiBrowser = null;

@@ -1,14 +1,12 @@
 "use strict";
 
 import ui from "./ui";
-import phone from "../phone";
 import methods from "./methods";
 import UIMenu from "./menu";
 import menuList from "../menuList";
 import houses from "../property/houses";
 import mail from "../jobs/mail";
 import user from "../user";
-import chat from "../chat";
 
 let cefMenu = {};
 
