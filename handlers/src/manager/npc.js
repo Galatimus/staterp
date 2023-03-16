@@ -1,9 +1,7 @@
 import methods from '../modules/methods';
 import timer from '../manager/timer';
-
 import checkpoint from "./checkpoint";
 import quest from "./quest";
-
 import user from "../user";
 import enums from "../enums";
 import shopMenu from "../shopMenu";
@@ -85,12 +83,8 @@ npc.loadAll = function() {
 // Охранник справа в City Hall
     npc.create(mp.game.joaat("s_m_m_highsec_02"), new mp.Vector3(-1291.8, -565.9213, 30.57479), -132.9988, false, "WORLD_HUMAN_GUARD_STAND", '', '', 9, 0, '', '');
 
-    //Больница PillBox
-    npc.create(mp.game.joaat("s_f_y_scrubs_01"), new mp.Vector3(309.55218505859375, -593.9552612304688, 43.28400802612305), 21.91470, false, "WORLD_HUMAN_STAND_IMPATIENT");
-    //Больница Sandy
-    npc.create(mp.game.joaat("s_f_y_scrubs_01"), new mp.Vector3(1838.4437255859375, 3682.33544921875, 34.27005386352539), 162.76380920410156, false, "WORLD_HUMAN_STAND_IMPATIENT");
-    //Больница Paleto
-    npc.create(mp.game.joaat("s_f_y_scrubs_01"), new mp.Vector3(-246.97201538085938, 6320.427734375, 32.420734405517578), 312.1958923339844, false, "WORLD_HUMAN_STAND_IMPATIENT");
+
+    
     //USMC
     npc.create(mp.game.joaat("s_m_y_marine_03"), new mp.Vector3(486.37030029296875, -3027.28515625, 6.014427661895752), 275.48919677734375, false, "WORLD_HUMAN_CLIPBOARD");
 
@@ -150,8 +144,7 @@ npc.loadAll = function() {
     npc.create(mp.game.joaat("a_f_y_business_04"), new mp.Vector3(92.31831, -231.1054, 54.66363), 327.2379, false, "WORLD_HUMAN_STAND_IMPATIENT");
 // D.P. Pharmacy - Текстайл-Сити - Строберри-авеню
     npc.create(mp.game.joaat("a_f_y_business_03"), new mp.Vector3(299.7478, -733.0994, 29.3525), 255.0316, false, "WORLD_HUMAN_STAND_IMPATIENT");
-// Больница - Аптека - Палето-Бей - Бульвар Палето
-    npc.create(mp.game.joaat("a_f_y_business_02"), new mp.Vector3(-253.79364013671875, 6336.76953125, 32.426055908203125), 215.51046752929688, false, "WORLD_HUMAN_STAND_IMPATIENT");
+
 // Рыболовный магазин
     npc.create(mp.game.joaat("s_m_m_ammucountry"), new mp.Vector3(-1598.123046875, 5200.99609375, 4.3873372077941895), 68.22468566894531, false, "WORLD_HUMAN_GUARD_STAND");
 // Магазин охоты
@@ -413,7 +406,9 @@ npc.loadAll = function() {
     npc.create(mp.game.joaat("g_m_y_strpunk_02"), new mp.Vector3(5106.8076171875, -5162.783203125, 2.05600905418396), 353.6639404296875, 0, 'WORLD_HUMAN_CLIPBOARD');
     //Island Работа садовника
     npc.create(mp.game.joaat("s_m_m_gaffer_01"), new mp.Vector3(5399.09619140625, -5172.28369140625, 31.35650634765625), 160.55970764160156, 0, 'WORLD_HUMAN_CLIPBOARD');
-
+    
+    // Больница - Аптека - Палето-Бей - Бульвар Палето
+    npc.create(mp.game.joaat("a_f_y_business_02"), new mp.Vector3(-253.79364013671875, 6336.76953125, 32.426055908203125), 215.51046752929688, false, "WORLD_HUMAN_STAND_IMPATIENT");
 
     timer.createInterval('npc.timer', npc.timer, 2500);
     timer.createInterval('npc.timer500', npc.timer500, 500);
@@ -566,7 +561,6 @@ npc.createPedLocally = async function(model, pos, heading) {
     }
     return null;
 };
-
 
 npc.getDialog = function(pos, rot, name, subtitle, question, btn = []) {
     btn.push(

@@ -33,10 +33,8 @@ import jobPoint from "../manager/jobPoint";
 import quest from "../manager/quest";
 import jail from "../manager/jail";
 import object from "../manager/object";
-import hosp from "../manager/hosp";
 import edu from "../manager/edu";
 import prolog from "../manager/prolog";
-import npc from "../manager/npc";
 import cutscene from "../manager/cutscene";
 import drone from "../manager/drone";
 
@@ -1427,16 +1425,6 @@ mp.events.add('client:menuList:showInvaderShopMenu', () => {
     }
 });
 
-mp.events.add('client:menuList:showBotEmsMenu', (idx, canFree) => {
-    try {
-       methods.debug('Event: client:menuList:showBotEmsMenu');
-       menuList.showBotEmsMenu(idx, canFree);
-    }
-    catch (e) {
-        methods.debug(e);
-    }
-});
-
 mp.events.add('client:menuList:showBotUsmcMenu', () => {
     try {
        methods.debug('Event: client:menuList:showBotUsmcMenu');
@@ -2091,10 +2079,6 @@ mp.events.add('client:user:updateDating', (datingList) => {
     }
 });
 
-mp.events.add('client:hosp:free', () => {
-    hosp.freePlayer(true);
-});
-
 mp.events.add('client:menuList:showMenu', (title, desc, menuData) => {
     methods.debug('Event: client:menuList:showMenu');
     menuList.showMenu(title, desc, new Map(menuData));
@@ -2271,14 +2255,8 @@ mp.events.add('client:menuList:showMazeOfficeMenu', async () => {
     menuList.showBankMenu(1, await business.getPrice(1));
 });
 
-mp.events.add('client:menuList:showFractionKeyMenu', (data) => {
-    methods.debug('Event: client:menuList:showFractionKeyMenu', data);
+mp.events.add('wixcore::security:feature:factions:menu:list:vehicles', (data) => {
     menuList.showFractionKeyMenu(data);
-});
-
-mp.events.add('client:menuList:showFractionInfoMenu', () => {
-    methods.debug('Event: client:menuList:showFractionInfoMenu');
-    menuList.showFractionInfoMenu();
 });
 
 mp.events.add('client:menuList:showFractionInvaderMenu', () => {
@@ -2353,27 +2331,10 @@ mp.events.add('client:menuList:showSapdGarderobMenu', () => {
 
 mp.events.add('client:menuList:showSapdArrestMenu', () => {
     methods.debug('Event: client:menuList:showSapdArrestMenu');
-    //menuList.showSapdArrestMenu();
 });
 
 mp.events.add('client:menuList:showSapdClearMenu', () => {
     methods.debug('Event: client:menuList:showSapdClearMenu');
-    //menuList.showSapdClearMenu();
-});
-
-mp.events.add('client:menuList:showEmsGarderobMenu', () => {
-    methods.debug('Event: client:menuList:showEmsGarderobMenu');
-    menuList.showEmsGarderobMenu();
-});
-
-mp.events.add('client:menuList:showEmsArsenalMenu', () => {
-    methods.debug('Event: client:menuList:showEmsArsenalMenu');
-    menuList.showEmsArsenalMenu();
-});
-
-mp.events.add('client:menuList:showEmsFreeMenu', () => {
-    methods.debug('Event: client:menuList:showEmsFreeMenu');
-    menuList.showEmsFreeMenu();
 });
 
 mp.events.add('client:menuList:showSheriffGarderobMenu', () => {
@@ -4297,8 +4258,7 @@ mp.events.add("playerDeath", async function (player, reason, killer) {
         user.removeAllWeapons();
     }
 
-    hosp.reset();
-    user.setTeleport(true);
+    // user.setTeleport(true);
 
     ui.callCef('license', JSON.stringify({type: 'hide'}));
     ui.callCef('certificate', JSON.stringify({type: 'hide'}));

@@ -11867,10 +11867,6 @@ menuList.showFractionInfoMenu = function() {
         UIMenu.Menu.AddMenuItem(`Забрать лицензию на предпринимательство`, "", {licRName: "biz_lic"});
         UIMenu.Menu.AddMenuItem(`Забрать лицензию на рыбаловство`, "", {licRName: "fish_lic"});
     }
-    if (user.isEms()) {
-        UIMenu.Menu.AddMenuItem(`Выдать мед. страховку`, "Стоимость: ~g~$20,000", {licName: "med_lic"});
-        UIMenu.Menu.AddMenuItem(`Выдать разрешение на марихуану`, "Стоимость: ~g~$5,000", {licName: "marg_lic"});
-    }
     if (user.isCartel()) {
         UIMenu.Menu.AddMenuItem(`Выдать разрешение на рыбаловство`, "Стоимость: ~g~$10,000", {licName: "fish_lic"});
         UIMenu.Menu.AddMenuItem(`Забрать лицензию на рыбаловство`, "", {licRName: "fish_lic"});
@@ -12441,104 +12437,6 @@ menuList.showGovGarderobMenu = function() {
                 inventory.takeNewWeaponItem(item.itemId, `{"owner": "Правительство", "userName": "${user.getCache('name')}"}`, 'Выдано оружие').then();
             else
                 inventory.takeNewWeaponItem(item.itemId, `{"owner": "Правительство", "userName": "${user.getCache('name')}"}`, 'Выдан предмет').then();
-        }
-    });
-};
-
-menuList.showEmsGarderobMenu = function() {
-
-    UIMenu.Menu.Create(`Гардероб`, `~b~Гардероб EMS`);
-
-    let listGarderob = [
-        "Повседневная одежда",
-        "Форма парамедика #1",
-        "Форма парамедика #2",
-        "Зимняя форма парамедика #1",
-        "Зимняя форма парамедика #2",
-        "Форма спасателя #1",
-        "Форма спасателя #2",
-        "Форма врача #1",
-        "Форма врача #2",
-        "Форма врача #3",
-        "Форма врача #4",
-        "Форма врача #5",
-        "Форма врача #6"
-    ];
-
-    for (let i = 0; i < listGarderob.length; i++) {
-        try {
-            UIMenu.Menu.AddMenuItem(`${listGarderob[i]}`);
-        }
-        catch (e) {
-            methods.debug(e);
-        }
-    }
-
-    UIMenu.Menu.AddMenuItem("~r~Закрыть", "", {doName: "closeMenu"});
-    UIMenu.Menu.Draw();
-
-    UIMenu.Menu.OnIndexSelect.Add((index) => {
-        if (index >= listGarderob.length)
-            return;
-        if (index === 0)
-            user.giveUniform(index);
-        else
-            user.giveUniform(index + 23);
-    });
-};
-
-menuList.showEmsArsenalMenu = function() {
-    UIMenu.Menu.Create(`Арсенал`, `~b~Арсенал`);
-
-    UIMenu.Menu.AddMenuItem("Сухпаёк", "", {itemId: 32});
-    UIMenu.Menu.AddMenuItem("Антипохмелин", "", {itemId: 221});
-
-    if (user.isLeader() || user.isSubLeader()) {
-        UIMenu.Menu.AddMenuItem("Рецепт на большую аптечку", "Рецепт для крафта", {recHealB: true});
-        UIMenu.Menu.AddMenuItem("Рецепт на малую аптечку", "Рецепт для крафта", {recHeal: true});
-    }
-    
-    if (user.getCache('rank_type') !== 0 || user.isLeader() || user.isSubLeader() || user.isDepLeader() || user.isDepSubLeader()) {
-        UIMenu.Menu.AddMenuItem("Большая Аптечка", "", {itemId: 278});
-        UIMenu.Menu.AddMenuItem("Дефибриллятор", "", {itemId: 277});
-        UIMenu.Menu.AddMenuItem("Полицейское огорождение", "", {itemId: 199});
-        UIMenu.Menu.AddMenuItem("Полосатый конус", "", {itemId: 201});
-        UIMenu.Menu.AddMenuItem("Красный конус", "", {itemId: 202});
-    }
-
-    UIMenu.Menu.AddMenuItem("~r~Закрыть", "", {doName: "closeMenu"});
-    UIMenu.Menu.Draw();
-
-    UIMenu.Menu.OnSelect.Add(async item => {
-        UIMenu.Menu.HideMenu();
-        if (item.itemId) {
-            inventory.takeNewWeaponItem(item.itemId, `{"owner": "EMS", "userName": "${user.getCache('name')}"}`, 'Выдано оружие').then();
-        }
-        if (item.recHealB) {
-            inventory.takeNewWeaponItem(474, `{"owner": "EMS", "userName": "${user.getCache('name')}", "id":0}`, 'Выдан рецепт').then();
-        }
-        if (item.recHeal) {
-            inventory.takeNewWeaponItem(474, `{"owner": "EMS", "userName": "${user.getCache('name')}", "id":1}`, 'Выдан рецепт').then();
-        }
-    });
-};
-
-menuList.showEmsFreeMenu = function() {
-    UIMenu.Menu.Create(`EMS`, `~b~Мед. панель`);
-    UIMenu.Menu.AddMenuItem("Выписать человека", "", {doName: 'free'});
-    UIMenu.Menu.AddMenuItem("Вылечить человека", "", {doName: 'heal'});
-    UIMenu.Menu.AddMenuItem("~r~Закрыть", "", {doName: "closeMenu"});
-    UIMenu.Menu.Draw();
-
-    UIMenu.Menu.OnSelect.Add(async item => {
-        UIMenu.Menu.HideMenu();
-        if (item.doName === 'free') {
-            let id = await UIMenu.Menu.GetUserInput("ID Игрока", "", 10);
-            mp.events.callRemote('server:med:free', methods.parseInt(id));
-        }
-        if (item.doName === 'heal') {
-            let id = await UIMenu.Menu.GetUserInput("ID Игрока", "", 10);
-            mp.events.callRemote('server:med:heal', methods.parseInt(id));
         }
     });
 };
@@ -13757,56 +13655,6 @@ menuList.showBotUsmcMenu = function() {
     );
 
     npc.showDialogUsmc('Здравствуйте, чем я могу вам помочь?', btn);
-};
-
-menuList.showBotEmsMenu = function(idx, canFree) {
-
-    let btn = [];
-    btn.push(
-        {
-            text: 'Подать заявление на стажировку',
-            bgcolor: '',
-            params: {doName: 'ems:wantWork'}
-        }
-    );
-
-    if (canFree) {
-        if (user.getCache('med_lic')) {
-            btn.push(
-                {
-                    text: 'Купить выписку за $800',
-                    bgcolor: '',
-                    params: {doName: 'ems:free'}
-                }
-            );
-        }
-        else {
-            btn.push(
-                {
-                    text: 'Купить выписку за $2000',
-                    bgcolor: '',
-                    params: {doName: 'ems:free'}
-                }
-            );
-        }
-    }
-    else {
-        btn.push(
-            {
-                text: 'Выписка сейчас не доступна',
-                bgcolor: '',
-                params: {}
-            }
-        );
-    }
-
-    let listPos = [
-        [309.55218505859375, -593.9552612304688, 43.28400802612305, 21.91470718383789],
-        [1838.4437255859375, 3682.33544921875, 34.27005386352539, 162.76380920410156],
-        [-246.97201538085938, 6320.427734375, 32.420734405517578, 312.1958923339844],
-    ];
-
-    npc.getDialog(new mp.Vector3(listPos[idx][0], listPos[idx][1], listPos[idx][2] + 0.6), listPos[idx][3], 'Врач', 'Сотрудник EMS', 'Здравствуйте, чем помочь? Хочу вам напомнить что, при наличии мед. страховки стоимость услуг намного ниже', btn);
 };
 
 menuList.showBotLspdMenu = function(idx = 0)

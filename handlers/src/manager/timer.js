@@ -14,7 +14,7 @@ import vehicles from "../property/vehicles";
 import vSync from "./vSync";
 import license from "./license";
 import weather from './weather';
-import hosp from './hosp';
+import ems from '../modules/factions/plugins/ems';
 import discord from "./discord";
 import checkpoint from "./checkpoint";
 import dispatcher from "./dispatcher";
@@ -712,8 +712,10 @@ timer.secTimer = function() {
         if (timer.getDeathTimer() > 0) {
             timer.setDeathTimer(timer.getDeathTimer() - 1);
 
-            if (timer.getDeathTimer() == 0)
-                hosp.toHosp();
+            if (timer.getDeathTimer() == 0) {
+                ems.respawn();
+            }
+            
             if (!user.isDead())
                 timer.setDeathTimer(0);
         }

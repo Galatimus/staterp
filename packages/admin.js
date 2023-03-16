@@ -703,7 +703,7 @@ admin.freeHospById = function(player, type, id) {
                 return;
             }
 
-            target.call('client:hosp:free');
+            target.call('client:ems:free');
 
             target.notify(`~b~Администратор ${user.getRpName(player)} выпустил из больницы ${user.getRpName(target)}`);
             player.notify(`~b~Администратор ${user.getRpName(player)} выпустил из больницы ${user.getRpName(target)}`);
@@ -717,7 +717,7 @@ admin.freeHospById = function(player, type, id) {
                 return;
             }
 
-            target.call('client:hosp:free');
+            target.call('client:ems:free');
 
             target.notify(`~b~Администратор ${user.getRpName(player)} выпустил из больницы ${user.getRpName(target)}`);
             player.notify(`~b~Администратор ${user.getRpName(player)} выпустил из больницы ${user.getRpName(target)}`);

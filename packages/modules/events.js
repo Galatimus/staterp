@@ -44,6 +44,7 @@ let weather = require('../managers/weather');
 let gangWar = require('../managers/gangWar');
 let canabisWar = require('../managers/canabisWar');
 let ems = require('../managers/ems');
+let factionEms = require('./factions/plugins/ems');
 let tax = require('../managers/tax');
 let discord = require('../managers/discord');
 let racer = require('../managers/racer');
@@ -52,6 +53,8 @@ let copsRacer = require('../managers/copsRacer');
 let trucker = require('../managers/trucker');
 let vSync = require('../managers/vSync');
 let fishing = require('../managers/fishing');
+
+
 
 mp.events.__add__ = mp.events.add;
 
@@ -7551,58 +7554,13 @@ mp.events.addRemoteCounted('server:user:arrest', (player, id) => {
     }
 });
 
+// Поки не можна звідси забирати!
 mp.events.addRemoteCounted('server:med:free', (player, id) => {
-    if (!user.isLogin(player))
-        return;
-    try {
-        let p = mp.players.at(id);
-        if (user.isLogin(p)) {
-
-            if (methods.distanceToPos(p.position, player.position) > 10) {
-                player.notify('~r~Вы слишком далеко друг от друга');
-                return;
-            }
-
-            if (!user.isLogin(p) || user.get(p, 'med_time') <= 0) {
-                player.notify('~r~У игрок не проходит лечение');
-                return;
-            }
-
-            coffer.addMoney(coffer.getIdByFraction(user.get(player, 'fraction_id'), 400));
-            user.addMoney(player, 400, 'Премия');
-            player.notify('~g~Вы выписали игрока. Премия: ~s~$400');
-
-            p.call('client:hosp:free');
-        }
-        else
-            player.notify('~r~Игрок не найден');
-    }
-    catch (e) {
-        methods.debug(e);
-    }
+    factionEms.remoteMedFree(player, id);
 });
-
+// Поки не можна звідси забирати!
 mp.events.addRemoteCounted('server:med:heal', (player, id) => {
-    if (!user.isLogin(player))
-        return;
-    try {
-        let p = mp.players.at(id);
-        if (user.isLogin(p)) {
-
-            if (methods.distanceToPos(p.position, player.position) > 10) {
-                player.notify('~r~Вы слишком далеко друг от друга');
-                return;
-            }
-
-            player.notify('~g~Вы вылечили игрока.');
-            user.setHealth(p, 100);
-        }
-        else
-            player.notify('~r~Игрок не найден');
-    }
-    catch (e) {
-        methods.debug(e);
-    }
+    factionEms.remoteMedHeal(player, id);
 });
 
 mp.events.addRemoteCounted('server:user:giveSubLeader', (player, id) => {

@@ -8,7 +8,6 @@ import vehicles from "./property/vehicles";
 
 import quest from "./manager/quest";
 import edu from "./manager/edu";
-import hosp from "./manager/hosp";
 import prolog from "./manager/prolog";
 import npc from "./manager/npc";
 
@@ -1200,25 +1199,6 @@ mp.events.add('client:dialog:btn', async function(json) {
             let text = await menuList.getUserInput('Почему вы хотите тут служить?', '', 100);
             mp.game.ui.notifications.show(`~g~Заявление было отправлено, скоро с вами свяжутся в дискорде`);
             mp.events.callRemote('server:discord:sendWorkUsmc', discord, text);
-        }
-        if (params.doName === 'ems:wantWork') {
-            shopMenu.hideDialog();
-            let discord = await menuList.getUserInput('Введите ваш DISCORD', '', 30);
-            let text = await menuList.getUserInput('Почему вы хотите тут работать?', '', 100);
-            mp.game.ui.notifications.show(`~g~Заявление было отправлено, скоро с вами свяжутся в дискорде`);
-            mp.events.callRemote('server:discord:sendWorkEms', discord, text);
-        }
-        if (params.doName === 'ems:free') {
-            shopMenu.hideDialog();
-            let price = 2000;
-            if (user.getCache('med_lic'))
-                price = 800;
-            if (user.getCashMoney() < price) {
-                mp.game.ui.notifications.show(`~r~У вас нет при себе денег на выписку`);
-                return ;
-            }
-            user.removeCashMoney(price, 'Выписка из больницы');
-            hosp.freePlayer(true);
         }
         if (params.doName === 'lspd:toJail') {
             shopMenu.hideDialog();

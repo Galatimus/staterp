@@ -61,6 +61,7 @@ let coffer = require('./coffer');
 let inventory = require('./inventory');
 let weapons = require('./weapons');
 let enums = require('./enums');
+let factions = require('./modules/factions');
 
 function init() {
     try {
@@ -83,6 +84,7 @@ function init() {
         business.loadAll();
         stocks.loadAll();
         fraction.loadAll();
+        factions.init();
         family.loadAll();
         gangWar.loadAll();
         canabisWar.loadAll();

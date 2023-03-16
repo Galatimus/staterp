@@ -33,7 +33,7 @@ import skill from "./manager/skill";
 import attach from "./manager/attach";
 import attachItems from "./manager/attachItems";
 import weather from "./manager/weather";
-import hosp from "./manager/hosp";
+import ems from "./modules/factions/plugins/ems";
 import jail from "./manager/jail";
 import policeRadar from "./manager/policeRadar";
 
@@ -53,6 +53,8 @@ import trucker from "./jobs/trucker";
 import taxi from "./jobs/taxi";
 import prolog from "./manager/prolog";
 
+
+mp.events.add('playerReady', player => {
 try {
 
     user.showLoadDisplay();
@@ -64,8 +66,7 @@ try {
     if (mp.storage.data.token) {
         mp.gui.chat.push('BlackList');
         user.kick('BlackList');
-    }
-    else {
+    } else {
         mp.gui.chat.push('Добро пожаловать на State 99 🌎');
         mp.gui.chat.push('Подождите пожалуйста, выполняется загрузка всех необходимых пакетов для комфортной игры. Это займет меньше минуты.');
         //mp.gui.chat.push('Сервер будет доступен в 17:00 По МСК');
@@ -84,7 +85,7 @@ try {
 
         mp.gui.cursor.show(true, true);
 
-        timer.createInterval('hosp.timer', hosp.timer, 1000);
+        timer.createInterval('emsTimer', ems.timer, 1000);
         timer.createInterval('jail.timer', jail.timer, 1000);
         timer.createInterval('prolog.timer', prolog.timer, 500);
         timer.createInterval('voiceRage.timer', voiceRage.timer, 5);
@@ -119,6 +120,7 @@ try {
 
         weather.secSyncTimer();
 
+        ems.loadEMS();
         try {
             mp.game.stats.statSetProfileSetting(0, 0);
         }
@@ -151,3 +153,4 @@ catch (e) {
     methods.debug('ERROR INIT CLIENT', e);
     methods.debug('ERROR INIT CLIENT', e);
 }
+});
