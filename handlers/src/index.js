@@ -13,6 +13,7 @@ import './manager/jobPoint';
 import "./manager/prolog";
 import "./manager/scaleform";
 import './betternotifs';
+import './modules/ragemp';
 
 import business from "./property/business";
 import "./property/vehicles";
