@@ -105,9 +105,6 @@ phone.showOrHide = function() {
         mp.game.ui.notifications.show("~r~У Вас нет телефона");
         return;
     }
-    if (!phone.isHide() && mp.gui.cursor.visible) //TODO 1.1 Возможно придется исрпавить в 1.1
-        return;
-
     ui.callCef('phone', '{"type": "showOrHide"}');
 };
 
@@ -153,7 +150,7 @@ phone.updateCallInfo = function(number, avatar, name) {
         phonecall: {
             number: number,
             name: name,
-            avatar: 'https://a.rsg.sc//n/' + avatar.toLowerCase(),
+            avatar: 'https://a.rsg.sc/n/' + avatar.toLowerCase(),
             going: true
         },
     };
@@ -190,12 +187,15 @@ phone.updateAppAchiev = function(value = []) {
 };
 
 phone.timer = function() {
+    if(!user.isLogin()) {
+        return;
+    }
+
     let pType = phone.getType();
     if (!hidden && pType == 0) {
         phone.hide();
         return;
-    }
-    else if ( pType == 0) {
+    } else if ( pType == 0) {
         return;
     }
 
@@ -394,7 +394,7 @@ phone.showAppList = function() {
                         title: user.getCache('name'),
                         text: `${user.getCache('social')}#${user.getCache('id')}`,
                         type: 0,
-                        value: 'https://a.rsg.sc//n/' + user.getCache('social').toString().toLowerCase(),
+                        value: 'https://a.rsg.sc/n/' + user.getCache('social').toString().toLowerCase(),
                         params: { name: "null" }
                     },
                     {
@@ -690,7 +690,7 @@ phone.showAppEcorp= function() {
                         title: user.getCache('name'),
                         text: `${methods.cryptoFormat(user.getCryptoMoney())}`,
                         type: 0,
-                        value: 'https://a.rsg.sc//n/' + user.getCache('social').toString().toLowerCase(),
+                        value: 'https://a.rsg.sc/n/' + user.getCache('social').toString().toLowerCase(),
                         params: { name: "null" }
                     },
                     {
@@ -783,7 +783,7 @@ phone.showAppInvader= function() {
                         title: user.getCache('name'),
                         text: `${user.getCache('social')}#${user.getCache('id')}`,
                         type: 0,
-                        value: 'https://a.rsg.sc//n/' + user.getCache('social').toString().toLowerCase(),
+                        value: 'https://a.rsg.sc/n/' + user.getCache('social').toString().toLowerCase(),
                         params: { name: "null" }
                     },
                     {
@@ -5634,8 +5634,14 @@ phone.callBackModal = function(paramsJson) {
 
 phone.callBackModalInput = async function(paramsJson, text) {
     try {
+        if (Container.Data.HasLocally(mp.players.local.remoteId, "isModalInputTimeout")) {
+            user.showCustomNotify('Нельзя нажимать так часто');
+            return;
+        }
+
         mp.events.call('client:phone:inputModal', false);
-        methods.debug(text);
+        methods.debug(`phone.callBackModalInput: ${text}`);
+
         let params = JSON.parse(paramsJson);
         if (params.name == 'giveWanted') {
             let args = text.split(',');
@@ -5757,7 +5763,6 @@ phone.callBackModalInput = async function(paramsJson, text) {
         }
         if (params.name == 'fractionBenefit') {
             let price = methods.parseFloat(text);
-О
             if (price < 0) {
                 mp.game.ui.notifications.show(`~r~Значение не может быть меньше нуля`);
                 return;
@@ -5782,6 +5787,12 @@ phone.callBackModalInput = async function(paramsJson, text) {
             }
             if (price > 250000) {
                 mp.game.ui.notifications.show(`~r~Значение не может быть больше 250000`);
+                return;
+            }
+
+            let money = await coffer.getMoney(coffer.getIdByFraction(user.getCache('fraction_id')));
+            if (money < price) {
+                mp.game.ui.notifications.show('~r~В бюджете организации недостаточно средств!');
                 return;
             }
 
@@ -6135,6 +6146,11 @@ phone.callBackModalInput = async function(paramsJson, text) {
                     break;
             }
         }
+
+        Container.Data.SetLocally(mp.players.local.remoteId, "isModalInputTimeout", true);
+        setTimeout(function () {
+            Container.Data.ResetLocally(mp.players.local.remoteId, "isModalInputTimeout");
+        }, 3000);
     }
     catch(e) {
         methods.debug(e);
