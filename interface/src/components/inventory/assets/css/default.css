@@ -4,7 +4,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    background: url('//staterp.wixcore.net/assets/exports/inventory/inv-box.png');
+    background: url('//staterp.wixcore.net/exports/inventory/inv-box.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -72,7 +72,7 @@
     -webkit-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     transform: scaleX(-1);
-    background: url('//staterp.wixcore.net/assets/exports/inventory/liner.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/liner.png') no-repeat;
     width: 201px;
     height: 9px;
     margin-right: auto;
@@ -81,7 +81,7 @@
 }
 
 .liner-inv {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/liner.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/liner.png') no-repeat;
     width: 201px;
     height: 9px;
     margin-left: auto;
@@ -90,7 +90,7 @@
 }
 
 .liner-inv-info {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/liner.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/liner.png') no-repeat;
     width: 201px;
     height: 9px;
     margin-left: auto;
@@ -108,7 +108,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain !important;
-    background: url('//staterp.wixcore.net/assets/exports/inventory/frame.png');
+    background: url('//staterp.wixcore.net/exports/inventory/frame.png');
     align-content: flex-start;
     flex-wrap: wrap;
     background-attachment: local;
@@ -131,7 +131,7 @@
 }
 
 .object-box:hover {
-    background: #DC133B40 url('//staterp.wixcore.net/assets/exports/inventory/object-box.png');
+    background: #DC133B40 url('//staterp.wixcore.net/exports/inventory/object-box.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -179,7 +179,7 @@
 }
 
 .outf-cap {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/hat.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/hat.png') no-repeat;
     width: 62px;
     height: 51px;
     position: absolute;
@@ -188,7 +188,7 @@
 }
 
 .outf-glasses {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/glasses.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/glasses.png') no-repeat;
     width: 72px;
     height: 22px;
     position: absolute;
@@ -197,7 +197,7 @@
 }
 
 .outf-mask {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/mask.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/mask.png') no-repeat;
     width: 52px;
     height: 64px;
     position: absolute;
@@ -206,7 +206,7 @@
 }
 
 .outf-shirt {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/shirt.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/shirt.png') no-repeat;
     width: 103px;
     height: 103px;
     position: absolute;
@@ -215,7 +215,7 @@
 }
 
 .outf-jewerly {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/jewerly.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/jewerly.png') no-repeat;
     width: 63px;
     height: 63px;
     position: absolute;
@@ -224,7 +224,7 @@
 }
 
 .outf-earrings {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/earrings.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/earrings.png') no-repeat;
     width: 48px;
     height: 62px;
     position: absolute;
@@ -233,7 +233,7 @@
 }
 
 .outf-jeans {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/pants.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/pants.png') no-repeat;
     width: 66px;
     height: 142px;
     position: absolute;
@@ -242,7 +242,7 @@
 }
 
 .outf-watch {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/watch.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/watch.png') no-repeat;
     width: 36px;
     height: 72px;
     position: absolute;
@@ -251,7 +251,7 @@
 }
 
 .outf-bracelet {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/bracelet.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/bracelet.png') no-repeat;
     width: 34px;
     height: 56px;
     position: absolute;
@@ -260,7 +260,7 @@
 }
 
 .outf-bag {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/bag.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/bag.png') no-repeat;
     width: 63px;
     height: 63px;
     position: absolute;
@@ -270,7 +270,7 @@
 }
 
 .outf-boot {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/shoes.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/shoes.png') no-repeat;
     width: 75px;
     height: 53px;
     position: absolute;
@@ -279,14 +279,14 @@
 }
 
 /* .outf-clock {
-    background: url(../img/outfit/circular-clock-tool.png) no-repeat;   || https://staterp.wixcore.net/assets/exports/inventory/outfit/
+    background: url(../img/outfit/circular-clock-tool.png) no-repeat;   || https://staterp.wixcore.net/exports/inventory/outfit/
     width: 51px;
     height: 51px;
     margin-left: 18px;
 } */
 
 .outf-armour {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/armour.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/armour.png') no-repeat;
     width: 51px;
     height: 51px;
     margin-left: 18px;
@@ -294,21 +294,21 @@
 }
 
 .outf-phone {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/phone.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/phone.png') no-repeat;
     width: 31px;
     height: 55px;
     margin-left: 47px;
 }
 
 .outf-money {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/notes.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/notes.png') no-repeat;
     width: 55px;
     height: 41px;
     margin-left: 48px;
 }
 
 .outf-card {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/outfit/card.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/outfit/card.png') no-repeat;
     width: 55px;
     height: 41px;
     margin-left: 41px;
@@ -497,13 +497,13 @@ input[type="radio"]:checked+label .bg-color-craft-block {
 }
 
 .img-btn-weapon {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/gun.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/gun.png') no-repeat;
     width: 60px;
     height: 42px;
 }
 
 .img-btn-cutter {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/cutter.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/cutter.png') no-repeat;
     width: 44px;
     height: 44px;
 }
@@ -631,7 +631,7 @@ input[type="radio"]:checked+label .bg-color-craft-block {
 }
 
 .weapon-m41 {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/weapons/m41.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/weapons/m41.png') no-repeat;
     width: 252px;
     height: 79px;
 }
@@ -698,19 +698,19 @@ input[type="radio"]:checked+label .bg-color-craft-block {
 }
 
 .weapon-supressor {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/weapons/supressor.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/weapons/supressor.png') no-repeat;
 }
 
 .weapon-flashlight {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/weapons/flashlight.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/weapons/flashlight.png') no-repeat;
 }
 
 .weapon-grip {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/weapons/grip.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/weapons/grip.png') no-repeat;
 }
 
 .weapon-scope {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/weapons/scope.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/weapons/scope.png') no-repeat;
 }
 
 .sqr-wp-top {
@@ -729,13 +729,13 @@ input[type="radio"]:checked+label .bg-color-craft-block {
 }
 
 .img-fail {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/fail.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/fail.png') no-repeat;
     width: 71px;
     height: 72px;
 }
 
 .img-succes {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/succes.png') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/succes.png') no-repeat;
     width: 71px;
     height: 71px;
 }
@@ -885,7 +885,7 @@ input[type="radio"]:checked+label .bg-color-craft-block {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain !important;
-    background: url('//staterp.wixcore.net/assets/exports/inventory/frame.png');
+    background: url('//staterp.wixcore.net/exports/inventory/frame.png');
     flex-wrap: wrap;
     background-attachment: local;
     align-content: flex-start;
@@ -902,7 +902,7 @@ input[type="radio"]:checked+label .bg-color-craft-block {
 }
 
 .object-box-trunk:hover {
-    background: #DC133B40 url('//staterp.wixcore.net/assets/exports/inventory/object-box.png');
+    background: #DC133B40 url('//staterp.wixcore.net/exports/inventory/object-box.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -1027,7 +1027,7 @@ input[type="radio"]:checked+label .bg-color-craft-block {
 }
 
 .moveall_left {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/moveall.svg') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/moveall.svg') no-repeat;
     width: 20px;
     height: 20px;
     background-size: cover;
@@ -1037,7 +1037,7 @@ input[type="radio"]:checked+label .bg-color-craft-block {
 }
 
 .moveall_right {
-    background: url('//staterp.wixcore.net/assets/exports/inventory/moveall.svg') no-repeat;
+    background: url('//staterp.wixcore.net/exports/inventory/moveall.svg') no-repeat;
     width: 15px;
     height: 15px;
     background-size: cover;

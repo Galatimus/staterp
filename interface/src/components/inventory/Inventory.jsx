@@ -119,24 +119,24 @@ class Inventory extends React.Component {
             // !!! Элементы массива outfit нельзя менять местами !!!
             outfit: [
                 [
-                    { slot: "outf-cap", equipped: false, type: 'cap', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/hat.svg', iconName: 'hat' },
-                    { slot: "outf-glasses", equipped: false, type: 'glasses', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/glasses.svg', iconName: 'glasses' },
-                    { slot: "outf-mask", equipped: false, type: 'mask', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/mask.svg', iconName: 'mask' },
-                    { slot: "outf-shirt", equipped: false, type: 'shirt', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/shirt.svg', iconName: 'shirt' },
-                    { slot: "outf-jewerly", equipped: false, type: 'jewerly', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/jewerly.svg', iconName: 'jewerly' },
-                    { slot: "outf-earrings", equipped: false, type: 'earrings', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/earrings.svg', iconName: 'earrings' },
-                    { slot: "outf-jeans", equipped: false, type: 'jeans', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/pants.svg', iconName: 'pants' },
-                    { slot: "outf-watch", equipped: false, type: 'watch', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/watch.svg', iconName: 'watch' },
-                    { slot: "outf-bracelet", equipped: false, type: 'bracelet', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/bracelet.svg', iconName: 'bracelet' },
-                    { slot: "outf-boot", equipped: false, type: 'boot', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/shoes.svg', iconName: 'shoes' },
-                    { slot: "outf-bag", equipped: false, type: 'bag', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/bag.svg', iconName: 'bag' },
-                    { slot: "outf-gloves", equipped: false, type: 'gloves', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/gloves.svg', iconName: 'gloves' },
+                    { slot: "outf-cap", equipped: false, type: 'cap', icon: '//staterp.wixcore.net/exports/inventory/outfit/hat.svg', iconName: 'hat' },
+                    { slot: "outf-glasses", equipped: false, type: 'glasses', icon: '//staterp.wixcore.net/exports/inventory/outfit/glasses.svg', iconName: 'glasses' },
+                    { slot: "outf-mask", equipped: false, type: 'mask', icon: '//staterp.wixcore.net/exports/inventory/outfit/mask.svg', iconName: 'mask' },
+                    { slot: "outf-shirt", equipped: false, type: 'shirt', icon: '//staterp.wixcore.net/exports/inventory/outfit/shirt.svg', iconName: 'shirt' },
+                    { slot: "outf-jewerly", equipped: false, type: 'jewerly', icon: '//staterp.wixcore.net/exports/inventory/outfit/jewerly.svg', iconName: 'jewerly' },
+                    { slot: "outf-earrings", equipped: false, type: 'earrings', icon: '//staterp.wixcore.net/exports/inventory/outfit/earrings.svg', iconName: 'earrings' },
+                    { slot: "outf-jeans", equipped: false, type: 'jeans', icon: '//staterp.wixcore.net/exports/inventory/outfit/pants.svg', iconName: 'pants' },
+                    { slot: "outf-watch", equipped: false, type: 'watch', icon: '//staterp.wixcore.net/exports/inventory/outfit/watch.svg', iconName: 'watch' },
+                    { slot: "outf-bracelet", equipped: false, type: 'bracelet', icon: '//staterp.wixcore.net/exports/inventory/outfit/bracelet.svg', iconName: 'bracelet' },
+                    { slot: "outf-boot", equipped: false, type: 'boot', icon: '//staterp.wixcore.net/exports/inventory/outfit/shoes.svg', iconName: 'shoes' },
+                    { slot: "outf-bag", equipped: false, type: 'bag', icon: '//staterp.wixcore.net/exports/inventory/outfit/bag.svg', iconName: 'bag' },
+                    { slot: "outf-gloves", equipped: false, type: 'gloves', icon: '//staterp.wixcore.net/exports/inventory/outfit/gloves.svg', iconName: 'gloves' },
                 ],
                 [
-                    { slot: "outf-armour", equipped: false, type: 'armour', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/armour.svg', iconName: 'armour' },
-                    { slot: "outf-phone", equipped: false, type: 'phone', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/phone.svg', iconName: 'phone' },
-                    { slot: "outf-money", equipped: false, type: 'money', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/notes.svg', iconName: 'notes' },
-                    { slot: "outf-card", equipped: false, type: 'card', icon: '//staterp.wixcore.net/assets/exports/inventory/outfit/card.svg', iconName: 'card' },
+                    { slot: "outf-armour", equipped: false, type: 'armour', icon: '//staterp.wixcore.net/exports/inventory/outfit/armour.svg', iconName: 'armour' },
+                    { slot: "outf-phone", equipped: false, type: 'phone', icon: '//staterp.wixcore.net/exports/inventory/outfit/phone.svg', iconName: 'phone' },
+                    { slot: "outf-money", equipped: false, type: 'money', icon: '//staterp.wixcore.net/exports/inventory/outfit/notes.svg', iconName: 'notes' },
+                    { slot: "outf-card", equipped: false, type: 'card', icon: '//staterp.wixcore.net/exports/inventory/outfit/card.svg', iconName: 'card' },
                 ],
             ],
 
@@ -2101,7 +2101,7 @@ class Inventory extends React.Component {
                                                     <Draggable that={this} id={index} type="take_off drop" item={item} key={index}>
                                                         <Droppable className="droppable" id="put_on" that={this}>
                                                             <div onContextMenu={(e) => this.handlePos(e, item, 'outfit')} className={`item__background outfit-pos-outfit-${item.iconName}`} key={index}>
-                                                                <img src={`//staterp.wixcore.net/assets/exports/inventory/outfit/${item.iconName}.png`} alt={`${item.iconName}.png`} />
+                                                                <img src={`//staterp.wixcore.net/exports/inventory/outfit/${item.iconName}.png`} alt={`${item.iconName}.png`} />
                                                             </div>
                                                         </Droppable>
                                                     </Draggable>
@@ -2111,7 +2111,7 @@ class Inventory extends React.Component {
                                             return (
                                                 <Droppable className="droppable" key={index} id="put_on" that={this}>
                                                     <div onContextMenu={(e) => this.handlePos(e, item, 'outfit')} className={`item__background outfit-pos-outfit-${item.iconName}`} key={index}>
-                                                        <img src={`//staterp.wixcore.net/assets/exports/inventory/outfit/${item.iconName}.png`} style={{ filter: 'grayscale(100%)', opacity: '0.7' }} alt={`${item.iconName}.png`} />
+                                                        <img src={`//staterp.wixcore.net/exports/inventory/outfit/${item.iconName}.png`} style={{ filter: 'grayscale(100%)', opacity: '0.7' }} alt={`${item.iconName}.png`} />
                                                     </div>
                                                 </Droppable>
                                             )
@@ -2124,7 +2124,7 @@ class Inventory extends React.Component {
                                                         <Draggable that={this} id={index} type="take_off drop" item={item} key={index}>
                                                             <Droppable className="droppable" id="put_on" that={this}>
                                                                 <div onContextMenu={(e) => this.handlePos(e, item, 'outfit')} className={`item__background outfit-pos-outfit-${item.iconName}`} key={index}>
-                                                                    <img src={`//staterp.wixcore.net/assets/exports/inventory/outfit/${item.iconName}.png`} alt={`${item.iconName}.png`} />
+                                                                    <img src={`//staterp.wixcore.net/exports/inventory/outfit/${item.iconName}.png`} alt={`${item.iconName}.png`} />
                                                                 </div>
                                                             </Droppable>
                                                         </Draggable>
@@ -2134,7 +2134,7 @@ class Inventory extends React.Component {
                                                 return (
                                                     <Droppable className="droppable" key={index} id="put_on" that={this}>
                                                         <div onContextMenu={(e) => this.handlePos(e, item, 'outfit')} className={`item__background outfit-pos-outfit-${item.iconName}`} key={index}>
-                                                            <img src={`//staterp.wixcore.net/assets/exports/inventory/outfit/${item.iconName}.png`} style={{ filter: 'grayscale(100%)', opacity: '0.7' }} alt={`${item.iconName}.png`} />
+                                                            <img src={`//staterp.wixcore.net/exports/inventory/outfit/${item.iconName}.png`} style={{ filter: 'grayscale(100%)', opacity: '0.7' }} alt={`${item.iconName}.png`} />
                                                         </div>
                                                     </Droppable>
                                                 )
@@ -2148,7 +2148,7 @@ class Inventory extends React.Component {
                                             className="close-window-craft"
                                             onClick={() => this.closeInventory()}
                                         >
-                                            <img src={`//staterp.wixcore.net/assets/exports/inventory/close.svg`} width="40%" className="close-window-craft__img" />
+                                            <img src={`//staterp.wixcore.net/exports/inventory/close.svg`} width="40%" className="close-window-craft__img" />
                                         </div>
                                         <span className="title-inv__name"><h1>Дополнительно</h1><p>Дополнительно</p></span>
                                     </div>
@@ -2353,7 +2353,7 @@ class Inventory extends React.Component {
                                                 className="close-window-craft"
                                                 onClick={() => this.closeSecondaryInventory()}
                                             >
-                                                <img src={`//staterp.wixcore.net/assets/exports/inventory/close.svg`} width="40%" className="close-window-craft__img" />
+                                                <img src={`//staterp.wixcore.net/exports/inventory/close.svg`} width="40%" className="close-window-craft__img" />
                                             </div>
                                         </div>
                                         <div className="inventory__trunk__list">
