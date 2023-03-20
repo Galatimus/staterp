@@ -52,6 +52,8 @@ mp.events.add('playerReady', player => {
 try {
     // Автоматичний парашут при виході з повітряного т/с
     mp.game.player.setAutoGiveParachuteWhenEnterPlane(true); 
+    // Відключаємо навколишні звуки на сервері.
+    mp.game.audio.startAudioScene("CHARACTER_CHANGE_IN_SKY_SCENE");
 
     user.showLoadDisplay();
     user.setVirtualWorld(mp.players.local.remoteId);
