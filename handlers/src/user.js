@@ -1736,7 +1736,9 @@ user.isCanFishingPearceAlamo = function() {
 };
 
 user.isCanFishing = function() {
-    return user.isInOcean() || mp.players.local.isInWater() || user.isCanFishingPearceOcean() || user.isCanFishingPearceAlamo();
+    let pos = mp.players.local.position;
+    let waterHeight = mp.game.water.getWaterHeight(pos.x, pos.y, pos.z, mp.players.local.getHeightAboveGround());
+    return user.isInOcean() || (mp.players.local.isInWater() && waterHeight != undefined) || user.isCanFishingPearceOcean() || user.isCanFishingPearceAlamo();
 };
 
 user.isJobMail = function() {
@@ -1957,6 +1959,7 @@ user.lastAnim = {
     d: '',
     f: 0,
 };
+
 let lastFlag = 0;
 user.playAnimation = function(dict, anim, flag = 49, sendEventToServer = true) {
     if (mp.players.local.getVariable("isBlockAnimation") || mp.players.local.isInAnyVehicle(false) || user.isDead()) return;
@@ -2004,6 +2007,8 @@ user.stopAllAnimation = function() {
         //mp.players.local.clearTasks();
         //mp.players.local.clearSecondaryTask();
         mp.events.callRemote('server:stopAllAnimation');
+        user.lastAnim = { a: '', d: '', f: 0 };
+        lastFlag = 0;
     }
 };
 
