@@ -23,28 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `accounts`
---
-
-CREATE TABLE `accounts` (
-  `id` int(11) NOT NULL,
-  `login` varchar(64) NOT NULL DEFAULT '',
-  `email` varchar(256) NOT NULL DEFAULT '',
-  `social` varchar(128) NOT NULL DEFAULT '',
-  `serial` varchar(256) NOT NULL DEFAULT '',
-  `password` varchar(256) NOT NULL DEFAULT '',
-  `allow_stats` tinyint(1) NOT NULL DEFAULT '0',
-  `allow_acc` tinyint(1) NOT NULL DEFAULT '0',
-  `allow_acc_edit` tinyint(1) NOT NULL DEFAULT '0',
-  `admin_level` int(11) NOT NULL DEFAULT '0',
-  `reg_ip` varchar(128) NOT NULL DEFAULT '',
-  `reg_timestamp` int(11) NOT NULL DEFAULT '0',
-  `token` varchar(64) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `ban_list`
 --
 
@@ -6164,12 +6142,6 @@ INSERT INTO `yachts` (`id`, `name`, `price`, `user_id`, `user_name`, `x`, `y`, `
 --
 
 --
--- Индексы таблицы `accounts`
---
-ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Индексы таблицы `ban_list`
 --
 ALTER TABLE `ban_list`
@@ -6563,11 +6535,6 @@ ALTER TABLE `yachts`
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
---
--- AUTO_INCREMENT для таблицы `accounts`
---
-ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT для таблицы `ban_list`
 --
