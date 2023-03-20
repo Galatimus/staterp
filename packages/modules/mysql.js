@@ -8,17 +8,17 @@ let business = require('../property/business');
 let mysql = exports;
 
 const pool = mysql2.createPool({
-    host: mp.config.settings.mysql[0],
-    port: mp.config.settings.mysql[1],
-    database: mp.config.settings.mysql[2],
-    user: mp.config.settings.mysql[3],
-    password: mp.config.settings.mysql[4],
-    connectTimeout: mp.config.settings.mysql[5],
-    acquireTimeout: mp.config.settings.mysql[6],
-    waitForConnections: mp.config.settings.mysql[7],
-    connectionLimit: mp.config.settings.mysql[8],
-    queueLimit: mp.config.settings.mysql[9],
-    timeout: mp.config.settings.mysql[10]
+    host: mp.conf.mysql.connect[0],
+    port: mp.conf.mysql.connect[1],
+    database: mp.conf.mysql.connect[2],
+    user: mp.conf.mysql.connect[3],
+    password: mp.conf.mysql.connect[4],
+    connectTimeout: mp.conf.mysql.timeout,
+    acquireTimeout: mp.conf.mysql.timeout,
+    waitForConnections: true,
+    connectionLimit: 500,
+    queueLimit: 0,
+    timeout: 600000
 });
 
 pool.on('connection', function (connection) {

@@ -61,78 +61,77 @@ let factions = require('./modules/factions');
 let metro = require('./modules/metro');
 
 function init() {
-    try {
-        methods.debug('INIT GAMEMODE');
+    // Виклик підключення до БД, підключення всіх модулів та виклик їх ініціалізації.
+    mp.lib.mysql.connect(function () {
+        try {
+            methods.debug('INIT GAMEMODE');
+            mysql.executeQuery('UPDATE users SET is_online=\'0\', st_order_atm_d=\'0\', st_order_drug_d=\'0\', st_order_lamar_d=\'0\' WHERE 1');
+            for (let i = 0; i < weapons.hashesMap.length; i++) {
+                weapons.hashesMap[i][1] *= 2;
+            }
+            vehicleInfo.loadAll();
+            ctos.loadAll();
+            graffiti.loadAll();
+            fishing.loadAll();
+            houses.loadAll();
+            yachts.loadAll();
+            condos.loadAll();
+            condos.loadBigAll();
+            business.loadAll();
+            stocks.loadAll();
+            fraction.loadAll();
+            factions.init();
+            family.loadAll();
+            gangWar.loadAll();
+            canabisWar.loadAll();
+            //mafiaWar.loadAll();
+            timer.loadAll();
+            tax.loadAll();
+            trucker.loadAll();
+            weather.loadAll();
+            racer.loadAll();
+            gangZone.loadAll();
+            copsRacer.loadAll();
+            carWash.loadAll();
+            rent.loadAll();
+            lsc.loadAll();
+            bar.loadAll();
+            barberShop.loadAll();
+            cloth.loadAll();
+            tattoo.loadAll();
+            gun.loadAll();
+            bank.loadAll();
+            fuel.loadAll();
+            shop.loadAll();
+            tradeMarket.loadAll();
+            pickups.createAll();
+            coffer.load();
+            methods.loadAllBlips();
+            inventory.loadAll();
+            vShop.loadAllShop();
+            metro.loadMetro();
 
-        mysql.executeQuery('UPDATE users SET is_online=\'0\', st_order_atm_d=\'0\', st_order_drug_d=\'0\', st_order_lamar_d=\'0\' WHERE 1');
+            let c = a => 10 > a ? 2e4 + +a : a.charCodeAt(0);
 
-        for (let i = 0; i < weapons.hashesMap.length; i++)
-            weapons.hashesMap[i][1] *= 2;
+            enums.clothM = enums.clothM.sort((a, b) => c(a[9][0] + a[9][1]) - c(b[9][0] + b[9][1]));
+            enums.clothF = enums.clothF.sort((a, b) => c(a[9][0] + a[9][1]) - c(b[9][0] + b[9][1]));
+            enums.propM = enums.propM.sort((a, b) => c(a[5][0] + a[5][1]) - c(b[5][0] + b[5][1]));
+            enums.propF = enums.propF.sort((a, b) => c(a[5][0] + a[5][1]) - c(b[5][0] + b[5][1]));
+            enums.tattooList = enums.tattooList.sort((a, b) => c(a[0]) - c(b[0]));
 
-        vehicleInfo.loadAll();
-        ctos.loadAll();
-        graffiti.loadAll();
-        fishing.loadAll();
-        houses.loadAll();
-        yachts.loadAll();
-        condos.loadAll();
-        condos.loadBigAll();
-        business.loadAll();
-        stocks.loadAll();
-        fraction.loadAll();
-        factions.init();
-        family.loadAll();
-        gangWar.loadAll();
-        canabisWar.loadAll();
-        //mafiaWar.loadAll();
-        timer.loadAll();
-        tax.loadAll();
-        trucker.loadAll();
-        weather.loadAll();
-        racer.loadAll();
-        gangZone.loadAll();
-        copsRacer.loadAll();
-        carWash.loadAll();
-        rent.loadAll();
-        lsc.loadAll();
-        bar.loadAll();
-        barberShop.loadAll();
-        cloth.loadAll();
-        tattoo.loadAll();
-        gun.loadAll();
-        bank.loadAll();
-        fuel.loadAll();
-        shop.loadAll();
-        tradeMarket.loadAll();
-        pickups.createAll();
-        coffer.load();
-        methods.loadAllBlips();
-        inventory.loadAll();
-        vShop.loadAllShop();
-        metro.loadMetro();
-        
-        let c = a => 10 > a ? 2e4 + +a : a.charCodeAt(0);
+            setInterval(methods.saveAllAnother, 15 * 1000 * 60);
 
-        enums.clothM = enums.clothM.sort((a, b) => c(a[9][0] + a[9][1]) - c(b[9][0] + b[9][1]));
-        enums.clothF = enums.clothF.sort((a, b) => c(a[9][0] + a[9][1]) - c(b[9][0] + b[9][1]));
+            setTimeout(function () {
+                vShop.loadAllShopVehicles();
+                vehicles.loadAllTimers();
+                vehicles.loadAllFractionVehicles();
+                vehicles.checkVehiclesFuel();
+            }, 10000);
 
-        enums.propM = enums.propM.sort((a, b) => c(a[5][0] + a[5][1]) - c(b[5][0] + b[5][1]));
-        enums.propF = enums.propF.sort((a, b) => c(a[5][0] + a[5][1]) - c(b[5][0] + b[5][1]));
-
-        enums.tattooList = enums.tattooList.sort((a, b) => c(a[0]) - c(b[0]));
-
-        setInterval(methods.saveAllAnother, 15 * 1000 * 60);
-
-        setTimeout(function () {
-            vShop.loadAllShopVehicles();
-            vehicles.loadAllTimers();
-            vehicles.loadAllFractionVehicles();
-            vehicles.checkVehiclesFuel();
-        }, 10000);
-    }
-    catch (e) {
-        methods.debug('ERROR INIT', e);
-    }
+        } catch (e) {
+            methods.debug('ERROR INIT', e);
+        }
+    });
 }
 
 init();
