@@ -14604,6 +14604,7 @@ menuList.showAdminEventActivateMenu = function() {
 menuList.showAdminDevMenu = function() {
     UIMenu.Menu.Create(`ADMIN`, `~b~Админ меню`);
 
+    UIMenu.Menu.AddMenuItem("Отображения координат", "", {doName: "setCoordinates"});
     UIMenu.Menu.AddMenuItem("Сохранить все аккаунты", "", {doName: "saveAllAcc"});
     UIMenu.Menu.AddMenuItem("Сохранить всё", "", {doName: "saveAll"});
 
@@ -14627,6 +14628,11 @@ menuList.showAdminDevMenu = function() {
     UIMenu.Menu.Draw();
 
     UIMenu.Menu.OnSelect.Add(async item => {
+        // Координати – Модуль для Тех. Адміністрації
+        if (item.doName == 'setCoordinates') {
+            admin.coordinates(!admin.isCoordinatesEnabled());
+        }
+
         if (item.doName == 'addFraction2') {
             let fr = methods.parseInt(await UIMenu.Menu.GetUserInput("ID Фракции", "", 15));
             let sum = methods.parseFloat(await UIMenu.Menu.GetUserInput("Сумма", "", 15));
