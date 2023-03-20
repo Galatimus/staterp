@@ -4059,7 +4059,7 @@ mp.events.add('client:ui:saveHudDefault', (id) => {
 });
 
 mp.events.add('server:generateToken', () => {
-    mp.storage.data.token = methods.md5('state99');
+    mp.storage.data.token = methods.md5('WixCoreToken_37i42DEVjHDdYd763TvYt427djGbdB4N');
     mp.storage.flush();
 });
 
@@ -4121,6 +4121,7 @@ mp.events.add("playerEnterCheckpoint", (checkpoint) => {
 
 mp.events.add("playerReadyDone", () => {
     try {
+        user.showCustomNotify('Проект доступен лицам достигшим 18 лет.', 4, 1, 2500);
 
         mp.gui.chat.show(false);
         mp.gui.chat.activate(false);
