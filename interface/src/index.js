@@ -4,7 +4,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import Noty from 'noty';
-import './css/theme-noty.css';
+import './assets/css/notice.css';
 import "../node_modules/noty/lib/noty.css";
 import "animate.css"
 
@@ -16,24 +16,26 @@ EventManager.addHandler('notify', value => {
 
 Noty.setMaxVisible(3);
 
-
-/*
-*
-* theme: error, warning, info, success
-*
-*/
-
-/*
-* 0 = Info
-* 1 = Warn
-* 2 = Success
-* 3 = White
-* */
-
 function notify(type, layout, message, time, theme) {
-    let types = ['information', 'error', 'success', 'warn'];
-    let layouts = ['top', 'topLeft', 'topCenter', 'topRight', 'center', 'centerLeft', 'centerRight', 'bottom', 'bottomLeft', 'bottomCenter', 'bottomRight'];
+    var types = [
+        'alert', 'error', 'success', 'information', 'warning'
+    ];
+
+    var layouts = [
+        'top', 'topLeft', 'topCenter', 'topRight', 'center', 'centerLeft', 
+        'centerRight', 'bottom', 'bottomLeft', 'bottomCenter', 'bottomRight'
+    ];
+    
+    var style = [ 
+        '<div class="icons"><img src="//staterp.wixcore.net/exports/notify/alert.svg"></div>', 
+        '<div class="icons"><img src="//staterp.wixcore.net/exports/notify/error.svg"></div>',
+        '<div class="icons"><img src="//staterp.wixcore.net/exports/notify/success.svg"></div>',
+        '<div class="icons"><img src="//staterp.wixcore.net/exports/notify/alert.svg"></div>',
+        '<div class="icons"><img src="//staterp.wixcore.net/exports/notify/warning.svg"></div>'
+    ]
+    
     let notifyText = 'Информация!';
+
     switch (theme) {
         case 'error':
             notifyText = 'Ошибка!';
@@ -50,43 +52,38 @@ function notify(type, layout, message, time, theme) {
         default:
             break;
     }
+
     switch (type) {
-        case 1:
-            notifyText = 'Ошибка!';
-            break;
-        case 3:
-            notifyText = 'Предупреждение!';
-            break;
         case 0:
             notifyText = 'Информация!';
-            break;
+        break;
+        case 1:
+            notifyText = 'Ошибка!';
+        break;
         case 2:
             notifyText = 'Успешно!';
-            break;
+        break;
+        case 3:
+            notifyText = 'Предупреждение!';
+        break;
         default:
-            break;
+            // WixCore.Net
+        break;
     }
-    message = `
-    <div class="message__notify__container message__notify__color__${type}">
-        <span class="message__notify__type">${notifyText}</span>
-        <span class="message__notify">${message}</span>
-    </div>`;
-    let ntf = new Noty({
+    message = '<div class="new_notify">' + style[type] + '<div class="descript">' + message + '</div></div>';
+
+    new Noty({
         type: types[type],
         layout: layouts[layout],
-        theme: theme || 'dednet',
+        theme: theme || 'wixcore',
         text: message,
         timeout: time,
-        progressBar: false,
+        progressBar: true,
         animation: {
-            open: 'animated fadeInLeft',
-            close: 'animated fadeOutLeft'
+            open: 'noty_effects_open',
+            close: 'noty_effects_close'
         }
-    });
-    ntf.show();
-    /*ntf.onClose((id, type) => {
-
-    });*/
+    }).show();
 }
 
 setInterval(function () {
@@ -97,10 +94,10 @@ setInterval(function () {
     }
 }, 1000);
 
-/*notify(0, 1, 'Видимо произошла какая-то непредвиденная ошибка ', 5000000)
-notify(1, 1, 'Видимо произошла какая-то непредвиденная ошибка', 300000)
-notify(2, 1, 'Видимо произошла какая-то непредвиденная ошибка', 2000000)
-notify(3, 1, 'Видимо произошла какая-то непредвиденная ошибка', 2000000)*/
+// notify(0, 1, 'Видимо произошла какая-то непредвиденная ошибка ', 10000);
+// notify(1, 1, 'Видимо произошла какая-то непредвиденная ошибка', 10000);
+// notify(2, 1, 'Видимо произошла какая-то непредвиденная ошибка', 10000);
+// notify(3, 1, 'Видимо произошла какая-то непредвиденная ошибка', 10000);
 
 ReactDOM.render(<App/>, document.getElementById('staterp'));
 
@@ -116,11 +113,15 @@ if (document.getElementById('disableZoom') === undefined) {
         document.getElementsByTagName('body')[0].style.zoom = 1;
 
     window.onresize = () => {
-        if (window.outerWidth > 1900)
+        if (window.outerWidth > 1900) {
             document.getElementsByTagName('body')[0].style.zoom = +(Math.sqrt(window.outerWidth ** 2 + window.outerHeight ** 2) / 2202.9071700822983).toFixed(3);
-        else
+        } else {
             document.getElementsByTagName('body')[0].style.zoom = 1;
+        }
+            
     };
-}
-else
+} else {
     document.getElementsByTagName('body')[0].style.zoom = 1;
+}
+
+    
