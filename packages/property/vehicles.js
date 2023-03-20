@@ -1623,12 +1623,12 @@ vehicles.engineStatus = (player, vehicle, status = null) => {
             }
         }
         vSync.setEngineState(vehicle, eStatus);
-        if (eStatus)
-            player.notify('Вы ~g~запустили~s~ двигатель');
-        else
-            player.notify('Вы ~r~заглушили~s~ двигатель');
-    }
-    catch (e) {
+        if (eStatus) {
+            user.showCustomNotify(player, 'Вы запустили двигатель.', 2, 9);
+        } else {
+            user.showCustomNotify(player, 'Вы заглушили двигатель.', 2, 9);
+        }
+    } catch (e) {
         console.log(e);
     }
 };
