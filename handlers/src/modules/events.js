@@ -4148,10 +4148,12 @@ mp.events.add("playerReadyDone", () => {
 
 mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
     try {
-        if (targetEntity.getType() === 4 || targetEntity.getType() === 5)
-            mp.events.callRemote('server:playerWeaponShot', targetEntity.remoteId);
-    }
-    catch (e) {
+        if (targetEntity !== undefined) {
+            if (targetEntity.getType() === 4 || targetEntity.getType() === 5) {
+                mp.events.callRemote('server:playerWeaponShot', targetEntity.remoteId);
+            }
+        }
+    } catch (e) {
         methods.debug(e);
     }
 });
