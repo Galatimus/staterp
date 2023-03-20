@@ -877,54 +877,52 @@ vehicles.updatePrice = function(id, newPrice) {
     }
 };
 
-vehicles.respawn = (vehicle) => {
-    if (!vehicles.exists(vehicle))
+vehicles.removeAllPasengers = function(vehicle) {
+    if (!vehicles.exists(vehicle)) {
         return;
+    }
+    for(let veh of vehicles.getOccupants(vehicle)) {
+        veh.removeFromVehicle();
+    }
+};
+
+vehicles.respawn = (vehicle) => {
+    if (!vehicles.exists(vehicle)) {
+        return;
+    }
 
     try {
-        if (vehicle.getVariable('useless'))
+        if (vehicle.getVariable('useless')) {
             return;
+        }
 
-        try {
-            vehicle._attachments.forEach(attach => {
-                try {
-                    vehicle.addAttachment(attach, true);
-                }
-                catch (e) {
-                    
-                }
-            });
-        }
-        catch (e) {
-            
-        }
+        vehicles.removeAllPasengers(vehicle);   
         
+        vehicle._attachments.forEach(attach => {
+            vehicle.addAttachment(attach, true);
+        });
         setTimeout(function () {
-            if (!vehicles.exists(vehicle))
+            if (!vehicles.exists(vehicle)) {
                 return;
-           try {
-               methods.debug('vehicles.respawn');
-               let containerId = vehicle.getVariable('container');
-               if (containerId != undefined && vehicle.getVariable('user_id') > 0)
-                   vehicles.spawnPlayerCar(containerId);
-               let fractionId = vehicle.getVariable('fraction_id');
-               if (fractionId) {
-                    let info = vehicles.getFractionVehicleInfo(vehicle.getVariable('veh_id'));
-                    if (info !== undefined) {
-                        if (info.is_default || info.fraction_id < 0) {
-                            vehicles.spawnFractionCar(info.id);
-                        }
-                    }
-               }
-               vehicle.destroy();
-           }
-           catch (e) {
-               
+            }
+        
+            methods.debug('vehicles.respawn');
+            
+            let containerId = vehicle.getVariable('container');
+            if (containerId != undefined && vehicle.getVariable('user_id') > 0) {
+                vehicles.spawnPlayerCar(containerId);
+            }
+
+            let fractionId = vehicle.getVariable('fraction_id');
+            if (fractionId) {
+                let info = vehicles.getFractionVehicleInfo(vehicle.getVariable('veh_id'));
+                if (info.is_default || info.fraction_id < 0) {
+                    vehicles.spawnFractionCar(info.id);
+                }
            }
         }, 100)
-    }
-    catch (e) {
-        methods.debug(e);
+    } catch (error) {
+        methods.debug(error);
     }
 };
 
