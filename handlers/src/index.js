@@ -32,12 +32,12 @@ import jail from "./manager/jail";
 import policeRadar from "./manager/policeRadar";
 import ui from "./modules/ui";
 import wheel from "./casino/wheel";
-
 import user from "./user";
 import enums from "./enums";
 import phone from "./phone";
 import chat from "./chat";
 import voiceRage from "./voiceRage";
+import metro from "./modules/metro";
 
 import "./antiCheat";
 import "./mainMenu";
@@ -91,41 +91,30 @@ mp.events.add('playerReady', player => {
             user.init();
             try {
                 methods.requestIpls();
-            }
-            catch (e) {
+            } catch (e) {
                 methods.saveFile('errorIpl', e);
             }
             setTimeout(checkpoint.checkPosition, 10000);
 
             enums.loadCloth();
             business.loadScaleform();
-
             object.load();
             npc.loadAll();
             skill.loadAll();
-
             wheel.loadAll();
-
             trucker.loadAll();
             taxi.loadAll();
-
             attach.init();
             attachItems.registerAttaches();
-
             timer.loadAll();
             vBreakLight.timer();
             policeRadar.load();
-
             weather.secSyncTimer();
-
             ems.loadEMS();
+            metro.loadMetro();
             try {
                 mp.game.stats.statSetProfileSetting(0, 0);
-            }
-            catch (e) {
-
-            }
-
+            } catch (e) {}
             timer.createInterval('phone.findNetworkTimer', phone.findNetworkTimer, 1000);
         }
 

@@ -10,14 +10,12 @@ require('./managers/wpSync');
 require('./managers/attach');
 require('./managers/attachWeapons');
 require('./managers/dispatcher');
-
 require('./casino/wheel');
 
 let mysql = require('./modules/mysql');
 let methods = require('./modules/methods');
 let vehicleInfo = require('./modules/vehicleInfo');
 let ctos = require('./modules/ctos');
-
 let cloth = require('./business/cloth');
 let tattoo = require('./business/tattoo');
 let lsc = require('./business/lsc');
@@ -31,7 +29,6 @@ let bank = require('./business/bank');
 let fuel = require('./business/fuel');
 let shop = require('./business/shop');
 let tradeMarket = require('./business/tradeMarket');
-
 let houses = require('./property/houses');
 let condos = require('./property/condos');
 let business = require('./property/business');
@@ -40,7 +37,6 @@ let stocks = require('./property/stocks');
 let fraction = require('./property/fraction');
 let family = require('./property/family');
 let yachts = require('./property/yachts');
-
 let weather = require('./managers/weather');
 let pickups = require('./managers/pickups');
 let gangWar = require('./managers/gangWar');
@@ -56,12 +52,12 @@ let racer = require('./managers/racer');
 let trucker = require('./managers/trucker');
 let graffiti = require('./managers/graffiti');
 let fishing = require('./managers/fishing');
-
 let coffer = require('./coffer');
 let inventory = require('./inventory');
 let weapons = require('./weapons');
 let enums = require('./enums');
 let factions = require('./modules/factions');
+let metro = require('./modules/metro');
 
 function init() {
     try {
@@ -76,7 +72,6 @@ function init() {
         ctos.loadAll();
         graffiti.loadAll();
         fishing.loadAll();
-
         houses.loadAll();
         yachts.loadAll();
         condos.loadAll();
@@ -91,14 +86,11 @@ function init() {
         //mafiaWar.loadAll();
         timer.loadAll();
         tax.loadAll();
-
         trucker.loadAll();
-
         weather.loadAll();
         racer.loadAll();
         gangZone.loadAll();
         copsRacer.loadAll();
-
         carWash.loadAll();
         rent.loadAll();
         lsc.loadAll();
@@ -111,17 +103,13 @@ function init() {
         fuel.loadAll();
         shop.loadAll();
         tradeMarket.loadAll();
-
         pickups.createAll();
-
         coffer.load();
-
         methods.loadAllBlips();
-
         inventory.loadAll();
-
         vShop.loadAllShop();
-
+        metro.loadMetro();
+        
         let c = a => 10 > a ? 2e4 + +a : a.charCodeAt(0);
 
         enums.clothM = enums.clothM.sort((a, b) => c(a[9][0] + a[9][1]) - c(b[9][0] + b[9][1]));
