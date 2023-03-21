@@ -1,3 +1,4 @@
 mp.utils = {
-    mailer: require('../utils/mailer')
+    ragemp: require('../utils/ragemp'),
+    mailer: require('../utils/mailer'),
 };
