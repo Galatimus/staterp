@@ -216,7 +216,6 @@ pickups.PrisonArrestPos = new mp.Vector3(1690.606, 2591.926, 44.83793);
 pickups.CartelArsenalPos = new mp.Vector3(5011.41455078125, -5742.89453125, 14.484437942504883);
 
 /*Keys*/
-pickups.GovKeyPos = new mp.Vector3(-1312.9268798828125, -550.072265625, 19.802770614624023);
 pickups.SapdKeyPos = new mp.Vector3(-1078.491943359375, -856.7177734375, 4.042818546295166);
 pickups.SheriffKeyPos = new mp.Vector3(-453.48065185546875, 6031.2314453125, 30.340538024902344);
 pickups.InvaderKeyPos = new mp.Vector3(-1095.8746337890625, -254.6504669189453, 36.68137741088867);
@@ -736,9 +735,6 @@ pickups.checkPressE = function(player) {
             player.call('client:menuList:showFractionInvaderMenu');
     }
 
-    if (methods.distanceToPos(pickups.GovKeyPos, playerPos) < distanceCheck && user.isGov(player))
-        player.call('wixcore::security:feature:factions:menu:list:vehicles', [vehicles.getFractionAllowCarList(1, user.isLeader(player) || user.isSubLeader(player) || user.isDepLeader(player) || user.isSubLeader(player) ? -1 : user.get(player, 'rank_type'))]);
-
     else if (methods.distanceToPos(pickups.SapdKeyPos, playerPos) < distanceCheck && user.isSapd(player))
         player.call('wixcore::security:feature:factions:menu:list:vehicles', [vehicles.getFractionAllowCarList(2, user.isLeader(player) || user.isSubLeader(player) || user.isDepLeader(player) || user.isSubLeader(player) ? -1 : user.get(player, 'rank_type'))]);
 
@@ -979,7 +975,6 @@ pickups.createAll = function() {
     methods.createCpVector(pickups.Builder2Pos1, 'Нажмите ~g~Left Alt~s~ чтобы воспользоваться пикапом', 1, -1, pickups.Blue100);
     methods.createCpVector(pickups.Builder2Pos2, 'Нажмите ~g~Left Alt~s~ чтобы воспользоваться пикапом', 1, -1, pickups.Blue100);
 
-    methods.createCpVector(pickups.GovKeyPos, 'Нажмите ~g~E~s~ чтобы открыть меню', 1, -1, pickups.Blue);
     methods.createCpVector(pickups.UsmcKeyPos, 'Нажмите ~g~E~s~ чтобы открыть меню', 1, -1, pickups.Blue);
     methods.createCpVector(pickups.CartelKeyPos, 'Нажмите ~g~E~s~ чтобы открыть меню', 1, -1, pickups.Blue);
 

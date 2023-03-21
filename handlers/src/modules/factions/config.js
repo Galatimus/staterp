@@ -1,5 +1,11 @@
 let config = {};
 
+config.cityhall = {
+    peds: [
+        ['s_m_m_security_01', -562.005859375, -173.7471160888672, 38.1336555480957, 21.51, 'WORLD_HUMAN_GUARD_STAND', '', 0, 0],                // Парковка.
+    ]
+}
+
 config.ems = {
     'paleto': {
         death: new mp.Vector3(-259.3686218261719, 6327.6416015625, 31.420677185058594),

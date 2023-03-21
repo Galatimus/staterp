@@ -27,6 +27,7 @@ import skill from "./manager/skill";
 import attach from "./manager/attach";
 import attachItems from "./manager/attachItems";
 import weather from "./manager/weather";
+import cityhall from "./modules/factions/plugins/cityhall";
 import ems from "./modules/factions/plugins/ems";
 import jail from "./manager/jail";
 import policeRadar from "./manager/policeRadar";
@@ -110,6 +111,7 @@ mp.events.add('playerReady', player => {
             vBreakLight.timer();
             policeRadar.load();
             weather.secSyncTimer();
+            cityhall.loadCityHall();
             ems.loadEMS();
             metro.loadMetro();
             try {
