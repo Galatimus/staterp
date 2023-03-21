@@ -9,9 +9,15 @@ let plugin = exports;
 
 //#region Ініціалізація фракції.
 plugin.loadCityHall = () => {
-    // Blips();
+    Blips();
     Parkings();
 }
+//#endregion
+//#region Виведення іконок (Blip) на карті.
+function Blips() {
+    mp.utils.ragemp.newBlip(cityhall.reception, 419, 0, 1, 'Правительство');
+};
+//#endregion
 //#region Службовий транспорт.
 function Parkings() {
     let data = cityhall.parkings;
