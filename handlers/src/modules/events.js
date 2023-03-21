@@ -2240,11 +2240,6 @@ mp.events.add('client:menuList:showBusinessMenu', (data) => {
     }
 });
 
-mp.events.add('client:menuList:showMeriaMainMenu', () => {
-    methods.debug('Event: client:menuList:showMeriaMainMenu');
-    menuList.showMeriaMainMenu();
-});
-
 mp.events.add('client:menuList:showMeriaIslandMainMenu', () => {
     methods.debug('Event: client:menuList:showMeriaIslandMainMenu');
     menuList.showMeriaIslandMainMenu();

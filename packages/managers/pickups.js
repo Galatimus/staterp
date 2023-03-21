@@ -140,7 +140,6 @@ pickups.MeriaRoofPos = new mp.Vector3(-1369, -471.5994, 83.44699);
 pickups.MeriaGarPos = new mp.Vector3(-1360.679, -471.8841, 30.59572);
 pickups.MeriaGarderobPos = new mp.Vector3(-1300.886, -555.9606, 29.56678);
 pickups.MeriaClearPos = new mp.Vector3(-1291.0059814453125, -574.3822631835938, 29.572912216186523);
-pickups.MeriaHelpPos = new mp.Vector3(-1290.544, -571.1852, 29.57288);
 pickups.MeriaHelpIslandPos = new mp.Vector3(5011.931640625, -5754.16259765625, 27.900148391723633);
 //pickups.MeriaKeyPos = new mp.Vector3(-1381.507, -466.2556, 71.04215);
 
@@ -692,8 +691,6 @@ pickups.checkPressE = function(player) {
         player.call('client:menuList:showMazeOfficeMenu');
     if (methods.distanceToPos(pickups.BankMazeOfficePos2, playerPos) < distanceCheck)
         player.call('client:menuList:showMazeOfficeMenu');
-    if (methods.distanceToPos(pickups.MeriaHelpPos, playerPos) < distanceCheck)
-        player.call('client:menuList:showMeriaMainMenu');
     if (methods.distanceToPos(pickups.MeriaHelpIslandPos, playerPos) < distanceCheck)
         player.call('client:menuList:showMeriaIslandMainMenu');
 
@@ -1096,7 +1093,6 @@ pickups.createAll = function() {
     methods.createCpVector(pickups.MeriaRoofPos, 'Нажмите ~g~Left Alt~s~ чтобы воспользоваться пикапом', 1, -1, pickups.Blue100);
     methods.createCpVector(pickups.MeriaGarPos, 'Нажмите ~g~Left Alt~s~ чтобы воспользоваться пикапом', 1, -1, pickups.Blue100);
     methods.createCpVector(pickups.MeriaGarderobPos, 'Нажмите ~g~E~s~ чтобы открыть меню', 1, -1, pickups.Blue);
-    methods.createCpVector(pickups.MeriaHelpPos, 'Нажмите ~g~E~s~ чтобы открыть меню', 1, -1, pickups.Blue);
     methods.createCpVector(pickups.MeriaHelpIslandPos, 'Нажмите ~g~E~s~ чтобы открыть меню', 1, -1, pickups.Blue);
 
     methods.createCpVector(pickups.SapdStockPos, 'Нажмите ~g~E~s~ чтобы открыть меню', 1, -1, pickups.Blue);

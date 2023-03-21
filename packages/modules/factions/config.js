@@ -1,6 +1,7 @@
 module.exports = {
     //#region Державні фракції
     cityhall: {
+        reception: new mp.Vector3(-554.8059692382812, -187.4222412109375, 37.22120666503906),
         parkings: new mp.Vector3(-562.005859375, -173.7471160888672, 37.1336555480957)
     },
     ems: {
