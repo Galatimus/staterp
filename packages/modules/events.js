@@ -2515,26 +2515,24 @@ mp.events.addRemoteCounted('server:admin:canabisZone:edit', (player, id, key, va
     }
 });
 
-mp.events.addRemoteCounted('server:admin:vehicleSpeedBoost', (player, vName, num) => {
-    if (!user.isAdmin(player))
+mp.events.addRemoteCounted('server:admin:vehicleSpeedBoost', async (player, vName, num) => {
+    if (!user.isAdmin(player)) {
         return;
-    try {
-
-        mysql.executeQuery(`UPDATE vehfeatures SET sb = '${num}' WHERE display_name = '${vName}'`);
     }
-    catch (e) {
+    try {
+        await mp.lib.mysql.model.vehfeature.update({ sb: num }, { where: { display_name: vName } });
+    } catch (e) {
         methods.debug(e);
     }
 });
 
-mp.events.addRemoteCounted('server:admin:vehicleSpeedMax', (player, vName, num) => {
-    if (!user.isAdmin(player))
+mp.events.addRemoteCounted('server:admin:vehicleSpeedMax', async (player, vName, num) => {
+    if (!user.isAdmin(player)) {
         return;
+    }  
     try {
-
-        mysql.executeQuery(`UPDATE vehfeatures SET sm = '${num}' WHERE display_name = '${vName}'`);
-    }
-    catch (e) {
+        await mp.lib.mysql.model.vehfeature.update({ sm: num }, { where: { display_name: vName } });
+    } catch (e) {
         methods.debug(e);
     }
 });
