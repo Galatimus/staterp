@@ -27,33 +27,36 @@ let vehicleInfo = require('./modules/vehicleInfo');
 let user = exports;
 
 user.createAccount = function(player, login, pass, email) {
-
-    methods.debug('user.createAccount');
-
-    if (!mp.players.exists(player))
+    if (!mp.players.exists(player)) {
         return;
-
+    }
     user.doesExistAccount(login, email, player.socialClub, function (cb) {
+        let social = player.socialClub;
+
         if (cb == 1) {
             user.showCustomNotify(player, 'Аккаунт с такими SocialClub уже существует', 1);
             return;
-        }
-        else if (cb == 2) {
+        } else if (cb == 2) {
             user.showCustomNotify(player, 'Логин уже занят', 1);
             return;
-        }
-        else if (cb == 3) {
+        } else if (cb == 3) {
             user.showCustomNotify(player, 'Email уже занят', 1);
             return;
         }
 
-        let social = player.socialClub;
-        if (player.accSocial)
+        if (player.accSocial) {
             social = player.accSocial;
-
-        let sql = "INSERT INTO accounts (login, email, social, serial, password, reg_ip, reg_timestamp) VALUES ('" + login +
-            "', '" + email + "', '" + social + "', '" + player.serial + "', '" + methods.sha256(pass) + "', '" + player.ip + "', '" + methods.getTimeStamp() + "')";
-        mysql.executeQuery(sql);
+        }
+        
+        mp.lib.mysql.model.account.create({ 
+            login: login,
+            email: email,
+            social: social,
+            serial: player.serial,
+            password: methods.sha256(pass),
+            reg_ip: player.ip ,
+            reg_timestamp: methods.getTimeStamp()
+        });
 
         setTimeout(function () {
             user.loginAccount(player, login, pass);
