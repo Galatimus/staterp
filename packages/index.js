@@ -69,7 +69,7 @@ function init() {
             for (let i = 0; i < weapons.hashesMap.length; i++) {
                 weapons.hashesMap[i][1] *= 2;
             }
-            vehicleInfo.loadAll();
+            vehicleInfo.loadAllFeature();
             ctos.loadAll();
             graffiti.loadAll();
             fishing.loadAll();

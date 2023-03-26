@@ -2520,7 +2520,7 @@ mp.events.addRemoteCounted('server:admin:vehicleSpeedBoost', (player, vName, num
         return;
     try {
 
-        mysql.executeQuery(`UPDATE veh_info SET sb = '${num}' WHERE display_name = '${vName}'`);
+        mysql.executeQuery(`UPDATE vehfeatures SET sb = '${num}' WHERE display_name = '${vName}'`);
     }
     catch (e) {
         methods.debug(e);
@@ -2532,7 +2532,7 @@ mp.events.addRemoteCounted('server:admin:vehicleSpeedMax', (player, vName, num) 
         return;
     try {
 
-        mysql.executeQuery(`UPDATE veh_info SET sm = '${num}' WHERE display_name = '${vName}'`);
+        mysql.executeQuery(`UPDATE vehfeatures SET sm = '${num}' WHERE display_name = '${vName}'`);
     }
     catch (e) {
         methods.debug(e);

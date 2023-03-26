@@ -2,23 +2,19 @@
 
 const crypto = require('crypto');
 const fs = require('fs/promises');
-
-
 let Container = require('./data');
 let mysql = require('./mysql');
-
 let enums = require('../enums');
 let user = require('../user');
 let coffer = require('../coffer');
-
 let vehicles = require('../property/vehicles');
 let business = require('../property/business');
 let stocks = require('../property/stocks');
 let fraction = require('../property/fraction');
 let family = require('../property/family');
-
 let weather = require('../managers/weather');
 let pickups = require('../managers/pickups');
+let vehicleInfo  = require('../modules/vehicleInfo');
 
 let checkPointStaticList = [];
 
@@ -131,7 +127,7 @@ methods.checkTeleportVeh = function(player, pos1, pos2) {
 };
 
 methods.getVehicleInfo = function (model) {
-    let vehInfo = enums.vehicleInfo;
+    let vehInfo = vehicleInfo.feature;
     for (let item in vehInfo) {
         let vItem = vehInfo[item];
         if (vItem.hash == model || vItem.display_name == model || vItem.display_name.toLowerCase() == model.toString().toLowerCase() || mp.joaat(vItem.display_name.toString().toLowerCase()) == model)

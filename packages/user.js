@@ -22,6 +22,7 @@ let fraction = require('./property/fraction');
 let family = require('./property/family');
 let stocks = require('./property/stocks');
 let yachts = require('./property/yachts');
+let vehicleInfo = require('./modules/vehicleInfo');
 
 let user = exports;
 
@@ -1851,38 +1852,15 @@ user.updateVehicleInfo = function(player) {
         return false;
 
     try {
-        for (let i = 0; i < parseInt(enums.vehicleInfo.length / 250) + 1; i++) {
+        for (let i = 0; i < parseInt(vehicleInfo.feature.length / 250) + 1; i++) {
             let from = i * 250 - 1;
             let to = i * 250 + 249;
-            player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(from < 0 ? 0 : from, to)]);
+            player.call('client:updateVehicleInfo', [i, vehicleInfo.feature.slice(from < 0 ? 0 : from, to)]);
         }
     } catch (e) {
         methods.debug(e);
     }
-
-    /*try {
-        for (let i = 0; i < methods.parseInt(enums.vehicleInfo.length / 250) + 1; i++)
-            player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(i * 250, i * 250 + 249)]);
-    }
-    catch (e) {
-        methods.debug(e);
-    }*/
 };
-
-/*user.updateVehicleInfo = function(player) {
-    if (!mp.players.exists(player))
-        return false;
-
-    try {
-        for (let i = 0; i < parseInt(enums.vehicleInfo.length / 250); i++) {
-            let from = i * 250 - 1;
-            let to = i * 250 + 249;
-            player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(from < 0 ? 0 : from, to)]);
-        }
-    } catch (e) {
-        methods.debug(e);
-    }
-};*/
 
 /*
 * StyleType

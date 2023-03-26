@@ -11,6 +11,8 @@ let user = require('../user');
 let enums = require('../enums');
 let coffer = require('../coffer');
 
+let vehicleInfo = require('../modules/vehicleInfo');
+
 let vShop = exports;
 
 vShop.loadAllShop = () => {
@@ -87,7 +89,7 @@ vShop.checkPosForOpenMenu = function(player) {
 
         let vList = [];
         let where = '';
-        enums.vehicleInfo.forEach(item => {
+        vehicleInfo.feature.forEach(item => {
             if (enums.carShopList[shopId].auto != item.type)
                 return;
             where += ` OR name = '${item.display_name}'`
