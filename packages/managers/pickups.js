@@ -134,14 +134,17 @@ pickups.CartelPickupPos2 = new mp.Vector3(5012.4775390625, -5746.83056640625, 14
 pickups.LifeInvaderShopPos = new mp.Vector3(-1083.074, -248.3521, 36.76329);
 pickups.UsmcBotPos = new mp.Vector3(487.7861022949219, -3027.18505859375, 5.01339435577392);
 
-pickups.MeriaUpPos = new mp.Vector3(-1395.997, -479.8439, 71.04215);
-pickups.MeriaDownPos = new mp.Vector3(-1379.659, -499.748, 32.15739);
-pickups.MeriaRoofPos = new mp.Vector3(-1369, -471.5994, 83.44699);
-pickups.MeriaGarPos = new mp.Vector3(-1360.679, -471.8841, 30.59572);
-pickups.MeriaGarderobPos = new mp.Vector3(-1300.886, -555.9606, 29.56678);
-pickups.MeriaClearPos = new mp.Vector3(-1291.0059814453125, -574.3822631835938, 29.572912216186523);
+pickups.MeriaUpPos = new mp.Vector3(-1395.997, -479.8439, 71.04215); // Лифт
+pickups.MeriaDownPos = new mp.Vector3(-1379.659, -499.748, 32.15739); // Вход в интерьер мейз банка
+pickups.MeriaRoofPos = new mp.Vector3(-1369, -471.5994, 83.44699); // Лифт кришп
+pickups.MeriaGarPos = new mp.Vector3(-1360.679, -471.8841, 30.59572); // Лифт гараж
+pickups.MeriaGarderobPos = new mp.Vector3(-1300.886, -555.9606, 29.56678); // Раздевалка
+pickups.MeriaClearPos = new mp.Vector3(-1291.0059814453125, -574.3822631835938, 29.572912216186523); //
 pickups.MeriaHelpIslandPos = new mp.Vector3(5011.931640625, -5754.16259765625, 27.900148391723633);
 //pickups.MeriaKeyPos = new mp.Vector3(-1381.507, -466.2556, 71.04215);
+pickups.GovInfoPos1 = new mp.Vector3(-1301.586, -572.8552, 40.18815); // info
+pickups.GovInfoPos2 = new mp.Vector3(-1287.264, -590.3502, 40.18817); // info
+pickups.GovInfoPos3 = new mp.Vector3(-1298.756, -572.7356, 33.37488); // info
 
 pickups.FibArsenalPos = new mp.Vector3(130.9275665283203, -762.3977661132812, 241.15185546875);
 pickups.FibLift0StationPos = new mp.Vector3(122.9873, -741.1865, 32.13323);
@@ -223,10 +226,6 @@ pickups.FibKeyPos = new mp.Vector3(127.6114273071289, -742.7451782226562, 32.133
 pickups.CartelKeyPos = new mp.Vector3(4976.3662109375, -5723.76611328125, 18.88021469116211);
 
 /*Info*/
-
-pickups.GovInfoPos1 = new mp.Vector3(-1301.586, -572.8552, 40.18815);
-pickups.GovInfoPos2 = new mp.Vector3(-1287.264, -590.3502, 40.18817);
-pickups.GovInfoPos3 = new mp.Vector3(-1298.756, -572.7356, 33.37488);
 pickups.CartelInfoPos = new mp.Vector3(5013.83349609375, -5754.810546875, 27.900144577026367);
 pickups.SapdInfoPos = new mp.Vector3(447.4615783691406, -973.3896484375, 29.689332962036133);
 pickups.SapdInfoPos2 = new mp.Vector3(-1617.1435546875, -1017.6526489257812, 12.145439147949219);
@@ -242,9 +241,6 @@ pickups.InvaderWorkPos1 = new mp.Vector3(-1055.5491943359375, -242.5165100097656
 pickups.InvaderWorkPos2 = new mp.Vector3(-1050.10302734375, -242.052734375, 43.02106475830078);
 pickups.InvaderWorkPos3 = new mp.Vector3(-1059.9254150390625, -246.7880096435547, 43.021060943603516);
 pickups.InvaderWorkPos4 = new mp.Vector3(-1056.6370849609375, -245.4740447998047, 43.021060943603516);
-
-pickups.BahamaPos1 = new mp.Vector3(-1387.69, -588.719, 29.3198);
-pickups.BahamaPos2 = new mp.Vector3(-1388.88, -586.291, 29.2198);
 
 pickups.TheLostPos1 = new mp.Vector3(982.47, -103.51, 73.848);
 pickups.TheLostPos2 = new mp.Vector3(981.03, -101.79, 73.845);
@@ -409,7 +405,6 @@ pickups.checkPressLAlt = function(player) {
         methods.distanceToPos(pickups.MeriaUpPos, playerPos) < distanceCheck)
         player.call('client:menuList:showGovOfficeTeleportMenu');
 
-    methods.checkTeleport(player, pickups.BahamaPos1, pickups.BahamaPos2);
     methods.checkTeleport(player, pickups.Builder1Pos1, pickups.Builder1Pos2);
     methods.checkTeleport(player, pickups.Builder2Pos1, pickups.Builder2Pos2);
     methods.checkTeleport(player, pickups.InvaderPos2, pickups.InvaderPos1);
@@ -949,11 +944,6 @@ pickups.checkPressE = function(player) {
 
 pickups.createAll = function() {
     methods.debug('pickups.createPickups');
-
-    //methods.createStaticCheckpointV(pickups.TheLostPos1, 'Нажмите ~g~Left Alt~s~ чтобы воспользоваться пикапом', 1, -1, pickups.Blue100);
-    //methods.createStaticCheckpointV(pickups.TheLostPos2, 'Нажмите ~g~Left Alt~s~ чтобы воспользоваться пикапом', 1, -1, pickups.Blue100);
-    methods.createCpVector(pickups.BahamaPos1, 'Нажмите ~g~Left Alt~s~ чтобы воспользоваться пикапом', 1, -1, pickups.Blue100);
-    methods.createCpVector(pickups.BahamaPos2, 'Нажмите ~g~Left Alt~s~ чтобы воспользоваться пикапом', 1, -1, pickups.Blue100);
 
     methods.createCpVector(pickups.SapdToInterrogationPos, 'Нажмите ~g~Left Alt~s~ чтобы воспользоваться пикапом', 1, -1, pickups.Blue100);
     methods.createCpVector(pickups.SapdFromInterrogationPos, 'Нажмите ~g~Left Alt~s~ чтобы воспользоваться пикапом', 1, -1, pickups.Blue100);
