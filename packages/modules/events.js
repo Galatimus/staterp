@@ -2613,6 +2613,67 @@ mp.events.addRemoteCounted('server:admin:tptome', (player, type, id) => {
     admin.tpToAdmin(player, type, id);
 });
 
+// 27.03.2023 - Поповнити гаманець гравця.
+mp.events.addRemoteCounted('wixcore:system:player:add:wallet:money', (player, type, id, wallet) => {
+    try {
+        if (!user.isAdmin(player)) {
+            return;
+        }
+        id = methods.parseInt(id);
+        if (type === 0) {
+            let target = mp.players.at(id);
+            if (!user.isLogin(target)) {
+                player.notify('~r~Игрок не найден на сервере.');
+                return;
+            }
+            user.addCashMoney(target, wallet);
+            target.notify(`~b~Администратор ${user.getRpName(player)} выдал ${wallet}$ денег ${user.getRpName(target)}`);
+            player.notify(`~b~Администратор ${user.getRpName(player)} выдал ${wallet}$ денег ${user.getRpName(target)}`);
+        } else {
+            let target = user.getPlayerById(id);
+            if (!user.isLogin(target)) {
+                player.notify('~r~Игрок не найден на сервере.');
+                return;
+            }
+            user.addCashMoney(target, wallet);
+            target.notify(`~b~Администратор ${user.getRpName(player)} выдал ${wallet}$ денег ${user.getRpName(target)}`);
+            player.notify(`~b~Администратор ${user.getRpName(player)} выдал ${wallet}$ денег ${user.getRpName(target)}`);
+        }
+    } catch (error) {
+        // WixCore.Net
+    }
+});
+// 27.03.2023 - Забрать деньги с гаманца гравця.
+mp.events.addRemoteCounted('wixcore:system:player:remove:wallet:money', (player, type, id, wallet) => {
+    try {
+        if (!user.isAdmin(player)) {
+            return;
+        }
+        id = methods.parseInt(id);
+        if (type === 0) {
+            let target = mp.players.at(id);
+            if (!user.isLogin(target)) {
+                player.notify('~r~Игрок не найден на сервере.');
+                return;
+            }
+            user.removeCashMoney(target, wallet);
+            target.notify(`~b~Администратор ${user.getRpName(player)} Забрал ${wallet}$ денег ${user.getRpName(target)}`);
+            player.notify(`~b~Администратор ${user.getRpName(player)} Забрал ${wallet}$ денег ${user.getRpName(target)}`);
+        } else {
+            let target = user.getPlayerById(id);
+            if (!user.isLogin(target)) {
+                player.notify('~r~Игрок не найден на сервере.');
+                return;
+            }
+            user.removeCashMoney(target, wallet);
+            target.notify(`~b~Администратор ${user.getRpName(player)} Забрал ${wallet}$ денег ${user.getRpName(target)}`);
+            player.notify(`~b~Администратор ${user.getRpName(player)} Забрал ${wallet}$ денег ${user.getRpName(target)}`);
+        }
+    } catch (error) {
+        // WixCore.Net
+    }
+});
+// Todo
 mp.events.addRemoteCounted('server:admin:tptov', (player, id) => {
     try {
         if (!user.isAdmin(player))

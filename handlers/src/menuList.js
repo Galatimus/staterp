@@ -14071,6 +14071,8 @@ menuList.showAdminPlayerMenu = function(id) {
     UIMenu.Menu.AddMenuItem("Телепортировать игрока к себе", "", {doName: "tptome"});
 
     if (user.isAdmin(2)) {
+        UIMenu.Menu.AddMenuItem("Пополнить кошелек игрока", "", {doName: "idPlayerGiveMoney"});
+        UIMenu.Menu.AddMenuItem("Опустошить кошелек игрока", "", {doName: "idPlayerTakeMoney"});
         UIMenu.Menu.AddMenuItem("Выдать HP", "", {doName: "setHpById"});
         UIMenu.Menu.AddMenuItem("Выдать Armor", "", {doName: "setArmorById"});
         UIMenu.Menu.AddMenuItem("Выдать скин", "", {doName: "setSkinById"});
@@ -14181,6 +14183,25 @@ menuList.showAdminPlayerMenu = function(id) {
                 let num = methods.parseInt(await UIMenu.Menu.GetUserInput("Значение брони", "", 3));
                 mp.events.callRemote('server:admin:setArmorById', typeIndex, id, num)
             }
+            // 27.03.2023 - Поповнити гаманець гравця.
+            if (item.doName == 'idPlayerGiveMoney') {
+                var wallet = methods.parseInt(await UIMenu.Menu.GetUserInput("Денег", "", 10));
+                if (wallet < 1 || wallet > 10000000) {
+                    mp.game.ui.notifications.show('Неверное введение значения средств.');
+                    return;
+                }
+                mp.events.callRemote('wixcore:system:player:add:wallet:money', typeIndex, id, wallet);
+            }
+            // 27.03.2023 - Забрать деньги с гаманца гравця.
+            if (item.doName == 'idPlayerTakeMoney') {
+                var wallet = methods.parseInt(await UIMenu.Menu.GetUserInput("Денег", "", 10));
+                if (wallet < 1 || wallet > 10000000) {
+                    mp.game.ui.notifications.show('Неверное введение значения средств.');
+                    return;
+                }
+                mp.events.callRemote('wixcore:system:player:remove:wallet:money', typeIndex, id, wallet);
+            }
+            // Todo // server:admin:givemoneyById
             if (item.doName == 'setHpById') {
                 let num = methods.parseInt(await UIMenu.Menu.GetUserInput("Значение HP", "", 3));
                 mp.events.callRemote('server:admin:setHpById', typeIndex, id, num)
