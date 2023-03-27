@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/editorplayer.css'
 import './css/editor-adaptive.css'
-import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
+import {HashRouter as Router, Route, Redirect} from "react-router-dom";
 import EditorPlayer from './EditorPlayer';
 import ChoiceRole from './content/ChoiceRole';
 import EventManager from "../../EventManager";
