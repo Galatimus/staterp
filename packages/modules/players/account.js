@@ -35,6 +35,11 @@ module.exports = {
                 reg_timestamp: methods.getTimeStamp()
             });
 
+            // Надсилання логіну та паролю на пошту
+            // var message = `<b>Ваши данные для входа:</b> <b>Логин:</b> ${login} <br /> <b>Пароль:</b> ${password}`;
+            // var subject = 'Добро пожаловать на сервер «WixCore»';
+            // mp.utils.mailer(email, subject, message);
+
             setTimeout(function () {
                 user.loginAccount(player, login, pass);
             }, 1000)
