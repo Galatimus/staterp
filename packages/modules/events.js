@@ -229,9 +229,9 @@ mp.events.addRemoteCounted('server:user:respawn', (player, x, y, z) => {
     }, 500);
 });
 
-mp.events.addRemoteCounted('server:user:createAccount', (player, login, password, email) => {
+mp.events.addRemoteCounted('server:user:createAccount', async (player, login, password, email) => {
     try {
-        user.createAccount(player, login, password, email);
+        await Module.Players.Account.Create(player, login, password, email);
     } catch (e) {
         console.log(e);
     }

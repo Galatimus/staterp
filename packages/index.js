@@ -1,6 +1,7 @@
 "use strict";
 
 require('./wixcore');
+require('./modules/players');
 require('./modules/cli');
 require('./modules/data');
 require('./modules/events');

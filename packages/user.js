@@ -26,44 +26,6 @@ let vehicleInfo = require('./modules/vehicleInfo');
 
 let user = exports;
 
-user.createAccount = function(player, login, pass, email) {
-    if (!mp.players.exists(player)) {
-        return;
-    }
-    user.doesExistAccount(login, email, player.socialClub, function (cb) {
-        let social = player.socialClub;
-
-        if (cb == 1) {
-            user.showCustomNotify(player, 'Аккаунт с такими SocialClub уже существует', 1);
-            return;
-        } else if (cb == 2) {
-            user.showCustomNotify(player, 'Логин уже занят', 1);
-            return;
-        } else if (cb == 3) {
-            user.showCustomNotify(player, 'Email уже занят', 1);
-            return;
-        }
-
-        if (player.accSocial) {
-            social = player.accSocial;
-        }
-        
-        mp.lib.mysql.model.account.create({ 
-            login: login,
-            email: email,
-            social: social,
-            serial: player.serial,
-            password: methods.sha256(pass),
-            reg_ip: player.ip ,
-            reg_timestamp: methods.getTimeStamp()
-        });
-
-        setTimeout(function () {
-            user.loginAccount(player, login, pass);
-        }, 1000)
-    });
-};
-
 let skin = {
     SKIN_SEX: 0,
     SKIN_MOTHER_FACE: 0,
