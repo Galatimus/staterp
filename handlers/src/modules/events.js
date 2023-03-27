@@ -48,7 +48,7 @@ import bind from "../manager/bind";
 import admin from "../admin";
 import attachItems from "../manager/attachItems";
 import achievement from "../manager/achievement";
-
+import dispenser from "./dispenser";
 
 mp.gui.chat.enabled = false;
 
@@ -3811,6 +3811,7 @@ mp.keys.bind(0x45, true, function() {
         if (!methods.isBlockKeys()) {
             mp.events.callRemote('onKeyPress:E');
             methods.pressEToPayRespect();
+            dispenser.pressE();
         }
     }
     catch (e) {

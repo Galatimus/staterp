@@ -19,6 +19,7 @@ import bind from "./bind";
 import achievement from "./achievement";
 
 import fuel from "../business/fuel";
+import dispenser from "../modules/dispenser";
 
 //import dispatcher from "./dispatcher";
 
@@ -401,7 +402,8 @@ timer.twoSecTimer = function() {
         }
 
         discord.checker();
-
+        dispenser.checker();
+        
         let plPos = mp.players.local.position;
 
         EntityFleeca = mp.game.object.getClosestObjectOfType(plPos.x, plPos.y, plPos.z, 0.68, 506770882, false, false, false);
