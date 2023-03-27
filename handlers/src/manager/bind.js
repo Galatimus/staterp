@@ -347,10 +347,11 @@ for(let code in keyCodes) {
                     inventory.openInventoryByEntity(targetEntity);
                 }
                 else {
-                    if (!menuList.isShowPlayerMenu)
+                    if (!menuList.isShowPlayerMenu && phone.isHide()) {
                         menuList.showPlayerMenu();
-                    else
+                    } else {
                         menuList.hide();
+                    }    
                 }
             }
         }
@@ -859,20 +860,29 @@ for(let code in keyCodes) {
                 Container.Data.ResetLocally(mp.players.local.remoteId, "isSeatTimeout");
             }, 1000);
         }
+        
         if (user.getCache('s_bind_passanger') == parseInt(code)) {
-            if (!user.isLogin())
+            if (!user.isLogin()) {
                 return;
-            let player = mp.players.local;
-            if (player.isInAnyVehicle(true) || methods.isBlockKeys() || mp.gui.cursor.visible)
-                return;
-            let position = mp.players.local.position;
-            let vehicle = methods.getNearestVehicleWithCoords(position, 6);
-            if (vehicle && mp.vehicles.exists(vehicle) && 5 > vehicle.getSpeed()) {
-                for (let i = 0; i < vehicle.getMaxNumberOfPassengers(); i++)
-                    if (vehicle.isSeatFree(i))
+            }
+            try {
+                let player = mp.players.local;
+                if (player.isInAnyVehicle(true) || methods.isBlockKeys() || mp.gui.cursor.visible) {
+                    return;
+                }
+                let position = mp.players.local.position;
+                let vehicle = methods.getNearestVehicleWithCoords(position, 6);
+                if (vehicle && mp.vehicles.exists(vehicle) && 5 > vehicle.getSpeed()) {
+                    for (let i = 0; i < vehicle.getMaxNumberOfPassengers(); i++)
+                    if (vehicle.isSeatFree(i)) {
                         return void player.taskEnterVehicle(vehicle.handle, 5000, i, 1, 1, 0)
+                    }
+                }
+            } catch (error) {
+                // WixCore.Net
             }
         }
+
         if (user.getCache('s_bind_firemod') == parseInt(code)) {
             mp.events.call('client:changeFireMod');
         }
