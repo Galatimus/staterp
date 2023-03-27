@@ -418,7 +418,9 @@ edu.createCamera = function() {
 edu.destroyCamera = function() {
     try {
         if (camera) {
-            camera.destroy();
+            if(mp.cameras.exists(camera)) {
+                camera.destroy();
+            }
             camera = null;
         }
     }
