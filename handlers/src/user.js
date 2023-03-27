@@ -642,21 +642,21 @@ user.teleportVehV = function(pos, rot) {
             mp.game.invoke(methods.SET_FOLLOW_VEHICLE_CAM_VIEW_MODE, 4);
             if (mp.players.local.vehicle) {
                 mp.players.local.vehicle.freezePosition(true);
-                mp.players.local.vehicle.position = pos;
-                if (rot != undefined)
+                mp.players.local.vehicle.setCoords(pos.x, pos.y, pos.z, false, false, false, false);
+                if (rot != undefined) {
                     mp.players.local.vehicle.setRotation(0, 0, methods.parseInt(rot), 0, true);
-            }
-            else {
-                if (rot != undefined)
+                }
+            } else {
+                if (rot != undefined) {
                     mp.players.local.setRotation(0, 0, methods.parseInt(rot), 0, true);
+                }
                 mp.players.local.position = pos;
                 admin.teleportCamera(pos);
             }
-        }
-        catch (e) {
+        } catch (e) {
             methods.debug(e);
         }
-        //methods.wait(500);
+
         setTimeout(function () {
 
             try {
