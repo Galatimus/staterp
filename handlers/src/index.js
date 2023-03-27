@@ -66,15 +66,9 @@ mp.events.add('playerReady', player => {
             mp.gui.chat.push('BlackList');
             user.kick('BlackList');
         } else {
-            mp.gui.chat.push('Добро пожаловать на State 99 🌎');
-            mp.gui.chat.push('Подождите пожалуйста, выполняется загрузка всех необходимых пакетов для комфортной игры. Это займет меньше минуты.');
-            //mp.gui.chat.push('Сервер будет доступен в 17:00 По МСК');
 
             chat.show(false);
             chat.activate(false);
-            /*enums.customIpl.forEach(item => {
-                object.createIpl(item[0], new mp.Vector3(item[1], item[2], item[3]), item[4]);
-            });*/
 
             mp.game.ped.setAiMeleeWeaponDamageModifier(1);
             mp.game.player.setMeleeWeaponDefenseModifier(1);

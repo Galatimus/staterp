@@ -787,20 +787,13 @@ mp.events.add('client:events:loginUser:success', async function() {
 
             inventory.getItemList(inventory.types.Player, await user.get('id'));
             quest.loadAllBlip();
-            chat.sendLocal('Добро пожаловать на State 99 🌎');
-            chat.sendLocal('Желаем приятной игры 🧡');
-            /*chat.sendLocal(' ');
-            chat.sendLocal(`!{${chat.clBlue}}На сервере действует конкурс`);
-            chat.sendLocal(`!{${chat.clBlue}}1. !{${chat.clWhite}}Каждый час разыгрывается VIP HARD на рандомное количество дней.`);
-            chat.sendLocal(`!{${chat.clBlue}}2. !{${chat.clWhite}}Каждые два часа игры на сервере разыгрывается редкая Маска.`);
-            chat.sendLocal(`!{${chat.clBlue}}3. !{${chat.clWhite}}Каждые 24 часа В 20:00 по МСК разыгрывается 5 транспортных средств.`);
-            chat.sendLocal(`!{${chat.clBlue}}3. !{${chat.clWhite}}Отыграв 8 часов на сервере, вы получите $30.000, но 1 раз в сутки.`);*/
-            /*chat.sendLocal('  ');
-            chat.sendLocal(`!{${chat.clBlue}}На сервере действует конкурс`);
-            chat.sendLocal(`Конкурс очень крутой, на 50 призовых мест и у тебя есть шанс победить, все подробности на сайте!`);*/
-            /*chat.sendLocal('  ');
-            chat.sendLocal(`!{${chat.clBlue}}Колесо удачи`);
-            chat.sendLocal(`Отыграв 3 часа на сервере, у вас есть возможность прокрутить колесо удачи и один из главных призов это дорогой автомобиль, маска или VIP HARD.`);*/
+
+            chat.sendLocal(`!{${chat.clOrange}} Добро пожаловать на WixCore Role Play.`);
+            chat.sendLocal(`!{${chat.clBlue}} ☰ IP сервера: !{${chat.clWhite}} roleplay.wixcore.net:22005`);
+            chat.sendLocal(`!{${chat.clBlue}} ☰ Мы Фейсбук: !{${chat.clWhite}} roleplay.wixcore.net/facebook`);
+            chat.sendLocal(`!{${chat.clBlue}} ☰ Наш Дискорд: !{${chat.clWhite}} roleplay.wixcore.net/discord`);
+            chat.sendLocal(`!{${chat.clBlue}} ☰ Донат сервера: !{${chat.clWhite}} roleplay.wixcore.net/donate`);
+            
             chat.updateSettings();
             ui.updateMenuSettings();
             ui.unloadIslandMinimap();
