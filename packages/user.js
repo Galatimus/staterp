@@ -359,9 +359,11 @@ user.save = function(player, withReset = false) {
 
         if (withReset === true) {
             user.resetAll(player);
+        } else {
+            setTimeout(function() {
+                user.updateClientCache(player);
+            }, 500);
         }
-        else
-            user.updateClientCache(player);
         resolve(true);
         return;
     });

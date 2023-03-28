@@ -692,35 +692,32 @@ user.putInVehicle = function() {
     isTeleport = true;
 };
 
-user.tpToWaypoint = function() { //TODO машина
+// 28.03.2023 - Телепорт гравця із транспортом.
+user.tpToWaypoint = function () {
     try {
-        let pos = methods.getWaypointPosition();
-
-        isTeleport = true;
-        let entity = mp.players.local.vehicle ? mp.players.local.vehicle : mp.players.local;
-        entity.position = new mp.Vector3(pos.x, pos.y, pos.z + 20);
-        let interval = setInterval(function () {
-            try {
-                mp.game.streaming.requestCollisionAtCoord(pos.x, pos.y, pos.z);
-                entity.position = new mp.Vector3(pos.x, pos.y, entity.position.z + 20);
-
-                admin.teleportCamera(pos);
-
-                let zPos = mp.game.gameplay.getGroundZFor3dCoord(mp.players.local.position.x, mp.players.local.position.y, mp.players.local.position.z, 0, false);
-                if (entity.position.z > 1000 || zPos != 0) {
-                    entity.position = new mp.Vector3(pos.x, pos.y, zPos + 2);
-
-                    if (mp.players.local.vehicle)
-                        mp.players.local.vehicle.setOnGroundProperly();
-
-                    clearInterval(interval);
+        setTimeout(() => {
+            let pos = methods.getWaypointPosition();
+            isTeleport = true;
+            let entity = mp.players.local.vehicle ? mp.players.local.vehicle : mp.players.local;
+            let interval = setInterval(function () {
+                try {
+                    mp.game.streaming.requestCollisionAtCoord(pos.x, pos.y, pos.z);
+                    entity.setCoords(pos.x, pos.y, entity.position.z + 20, false, false, false, false);
+                    admin.teleportCamera(pos);
+                    let zPos = mp.game.gameplay.getGroundZFor3dCoord(mp.players.local.position.x, mp.players.local.position.y, mp.players.local.position.z, 0, false);
+                    if (entity.position.z > 1000 || zPos != 0) {
+                        entity.position = new mp.Vector3(pos.x, pos.y, zPos + 2);
+                        if (mp.players.local.vehicle) {
+                            mp.players.local.vehicle.setOnGroundProperly();
+                        }
+                        clearInterval(interval);
+                    }
+                } catch (e) {
+                    methods.debug(e);
                 }
-            }
-            catch (e) {
-                methods.debug(e);
-            }
-        }, 1);
-    } catch(e) {
+            }, 1);
+        }, 1000);
+    } catch (e) {
         methods.debug(e);
     }
 };
