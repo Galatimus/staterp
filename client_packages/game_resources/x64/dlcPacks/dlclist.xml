@@ -71,10 +71,19 @@
 		<!-- Here register maps addons -->
 		<!-- Here register interiors addons -->
 		<Item>dlcpacks:/interiors/cityhall/</Item>
+		
 		<Item>dlcpacks:/interiors/ems_paleto/</Item>
 		<Item>dlcpacks:/interiors/ems_pillbox/</Item>
 		<Item>dlcpacks:/interiors/ems_sandy/</Item>
 		<Item>dlcpacks:/interiors/ems_zohan/</Item>
+
+		<Item>dlcpacks:/interiors/wixcore_garage1/</Item>
+		<Item>dlcpacks:/interiors/wixcore_garage2/</Item>
+		<Item>dlcpacks:/interiors/wixcore_garage3/</Item>
+		<Item>dlcpacks:/interiors/wixcore_garage4/</Item>
+		<Item>dlcpacks:/interiors/wixcore_garage5/</Item>
+		<Item>dlcpacks:/interiors/wixcore_garage6/</Item>
+		<Item>dlcpacks:/interiors/wixcore_garage7/</Item>
 		<!-- Here register skins addons -->
 		<!-- Here register clothes addons -->
 		<!-- Here register skins addons -->
