@@ -60,8 +60,10 @@ let weapons = require('./weapons');
 let enums = require('./enums');
 let factions = require('./modules/factions');
 let metro = require('./modules/metro');
+let whitelist = require('./modules/admin/plugins/whitelist');
 
 function init() {
+    
     // Виклик підключення до БД, підключення всіх модулів та виклик їх ініціалізації.
     mp.lib.mysql.connect(function () {
         try {
@@ -70,6 +72,9 @@ function init() {
             for (let i = 0; i < weapons.hashesMap.length; i++) {
                 weapons.hashesMap[i][1] *= 2;
             }
+
+            whitelist.init();
+
             vehicleInfo.loadAllFeature();
             ctos.loadAll();
             graffiti.loadAll();

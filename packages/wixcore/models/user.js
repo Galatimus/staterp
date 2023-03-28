@@ -177,6 +177,11 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: '',
             allowNull: false
         },
+        whitelist: {
+            type: DataTypes.ENUM('Y', 'N'),
+            defaultValue: 'N',
+            allowNull: false
+        },
         admin_level: {
             type: DataTypes.INTEGER(11),
             defaultValue: '0',

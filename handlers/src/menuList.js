@@ -13901,8 +13901,10 @@ menuList.showAdminMenu = function() {
             if (user.isAdmin(5)) {
                 UIMenu.Menu.AddMenuItem("Для разработчика", "", {doName: "developerMenu"});
             }
-        }
-        else {
+            if (user.isAdmin(10)) {
+                UIMenu.Menu.AddMenuItem("Управление белым списком", "", {doName: "menu:whitelist"});
+            }
+        } else {
             UIMenu.Menu.AddMenuItem("~y~Включить админку", "", {doName: "enableAdmin"});
             UIMenu.Menu.AddMenuItem("~y~Ответить на жалобу", "", {doName: "askReport"});
         }
@@ -14033,6 +14035,9 @@ menuList.showAdminMenu = function() {
             menuList.showAdminEventMenu();
         if (item.doName == 'developerMenu')
             menuList.showAdminDevMenu();
+        if (item.doName == 'menu:whitelist') {
+            menuList.showWhiteListMenu();
+        }
         if (item.doName == 'gunMenu')
             menuList.showGunShopMenu(0, 2);
         if (item.doName == 'vehicleMenu')
@@ -14054,6 +14059,42 @@ menuList.showAdminMenu = function() {
                 return;
             for (let i = 1; i <= 20; i++) {
                 methods.notifyWithPictureToFraction2('E CORP', 'Администрация', text, 'CHAR_ACTING_UP', i);
+            }
+        }
+    });
+};
+
+menuList.showWhiteListMenu = function () {
+    UIMenu.Menu.Create(`Admin`, `~b~Управление белым списком`);
+    UIMenu.Menu.AddMenuItem("Добавить в Whitelist", "", { doName: "add:player:whitelist" });
+    UIMenu.Menu.AddMenuItem("Удалить из Whitelist", "", { doName: "remove:player:whitelist" });
+    UIMenu.Menu.AddMenuItem("~r~Закрыть", "", { doName: "closeMenu" });
+    UIMenu.Menu.Draw();
+    UIMenu.Menu.OnSelect.Add(async item => {
+        UIMenu.Menu.HideMenu();
+        // 28.03.2023 - Додаємо гравця до білого списку.
+        if (item.doName == 'add:player:whitelist') {
+            try {
+                let social = await UIMenu.Menu.GetUserInput("Логин Social Club", "", 128);
+                if (social === '') {
+                    return;
+                }
+                mp.events.callRemote('wixcore:module:admin:add:player:whitelist', social);
+            } catch (e) {
+                methods.debug(e);
+            }
+        }
+        // 28.03.2023 - Видаляємо гравця з білого списку
+        if (item.doName == 'remove:player:whitelist') {
+            try {
+                let social = await UIMenu.Menu.GetUserInput("Логин Social Club", "", 128);
+                if (social === '') {
+                    return;
+                }
+                methods.debug(`social_remove: ${social}`);
+                mp.events.callRemote('wixcore:module:admin:remove:player:whitelist', methods.removeQuotes(social));
+            } catch (e) {
+                methods.debug(e);
             }
         }
     });

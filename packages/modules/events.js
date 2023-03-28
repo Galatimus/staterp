@@ -53,8 +53,7 @@ let copsRacer = require('../managers/copsRacer');
 let trucker = require('../managers/trucker');
 let vSync = require('../managers/vSync');
 let fishing = require('../managers/fishing');
-
-
+let whitelist = require('./admin/plugins/whitelist');
 
 mp.events.__add__ = mp.events.add;
 
@@ -2545,6 +2544,23 @@ mp.events.addRemoteCounted('server:admin:blacklist', (player, type, id, reason) 
     admin.blacklist(player, type, id, reason);
 });
 
+// 28.03.2023 - Додаємо гравця до білого списку.
+mp.events.addRemoteCounted('wixcore:module:admin:add:player:whitelist', (player, social) => {
+    try {
+        whitelist.add(player, social);
+    } catch (error) {
+        // wixcore.net
+    }
+});
+// 28.03.2023 - Видаляємо гравця з білого списку
+mp.events.addRemoteCounted('wixcore:module:admin:remove:player:whitelist', (player, social) => {
+    try {
+        whitelist.remove(player, social);
+    } catch (error) {
+        // wixcore.net
+    }
+});
+// Todo
 mp.events.addRemoteCounted('server:admin:kick', (player, type, id, reason) => {
     admin.kick(player, type, id, reason);
 });
