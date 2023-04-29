@@ -40,6 +40,24 @@ let godmodeEnabled = false;
 let noClipSpeed = 1;
 let noClipSpeedNames = ["Die", "Slow", "Medium", "Fast", "Very Fast", "Extremely Fast", "Snail Speed!"];
 
+// Координати – Модуль для Тех. Адміністрації
+let coordinatesEnabled = false;
+admin.coordinates = function(enable, notify = true) {
+    try {
+        methods.debug('Execute: admin.coordinates');
+        coordinatesEnabled = enable;
+        if (notify) {
+            if (coordinatesEnabled) {
+                mp.game.ui.notifications.show(`~q~Module: Display coordinates successfully enabled.`);
+            } else {
+                mp.game.ui.notifications.show(`~q~Module: Display coordinates successfully turned off.`);
+            }
+        }
+    } catch (e) {
+        methods.debug(e);
+    }
+};
+
 admin.noClip = function(enable) {
     try {
         methods.debug('Execute: admin.noClip');
@@ -94,6 +112,11 @@ admin.godmode = function(enable, notify = true) {
 
 admin.isNoClipEnable = function() {
     return noClipEnabled;
+};
+
+// Координати – Модуль для Тех. Адміністрації
+admin.isCoordinatesEnabled = function() {
+    return coordinatesEnabled;
 };
 
 admin.isGodModeEnable = function() {
@@ -230,6 +253,16 @@ mp.events.add('render', function() {
 });
 
 mp.events.add('render', () => {
+
+    // Кординаты - Модуль для Тех. Администрации
+    if(coordinatesEnabled) {
+        mp.game.graphics.drawText(`x: ${mp.players.local.position.x.toFixed(5)}, y: ${mp.players.local.position.y.toFixed(5)}, z: ${mp.players.local.position.z.toFixed(5)}, h: ${mp.players.local.getHeading().toFixed(0)}`, [.5, .02], { 
+            font: 0,
+            color: [180, 180, 180, 180],
+            scale: [0.25, 0.25],
+            outline: true
+        });
+    }
 
     if (godmodeEnabled) {
         mp.players.local.setInvincible(true);

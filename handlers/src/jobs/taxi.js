@@ -296,31 +296,35 @@ taxi.getNearestPed = function(pos, r) {
     return nearest;
 };
 
+// FIX MADE 27.03.2023
 mp.events.add('client:createGlobalPedInVehicle', (id, model, vehicleId) => {
-
     let veh = mp.vehicles.atRemoteId(vehicleId);
     if (mp.vehicles.exists(veh) && methods.distanceToPos(veh.position, mp.players.local.position) < 300) {
         let pos = new mp.Vector3(veh.position.x,veh.position.y + 2.5, veh.position.z);
         let ped = mp.peds.new(mp.game.joaat(model), pos, 270.0);
         var seat = null;
-
-        for (let i = 0; i < veh.getMaxNumberOfPassengers(); i++) {
-            if (veh.isSeatFree(i)) {
-                seat = i;
-                break;
+        try {
+            for (let i = 0; i < veh.getMaxNumberOfPassengers(); i++)
+            {
+                if (veh.isSeatFree(i))
+                {
+                    seat = i;
+                    break;
+                }
+            }
+            if(seat != null) {
+                setTimeout(function () {
+                    ped.setCollision(false, false);
+                    ped.taskEnterVehicle(veh.handle, 3000, seat, 1, 1, 0);
+                }, 250);
+            } else {
+                mp.game.ui.notifications.show('~r~В вашем авто нет свободного места для пассажира!');
+                return;
             }
         }
-
-        if(seat != null) {
-            setTimeout(function () {
-                ped.setCollision(false, false);
-                ped.taskEnterVehicle(veh.handle, 3000, seat, 1, 1, 0);
-            }, 250);
-        } else {
-            mp.game.ui.notifications.show('~r~В вашем авто нет свободного места для пассажира!');
-            return;
+        catch (error) {
+            methods.debug(error.message);
         }
-        
         pedList.push({ped: ped, pedId: id});
     }
 });

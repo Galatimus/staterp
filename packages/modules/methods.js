@@ -2,23 +2,19 @@
 
 const crypto = require('crypto');
 const fs = require('fs/promises');
-
-
 let Container = require('./data');
 let mysql = require('./mysql');
-
 let enums = require('../enums');
 let user = require('../user');
 let coffer = require('../coffer');
-
 let vehicles = require('../property/vehicles');
 let business = require('../property/business');
 let stocks = require('../property/stocks');
 let fraction = require('../property/fraction');
 let family = require('../property/family');
-
 let weather = require('../managers/weather');
 let pickups = require('../managers/pickups');
+let vehicleInfo  = require('../modules/vehicleInfo');
 
 let checkPointStaticList = [];
 
@@ -131,7 +127,7 @@ methods.checkTeleportVeh = function(player, pos1, pos2) {
 };
 
 methods.getVehicleInfo = function (model) {
-    let vehInfo = enums.vehicleInfo;
+    let vehInfo = vehicleInfo.feature;
     for (let item in vehInfo) {
         let vItem = vehInfo[item];
         if (vItem.hash == model || vItem.display_name == model || vItem.display_name.toLowerCase() == model.toString().toLowerCase() || mp.joaat(vItem.display_name.toString().toLowerCase()) == model)
@@ -971,7 +967,6 @@ methods.loadAllBlips = function () {
     methods.createBlip(new mp.Vector3(-158.44952392578125, -605.221923828125, 48.23460388183594), 535, 67, 0.8, 'Бизнес Центр');
     //methods.createBlip(new mp.Vector3(111.5687, -749.9395, 30.69), 498, 0, 0.8, 'Здание FIB');
     methods.createBlip(new mp.Vector3(1830.489, 2603.093, 45.8891), 238, 0, 0.8, 'Тюрьма');
-    methods.createBlip(new mp.Vector3(-1290.544, -571.1852, 29.57288), 419, 0, 1, 'Правительство');
     methods.createBlip(new mp.Vector3(5011.5771484375, -5750.75830078125, 31.852725982666016), 304, 5, 1, 'Правительство');
     methods.createBlip(new mp.Vector3(-759.5448608398438, -709.0863037109375, 29.0616512298584), 305, 60, 0.6, 'Церковь');
     //methods.createBlip(new mp.Vector3(-1682.297607421875, -279.4432678222656, 50.8623161315918), 305, 60, 0.6, 'Церковь');

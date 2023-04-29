@@ -76,8 +76,6 @@ npc.loadAll = function() {
     npc.create(mp.game.joaat("g_m_y_salvaboss_01"), new mp.Vector3(1326.823, -1638.513, 52.15056), 126.9999, false, "WORLD_HUMAN_DRUG_DEALER");
     npc.create(mp.game.joaat("g_m_y_salvagoon_01"), new mp.Vector3(1321.559, -1663.887, 51.23642), 133.9994, false, "WORLD_HUMAN_SMOKING");
 
-    // Секретарша в City Hall
-    npc.create(mp.game.joaat("a_f_y_business_01"), new mp.Vector3(-1291.811, -572.3674, 30.57272), -40.99984, false, "WORLD_HUMAN_STAND_IMPATIENT");
 // Охранник слева в City Hall
     npc.create(mp.game.joaat("s_m_m_highsec_01"), new mp.Vector3(-1295.207, -573.5434, 30.57015), 137.9987, false, "WORLD_HUMAN_GUARD_STAND", '', '', 9, 0, '', '');
 // Охранник справа в City Hall
@@ -263,8 +261,7 @@ npc.loadAll = function() {
     npc.create(mp.game.joaat("a_m_m_skater_01"), new mp.Vector3(1806.736, 3676.029, 34.27676), -39.58422, false, "WORLD_HUMAN_SMOKING");
 // Bike rent - Болингброк - Шоссе 68
     npc.create(mp.game.joaat("a_m_y_skater_01"), new mp.Vector3(1852.597, 2594.885, 45.67204), -80.29984, false, "WORLD_HUMAN_AA_COFFEE");
-// Bike rent - Текстайл-Сити - Элгин-авеню
-    npc.create(mp.game.joaat("a_f_y_skater_01"), new mp.Vector3(297.7727, -607.1932, 43.37174), 88.88361, false, "CODE_HUMAN_MEDIC_TIME_OF_DEATH");
+    npc.create(mp.game.joaat("a_f_y_skater_01"), new mp.Vector3(284.9119, -610.1529, 43.3058), 43.3, false, "CODE_HUMAN_MEDIC_TIME_OF_DEATH");  // Bike rent - Миррор-Парк - Никола-авеню
 // Bike rent - Миррор-Парк - Никола-авеню
     npc.create(mp.game.joaat("a_m_m_skater_01"), new mp.Vector3(1153.488, -454.4688, 66.98437), 170.2867, false, "WORLD_HUMAN_AA_COFFEE");
 // Bike rent - Пиллбокс-Хилл - Бульвар Веспуччи

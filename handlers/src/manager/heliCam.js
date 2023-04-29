@@ -170,7 +170,9 @@ heliCam.destroyCam = function () {
     fov = (fov_max+fov_min)*0.5;
     try {
         if (camera) {
-            camera.destroy();
+            if(mp.cameras.exists(camera)) {
+                camera.destroy();
+            }
             camera = null;
         }
     }

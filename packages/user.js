@@ -22,43 +22,9 @@ let fraction = require('./property/fraction');
 let family = require('./property/family');
 let stocks = require('./property/stocks');
 let yachts = require('./property/yachts');
+let vehicleInfo = require('./modules/vehicleInfo');
 
 let user = exports;
-
-user.createAccount = function(player, login, pass, email) {
-
-    methods.debug('user.createAccount');
-
-    if (!mp.players.exists(player))
-        return;
-
-    user.doesExistAccount(login, email, player.socialClub, function (cb) {
-        if (cb == 1) {
-            user.showCustomNotify(player, 'Аккаунт с такими SocialClub уже существует', 1);
-            return;
-        }
-        else if (cb == 2) {
-            user.showCustomNotify(player, 'Логин уже занят', 1);
-            return;
-        }
-        else if (cb == 3) {
-            user.showCustomNotify(player, 'Email уже занят', 1);
-            return;
-        }
-
-        let social = player.socialClub;
-        if (player.accSocial)
-            social = player.accSocial;
-
-        let sql = "INSERT INTO accounts (login, email, social, serial, password, reg_ip, reg_timestamp) VALUES ('" + login +
-            "', '" + email + "', '" + social + "', '" + player.serial + "', '" + methods.sha256(pass) + "', '" + player.ip + "', '" + methods.getTimeStamp() + "')";
-        mysql.executeQuery(sql);
-
-        setTimeout(function () {
-            user.loginAccount(player, login, pass);
-        }, 1000)
-    });
-};
 
 let skin = {
     SKIN_SEX: 0,
@@ -393,9 +359,11 @@ user.save = function(player, withReset = false) {
 
         if (withReset === true) {
             user.resetAll(player);
+        } else {
+            setTimeout(function() {
+                user.updateClientCache(player);
+            }, 500);
         }
-        else
-            user.updateClientCache(player);
         resolve(true);
         return;
     });
@@ -1851,38 +1819,15 @@ user.updateVehicleInfo = function(player) {
         return false;
 
     try {
-        for (let i = 0; i < parseInt(enums.vehicleInfo.length / 250) + 1; i++) {
+        for (let i = 0; i < parseInt(vehicleInfo.feature.length / 250) + 1; i++) {
             let from = i * 250 - 1;
             let to = i * 250 + 249;
-            player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(from < 0 ? 0 : from, to)]);
+            player.call('client:updateVehicleInfo', [i, vehicleInfo.feature.slice(from < 0 ? 0 : from, to)]);
         }
     } catch (e) {
         methods.debug(e);
     }
-
-    /*try {
-        for (let i = 0; i < methods.parseInt(enums.vehicleInfo.length / 250) + 1; i++)
-            player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(i * 250, i * 250 + 249)]);
-    }
-    catch (e) {
-        methods.debug(e);
-    }*/
 };
-
-/*user.updateVehicleInfo = function(player) {
-    if (!mp.players.exists(player))
-        return false;
-
-    try {
-        for (let i = 0; i < parseInt(enums.vehicleInfo.length / 250); i++) {
-            let from = i * 250 - 1;
-            let to = i * 250 + 249;
-            player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(from < 0 ? 0 : from, to)]);
-        }
-    } catch (e) {
-        methods.debug(e);
-    }
-};*/
 
 /*
 * StyleType

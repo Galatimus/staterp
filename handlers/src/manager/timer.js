@@ -19,6 +19,7 @@ import bind from "./bind";
 import achievement from "./achievement";
 
 import fuel from "../business/fuel";
+import dispenser from "../modules/dispenser";
 
 //import dispatcher from "./dispatcher";
 
@@ -245,29 +246,29 @@ timer.fourSecTimer = function() {
 timer.twoSecTimer = function() {
     
     try {
-
-        if (user.getCache('s_hud_keys')) {
-            ui.callCef('hudk', JSON.stringify({type: 'show'}));
-            let data = {
-                type: 'updateValues',
-                hints: [
-                    {key: 'M', text: 'Главное меню'},
-                    {key: 'F2', text: 'Курсор'},
-                    {key: bind.getKeyName(user.getCache('s_bind_phone')), text: 'Телефон'},
-                    {key: bind.getKeyName(user.getCache('s_bind_inv')), text: 'Инвентарь'},
-                    {key: bind.getKeyName(user.getCache('s_bind_inv_world')), text: 'Предметы рядом'},
-                    {key: bind.getKeyName(user.getCache('s_bind_voice')), text: 'Голосовой чат'},
-                ]
-            };
-            ui.callCef('hudk', JSON.stringify(data));
-        }
-        else {
-            ui.callCef('hudk', JSON.stringify({type: 'hide'}));
-        }
-
-        user.setLastWeapon(user.getCurrentWeapon());
+        if (user.isLogin()) {
+            if (user.getCache('s_hud_keys')) {
+                ui.callCef('hudk', JSON.stringify({type: 'show'}));
+                let data = {
+                    type: 'updateValues',
+                    hints: [
+                        {key: 'M', text: 'Главное меню'},
+                        {key: 'F2', text: 'Курсор'},
+                        {key: bind.getKeyName(user.getCache('s_bind_phone')), text: 'Телефон'},
+                        {key: bind.getKeyName(user.getCache('s_bind_inv')), text: 'Инвентарь'},
+                        {key: bind.getKeyName(user.getCache('s_bind_inv_world')), text: 'Предметы рядом'},
+                        {key: bind.getKeyName(user.getCache('s_bind_voice')), text: 'Голосовой чат'},
+                    ]
+                };
+                ui.callCef('hudk', JSON.stringify(data));
+            } else {
+                ui.callCef('hudk', JSON.stringify({type: 'hide'}));
+            }
+            user.setLastWeapon(user.getCurrentWeapon());
+        }  
+    } catch (e) {
+        methods.debug('Two Sec Timer', e);
     }
-    catch (e) {}
 
     try {
 
@@ -401,7 +402,8 @@ timer.twoSecTimer = function() {
         }
 
         discord.checker();
-
+        dispenser.checker();
+        
         let plPos = mp.players.local.position;
 
         EntityFleeca = mp.game.object.getClosestObjectOfType(plPos.x, plPos.y, plPos.z, 0.68, 506770882, false, false, false);

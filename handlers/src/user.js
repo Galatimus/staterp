@@ -642,21 +642,21 @@ user.teleportVehV = function(pos, rot) {
             mp.game.invoke(methods.SET_FOLLOW_VEHICLE_CAM_VIEW_MODE, 4);
             if (mp.players.local.vehicle) {
                 mp.players.local.vehicle.freezePosition(true);
-                mp.players.local.vehicle.position = pos;
-                if (rot != undefined)
+                mp.players.local.vehicle.setCoords(pos.x, pos.y, pos.z, false, false, false, false);
+                if (rot != undefined) {
                     mp.players.local.vehicle.setRotation(0, 0, methods.parseInt(rot), 0, true);
-            }
-            else {
-                if (rot != undefined)
+                }
+            } else {
+                if (rot != undefined) {
                     mp.players.local.setRotation(0, 0, methods.parseInt(rot), 0, true);
+                }
                 mp.players.local.position = pos;
                 admin.teleportCamera(pos);
             }
-        }
-        catch (e) {
+        } catch (e) {
             methods.debug(e);
         }
-        //methods.wait(500);
+
         setTimeout(function () {
 
             try {
@@ -692,35 +692,32 @@ user.putInVehicle = function() {
     isTeleport = true;
 };
 
-user.tpToWaypoint = function() { //TODO машина
+// 28.03.2023 - Телепорт гравця із транспортом.
+user.tpToWaypoint = function () {
     try {
-        let pos = methods.getWaypointPosition();
-
-        isTeleport = true;
-        let entity = mp.players.local.vehicle ? mp.players.local.vehicle : mp.players.local;
-        entity.position = new mp.Vector3(pos.x, pos.y, pos.z + 20);
-        let interval = setInterval(function () {
-            try {
-                mp.game.streaming.requestCollisionAtCoord(pos.x, pos.y, pos.z);
-                entity.position = new mp.Vector3(pos.x, pos.y, entity.position.z + 20);
-
-                admin.teleportCamera(pos);
-
-                let zPos = mp.game.gameplay.getGroundZFor3dCoord(mp.players.local.position.x, mp.players.local.position.y, mp.players.local.position.z, 0, false);
-                if (entity.position.z > 1000 || zPos != 0) {
-                    entity.position = new mp.Vector3(pos.x, pos.y, zPos + 2);
-
-                    if (mp.players.local.vehicle)
-                        mp.players.local.vehicle.setOnGroundProperly();
-
-                    clearInterval(interval);
+        setTimeout(() => {
+            let pos = methods.getWaypointPosition();
+            isTeleport = true;
+            let entity = mp.players.local.vehicle ? mp.players.local.vehicle : mp.players.local;
+            let interval = setInterval(function () {
+                try {
+                    mp.game.streaming.requestCollisionAtCoord(pos.x, pos.y, pos.z);
+                    entity.setCoords(pos.x, pos.y, entity.position.z + 20, false, false, false, false);
+                    admin.teleportCamera(pos);
+                    let zPos = mp.game.gameplay.getGroundZFor3dCoord(mp.players.local.position.x, mp.players.local.position.y, mp.players.local.position.z, 0, false);
+                    if (entity.position.z > 1000 || zPos != 0) {
+                        entity.position = new mp.Vector3(pos.x, pos.y, zPos + 2);
+                        if (mp.players.local.vehicle) {
+                            mp.players.local.vehicle.setOnGroundProperly();
+                        }
+                        clearInterval(interval);
+                    }
+                } catch (e) {
+                    methods.debug(e);
                 }
-            }
-            catch (e) {
-                methods.debug(e);
-            }
-        }, 1);
-    } catch(e) {
+            }, 1);
+        }, 1000);
+    } catch (e) {
         methods.debug(e);
     }
 };
@@ -1736,7 +1733,9 @@ user.isCanFishingPearceAlamo = function() {
 };
 
 user.isCanFishing = function() {
-    return user.isInOcean() || mp.players.local.isInWater() || user.isCanFishingPearceOcean() || user.isCanFishingPearceAlamo();
+    let pos = mp.players.local.position;
+    let waterHeight = mp.game.water.getWaterHeight(pos.x, pos.y, pos.z, mp.players.local.getHeightAboveGround());
+    return user.isInOcean() || (mp.players.local.isInWater() && waterHeight != undefined) || user.isCanFishingPearceOcean() || user.isCanFishingPearceAlamo();
 };
 
 user.isJobMail = function() {
@@ -1957,6 +1956,7 @@ user.lastAnim = {
     d: '',
     f: 0,
 };
+
 let lastFlag = 0;
 user.playAnimation = function(dict, anim, flag = 49, sendEventToServer = true) {
     if (mp.players.local.getVariable("isBlockAnimation") || mp.players.local.isInAnyVehicle(false) || user.isDead()) return;
@@ -2004,6 +2004,8 @@ user.stopAllAnimation = function() {
         //mp.players.local.clearTasks();
         //mp.players.local.clearSecondaryTask();
         mp.events.callRemote('server:stopAllAnimation');
+        user.lastAnim = { a: '', d: '', f: 0 };
+        lastFlag = 0;
     }
 };
 
@@ -2098,10 +2100,8 @@ user.isOpenPhone = function() {
 };
 
 user.hidePhone = function() {
-    mp.attachmentMngr.removeLocal('phone1');
-    mp.attachmentMngr.removeLocal('phone2');
-    mp.attachmentMngr.removeLocal('phone3');
-    //user.playAnimation("cellphone@female", "cellphone_text_out", 48);
+    let pType = phone.getType();
+    mp.attachmentMngr.removeLocal('phone' + pType);
     user.stopAllAnimation();
     isOpenPhone = false;
 };

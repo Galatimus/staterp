@@ -53,8 +53,7 @@ let copsRacer = require('../managers/copsRacer');
 let trucker = require('../managers/trucker');
 let vSync = require('../managers/vSync');
 let fishing = require('../managers/fishing');
-
-
+let whitelist = require('./admin/plugins/whitelist');
 
 mp.events.__add__ = mp.events.add;
 
@@ -229,9 +228,9 @@ mp.events.addRemoteCounted('server:user:respawn', (player, x, y, z) => {
     }, 500);
 });
 
-mp.events.addRemoteCounted('server:user:createAccount', (player, login, password, email) => {
+mp.events.addRemoteCounted('server:user:createAccount', async (player, login, password, email) => {
     try {
-        user.createAccount(player, login, password, email);
+        await Module.Players.Account.Create(player, login, password, email);
     } catch (e) {
         console.log(e);
     }
@@ -1266,7 +1265,7 @@ mp.events.addRemoteCounted('server:user:showLic', (player, lic, playerId) => {
                         regist: user.getRegStatusName(player),
                         idcard: user.getId(player).toString(),
                         subscribe: user.getRpName(player).split(' ')[0][0] + '.' + user.getRpName(player).split(' ')[1],
-                        img: 'https://a.rsg.sc//n/' + player.socialClub.toLowerCase(),
+                        img: 'https://a.rsg.sc/n/' + player.socialClub.toLowerCase(),
                     },
                 };
                 user.callCef(remotePlayer, 'cardid', JSON.stringify(dataSend));
@@ -1299,7 +1298,7 @@ mp.events.addRemoteCounted('server:user:showLic', (player, lic, playerId) => {
                             data: user.get(player, 'work_date'),
                             idwork: user.get(player, 'work_lic'),
                             subscribe: user.getRpName(player).split(' ')[0][0] + '.' + user.getRpName(player).split(' ')[1],
-                            img: 'https://a.rsg.sc//n/' + player.socialClub.toLowerCase(),
+                            img: 'https://a.rsg.sc/n/' + player.socialClub.toLowerCase(),
                         },
                     };
                     user.callCef(remotePlayer, 'workid', JSON.stringify(dataSend));
@@ -1397,7 +1396,7 @@ mp.events.addRemoteCounted('server:user:showLic', (player, lic, playerId) => {
                             date_stop: user.get(player, lic + '_end'),
                             prefix: licPref,
                             sign: user.getRpName(player).split(' ')[0][0] + '.' + user.getRpName(player).split(' ')[1],
-                            img: 'https://a.rsg.sc//n/' + player.socialClub.toLowerCase(),
+                            img: 'https://a.rsg.sc/n/' + player.socialClub.toLowerCase(),
                             number: licPref + (user.getId(player) + 100000)
                         },
                     };
@@ -1451,7 +1450,7 @@ mp.events.addRemoteCounted('server:user:showLicGos', (player, playerId) => {
                     dob: user.get(player, 'age'),
                     id: user.getId(player),
                     subscribe: user.getRpName(player).split(' ')[0][0] + '.' + user.getRpName(player).split(' ')[1],
-                    img: 'https://a.rsg.sc//n/' + player.socialClub.toLowerCase(),
+                    img: 'https://a.rsg.sc/n/' + player.socialClub.toLowerCase(),
                 },
             };
             user.callCef(remotePlayer, 'certificate', JSON.stringify(dataSend));
@@ -1862,7 +1861,7 @@ mp.events.addRemoteCounted('server:user:getPassById', (player, targetId) => {
                 nation: user.get(pl, 'national'),
                 regist: user.getRegStatusName(pl),
                 idcard: user.getId(pl).toString(),
-                img: 'https://a.rsg.sc//n/' + pl.socialClub.toLowerCase(),
+                img: 'https://a.rsg.sc/n/' + pl.socialClub.toLowerCase(),
             },
         };
         user.callCef(player, 'cardid', JSON.stringify(dataSend));
@@ -2515,26 +2514,24 @@ mp.events.addRemoteCounted('server:admin:canabisZone:edit', (player, id, key, va
     }
 });
 
-mp.events.addRemoteCounted('server:admin:vehicleSpeedBoost', (player, vName, num) => {
-    if (!user.isAdmin(player))
+mp.events.addRemoteCounted('server:admin:vehicleSpeedBoost', async (player, vName, num) => {
+    if (!user.isAdmin(player)) {
         return;
-    try {
-
-        mysql.executeQuery(`UPDATE veh_info SET sb = '${num}' WHERE display_name = '${vName}'`);
     }
-    catch (e) {
+    try {
+        await mp.lib.mysql.model.vehfeature.update({ sb: num }, { where: { display_name: vName } });
+    } catch (e) {
         methods.debug(e);
     }
 });
 
-mp.events.addRemoteCounted('server:admin:vehicleSpeedMax', (player, vName, num) => {
-    if (!user.isAdmin(player))
+mp.events.addRemoteCounted('server:admin:vehicleSpeedMax', async (player, vName, num) => {
+    if (!user.isAdmin(player)) {
         return;
+    }  
     try {
-
-        mysql.executeQuery(`UPDATE veh_info SET sm = '${num}' WHERE display_name = '${vName}'`);
-    }
-    catch (e) {
+        await mp.lib.mysql.model.vehfeature.update({ sm: num }, { where: { display_name: vName } });
+    } catch (e) {
         methods.debug(e);
     }
 });
@@ -2547,6 +2544,23 @@ mp.events.addRemoteCounted('server:admin:blacklist', (player, type, id, reason) 
     admin.blacklist(player, type, id, reason);
 });
 
+// 28.03.2023 - Додаємо гравця до білого списку.
+mp.events.addRemoteCounted('wixcore:module:admin:add:player:whitelist', (player, social) => {
+    try {
+        whitelist.add(player, social);
+    } catch (error) {
+        // wixcore.net
+    }
+});
+// 28.03.2023 - Видаляємо гравця з білого списку
+mp.events.addRemoteCounted('wixcore:module:admin:remove:player:whitelist', (player, social) => {
+    try {
+        whitelist.remove(player, social);
+    } catch (error) {
+        // wixcore.net
+    }
+});
+// Todo
 mp.events.addRemoteCounted('server:admin:kick', (player, type, id, reason) => {
     admin.kick(player, type, id, reason);
 });
@@ -2615,6 +2629,67 @@ mp.events.addRemoteCounted('server:admin:tptome', (player, type, id) => {
     admin.tpToAdmin(player, type, id);
 });
 
+// 27.03.2023 - Поповнити гаманець гравця.
+mp.events.addRemoteCounted('wixcore:system:player:add:wallet:money', (player, type, id, wallet) => {
+    try {
+        if (!user.isAdmin(player)) {
+            return;
+        }
+        id = methods.parseInt(id);
+        if (type === 0) {
+            let target = mp.players.at(id);
+            if (!user.isLogin(target)) {
+                player.notify('~r~Игрок не найден на сервере.');
+                return;
+            }
+            user.addCashMoney(target, wallet);
+            target.notify(`~b~Администратор ${user.getRpName(player)} выдал ${wallet}$ денег ${user.getRpName(target)}`);
+            player.notify(`~b~Администратор ${user.getRpName(player)} выдал ${wallet}$ денег ${user.getRpName(target)}`);
+        } else {
+            let target = user.getPlayerById(id);
+            if (!user.isLogin(target)) {
+                player.notify('~r~Игрок не найден на сервере.');
+                return;
+            }
+            user.addCashMoney(target, wallet);
+            target.notify(`~b~Администратор ${user.getRpName(player)} выдал ${wallet}$ денег ${user.getRpName(target)}`);
+            player.notify(`~b~Администратор ${user.getRpName(player)} выдал ${wallet}$ денег ${user.getRpName(target)}`);
+        }
+    } catch (error) {
+        // WixCore.Net
+    }
+});
+// 27.03.2023 - Забрать деньги с гаманца гравця.
+mp.events.addRemoteCounted('wixcore:system:player:remove:wallet:money', (player, type, id, wallet) => {
+    try {
+        if (!user.isAdmin(player)) {
+            return;
+        }
+        id = methods.parseInt(id);
+        if (type === 0) {
+            let target = mp.players.at(id);
+            if (!user.isLogin(target)) {
+                player.notify('~r~Игрок не найден на сервере.');
+                return;
+            }
+            user.removeCashMoney(target, wallet);
+            target.notify(`~b~Администратор ${user.getRpName(player)} Забрал ${wallet}$ денег ${user.getRpName(target)}`);
+            player.notify(`~b~Администратор ${user.getRpName(player)} Забрал ${wallet}$ денег ${user.getRpName(target)}`);
+        } else {
+            let target = user.getPlayerById(id);
+            if (!user.isLogin(target)) {
+                player.notify('~r~Игрок не найден на сервере.');
+                return;
+            }
+            user.removeCashMoney(target, wallet);
+            target.notify(`~b~Администратор ${user.getRpName(player)} Забрал ${wallet}$ денег ${user.getRpName(target)}`);
+            player.notify(`~b~Администратор ${user.getRpName(player)} Забрал ${wallet}$ денег ${user.getRpName(target)}`);
+        }
+    } catch (error) {
+        // WixCore.Net
+    }
+});
+// Todo
 mp.events.addRemoteCounted('server:admin:tptov', (player, id) => {
     try {
         if (!user.isAdmin(player))

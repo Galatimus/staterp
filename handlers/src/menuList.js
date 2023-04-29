@@ -2592,153 +2592,6 @@ menuList.showBusinessSettingsMenu = async function(data) {
     });
 };
 
-menuList.showMeriaMainMenu = function() {
-
-    if (methods.isBlackout()) {
-        mp.game.ui.notifications.show(`~r~В городе отсутствует свет`);
-        return;
-    }
-
-    UIMenu.Menu.Create(` `, `~b~Секретарь правительства`, 'gov', false, false, 'gov');
-
-    if (user.getCache('work_lic') == '')
-        UIMenu.Menu.AddMenuItem("Оформить WorkID", "", {doName: 'getWorkId'});
-
-    if (user.getCache('reg_status') === 0) {
-        if (user.getCache('online_time') < 169)
-            UIMenu.Menu.AddMenuItem("Оформить регистрацию", 'Стоимость: ~g~Бесплатно', {doName: 'getRegisterFree'});
-        else
-            UIMenu.Menu.AddMenuItem("Оформить регистрацию", 'Стоимость: ~g~$1,000', {doName: 'getRegister'});
-    }
-
-    if (user.getCache('reg_status') === 1)
-        UIMenu.Menu.AddMenuItem("Оформить гражданство", 'Стоимость: ~g~$10,000', {doName: 'getFullRegister'});
-
-    UIMenu.Menu.AddMenuItem("Работа", "", {doName: 'showMeriaJobListMenu'});
-    UIMenu.Menu.AddMenuItem("Лицензионный центр", "", {doName: 'showLicBuyMenu'});
-
-    UIMenu.Menu.AddMenuItem("Имущество", "Операции с вашим имуществом", {doName: 'showMeriaSellHvbMenu'});
-    UIMenu.Menu.AddMenuItem("Налоговый кабинет", "", {doName: 'showMeriaTaxMenu'});
-
-    if (user.getCache('house_id') > 0)
-        UIMenu.Menu.AddMenuItem("Подселение", "", {doName: 'showMeriaHousePeopleMenu'});
-
-    UIMenu.Menu.AddMenuItem("Экономика штата", "", {doName: 'showMeriaInfoMenu'});
-    UIMenu.Menu.AddMenuItem("Подать заявление на стажировку", "", {doName: 'govWork'});
-    
-    UIMenu.Menu.AddMenuItem("~y~Создать семью по цене $500,000", "", {doName: 'createFamily'});
-    
-    UIMenu.Menu.AddMenuItem("~y~Оплата штрафов", "", {doName: 'showMeriaTicketMenu'});
-
-    UIMenu.Menu.AddMenuItem("~r~Закрыть", "", {doName: 'closeMenu'});
-    UIMenu.Menu.Draw();
-
-    UIMenu.Menu.OnSelect.Add(async (item, index) => {
-        UIMenu.Menu.HideMenu();
-
-        if (item.doName == 'govWork')
-        {
-            let discord = await menuList.getUserInput('Введите ваш DISCORD', '', 30);
-            let text = await menuList.getUserInput('Почему вы хотите тут работать?', '', 100);
-            mp.game.ui.notifications.show(`~g~Заявление было отправлено, скоро с вами свяжутся в дискорде`);
-            mp.events.callRemote('server:discord:sendWorkGov', discord, text);
-        }
-        if (item.doName == 'createFamily')
-        {
-            let text = await menuList.getUserInput('Введите название семьи', '', 30);
-            if (text === '') 
-                return;
-            mp.events.callRemote('server:family:create', text);
-        }
-        if (item.doName == 'showMeriaSellHvbMenu')
-            menuList.showMeriaSellHvbMenu(await coffer.getAllData());
-        if (item.doName == 'showMeriaTaxMenu')
-            menuList.showMeriaTaxMenu();
-        if (item.doName == 'showMeriaInfoMenu')
-            menuList.showMeriaInfoMenu(await coffer.getAllData());
-        if (item.doName == 'showMeriaJobListMenu')
-            menuList.showMeriaJobListMenu();
-        if (item.doName == 'showMeriaHousePeopleMenu')
-            menuList.showMazeBankHousePeopleMenu();
-        if (item.doName == 'showMeriaTicketMenu')
-            mp.events.callRemote('server:showMeriaTicketMenu');
-        if (item.doName == 'showLicBuyMenu')
-            menuList.showLicBuyMenu();
-        if (item.doName == 'getRegister') {
-            if (user.getBankMoney() < 1000) {
-                mp.game.ui.notifications.show("~r~У Вас недостаточно средств на банковском счету");
-                return;
-            }
-            if (user.getCache('reg_status') > 0) {
-                mp.game.ui.notifications.show("~r~Вам не нужна регистрация");
-                return;
-            }
-            user.removeCashMoney(1000, 'Получение регистрации');
-            user.set('reg_status', 1);
-            mp.game.ui.notifications.show("~g~Поздравялем, вы получили регистрацию!");
-            user.addHistory(0, 'Получил регистрацию');
-            user.save();
-        }
-        if (item.doName == 'getRegisterFree') {
-            if (user.getCache('reg_status') > 0) {
-                mp.game.ui.notifications.show("~r~Вам не нужна регистрация");
-                return;
-            }
-            user.set('reg_status', 1);
-            mp.game.ui.notifications.show("~g~Поздравялем, вы получили регистрацию!");
-            user.addHistory(0, 'Получил регистрацию');
-            user.save();
-        }
-        if (item.doName == 'getFullRegister') {
-            if (user.getCache('reg_status') > 1) {
-                mp.game.ui.notifications.show("~r~У Вас уже есть гражданство");
-                return;
-            }
-            if (user.getBankMoney() < 10000) {
-                mp.game.ui.notifications.show("~r~У Вас недостаточно средств на банковском счету");
-                return;
-            }
-            if (user.getCache('work_lvl') < 4) {
-                mp.game.ui.notifications.show("~r~Рабочий стаж должен быть 4 уровня");
-                return;
-            }
-            if (user.getCache('reg_status') < 1) {
-                mp.game.ui.notifications.show("~r~Вам необходима регистрация");
-                return;
-            }
-            user.removeCashMoney(10000, 'Получение гражданства');
-            user.set('reg_status', 2);
-            mp.game.ui.notifications.show("~g~Поздравялем, вы получили регистрацию!");
-            user.addHistory(0, 'Получил гражданство');
-            user.save();
-        }
-        if (item.doName == 'getWorkId') {
-
-            if (user.getCache('work_lic') != '') {
-                mp.game.ui.notifications.show("~r~У Вас уже есть WorkID");
-                return;
-            }
-            if (user.getCache('reg_status') == 0) {
-                mp.game.ui.notifications.show("~r~У Вас нет регистрации или гражданства");
-                return;
-            }
-            try {
-                user.set('work_lic', methods.getRandomWorkID());
-                user.set('work_date', weather.getFullRpDate());
-                mp.game.ui.notifications.show("~g~Поздравялем, вы получили WorkID!");
-                user.addHistory(0, 'Получил WorkID');
-                user.save();
-
-                quest.role0();
-                quest.standart();
-            }
-            catch (e) {
-                methods.error(e);
-            }
-        }
-    });
-};
-
 menuList.showMeriaIslandMainMenu = function() {
 
     if (methods.isBlackout()) {
@@ -14048,8 +13901,10 @@ menuList.showAdminMenu = function() {
             if (user.isAdmin(5)) {
                 UIMenu.Menu.AddMenuItem("Для разработчика", "", {doName: "developerMenu"});
             }
-        }
-        else {
+            if (user.isAdmin(10)) {
+                UIMenu.Menu.AddMenuItem("Управление белым списком", "", {doName: "menu:whitelist"});
+            }
+        } else {
             UIMenu.Menu.AddMenuItem("~y~Включить админку", "", {doName: "enableAdmin"});
             UIMenu.Menu.AddMenuItem("~y~Ответить на жалобу", "", {doName: "askReport"});
         }
@@ -14180,6 +14035,9 @@ menuList.showAdminMenu = function() {
             menuList.showAdminEventMenu();
         if (item.doName == 'developerMenu')
             menuList.showAdminDevMenu();
+        if (item.doName == 'menu:whitelist') {
+            menuList.showWhiteListMenu();
+        }
         if (item.doName == 'gunMenu')
             menuList.showGunShopMenu(0, 2);
         if (item.doName == 'vehicleMenu')
@@ -14206,6 +14064,42 @@ menuList.showAdminMenu = function() {
     });
 };
 
+menuList.showWhiteListMenu = function () {
+    UIMenu.Menu.Create(`Admin`, `~b~Управление белым списком`);
+    UIMenu.Menu.AddMenuItem("Добавить в Whitelist", "", { doName: "add:player:whitelist" });
+    UIMenu.Menu.AddMenuItem("Удалить из Whitelist", "", { doName: "remove:player:whitelist" });
+    UIMenu.Menu.AddMenuItem("~r~Закрыть", "", { doName: "closeMenu" });
+    UIMenu.Menu.Draw();
+    UIMenu.Menu.OnSelect.Add(async item => {
+        UIMenu.Menu.HideMenu();
+        // 28.03.2023 - Додаємо гравця до білого списку.
+        if (item.doName == 'add:player:whitelist') {
+            try {
+                let social = await UIMenu.Menu.GetUserInput("Логин Social Club", "", 128);
+                if (social === '') {
+                    return;
+                }
+                mp.events.callRemote('wixcore:module:admin:add:player:whitelist', social);
+            } catch (e) {
+                methods.debug(e);
+            }
+        }
+        // 28.03.2023 - Видаляємо гравця з білого списку
+        if (item.doName == 'remove:player:whitelist') {
+            try {
+                let social = await UIMenu.Menu.GetUserInput("Логин Social Club", "", 128);
+                if (social === '') {
+                    return;
+                }
+                methods.debug(`social_remove: ${social}`);
+                mp.events.callRemote('wixcore:module:admin:remove:player:whitelist', methods.removeQuotes(social));
+            } catch (e) {
+                methods.debug(e);
+            }
+        }
+    });
+};
+
 menuList.showAdminPlayerMenu = function(id) {
     UIMenu.Menu.Create(`ADMIN`, `~b~Админ меню`);
 
@@ -14218,6 +14112,8 @@ menuList.showAdminPlayerMenu = function(id) {
     UIMenu.Menu.AddMenuItem("Телепортировать игрока к себе", "", {doName: "tptome"});
 
     if (user.isAdmin(2)) {
+        UIMenu.Menu.AddMenuItem("Пополнить кошелек игрока", "", {doName: "idPlayerGiveMoney"});
+        UIMenu.Menu.AddMenuItem("Опустошить кошелек игрока", "", {doName: "idPlayerTakeMoney"});
         UIMenu.Menu.AddMenuItem("Выдать HP", "", {doName: "setHpById"});
         UIMenu.Menu.AddMenuItem("Выдать Armor", "", {doName: "setArmorById"});
         UIMenu.Menu.AddMenuItem("Выдать скин", "", {doName: "setSkinById"});
@@ -14328,6 +14224,25 @@ menuList.showAdminPlayerMenu = function(id) {
                 let num = methods.parseInt(await UIMenu.Menu.GetUserInput("Значение брони", "", 3));
                 mp.events.callRemote('server:admin:setArmorById', typeIndex, id, num)
             }
+            // 27.03.2023 - Поповнити гаманець гравця.
+            if (item.doName == 'idPlayerGiveMoney') {
+                var wallet = methods.parseInt(await UIMenu.Menu.GetUserInput("Денег", "", 10));
+                if (wallet < 1 || wallet > 10000000) {
+                    mp.game.ui.notifications.show('Неверное введение значения средств.');
+                    return;
+                }
+                mp.events.callRemote('wixcore:system:player:add:wallet:money', typeIndex, id, wallet);
+            }
+            // 27.03.2023 - Забрать деньги с гаманца гравця.
+            if (item.doName == 'idPlayerTakeMoney') {
+                var wallet = methods.parseInt(await UIMenu.Menu.GetUserInput("Денег", "", 10));
+                if (wallet < 1 || wallet > 10000000) {
+                    mp.game.ui.notifications.show('Неверное введение значения средств.');
+                    return;
+                }
+                mp.events.callRemote('wixcore:system:player:remove:wallet:money', typeIndex, id, wallet);
+            }
+            // Todo // server:admin:givemoneyById
             if (item.doName == 'setHpById') {
                 let num = methods.parseInt(await UIMenu.Menu.GetUserInput("Значение HP", "", 3));
                 mp.events.callRemote('server:admin:setHpById', typeIndex, id, num)
@@ -14604,6 +14519,7 @@ menuList.showAdminEventActivateMenu = function() {
 menuList.showAdminDevMenu = function() {
     UIMenu.Menu.Create(`ADMIN`, `~b~Админ меню`);
 
+    UIMenu.Menu.AddMenuItem("Отображения координат", "", {doName: "setCoordinates"});
     UIMenu.Menu.AddMenuItem("Сохранить все аккаунты", "", {doName: "saveAllAcc"});
     UIMenu.Menu.AddMenuItem("Сохранить всё", "", {doName: "saveAll"});
 
@@ -14627,6 +14543,11 @@ menuList.showAdminDevMenu = function() {
     UIMenu.Menu.Draw();
 
     UIMenu.Menu.OnSelect.Add(async item => {
+        // Координати – Модуль для Тех. Адміністрації
+        if (item.doName == 'setCoordinates') {
+            admin.coordinates(!admin.isCoordinatesEnabled());
+        }
+
         if (item.doName == 'addFraction2') {
             let fr = methods.parseInt(await UIMenu.Menu.GetUserInput("ID Фракции", "", 15));
             let sum = methods.parseFloat(await UIMenu.Menu.GetUserInput("Сумма", "", 15));

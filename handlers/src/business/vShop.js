@@ -50,7 +50,9 @@ vShop.destroyCamera = function() {
         cameraRotator.stop();
         cameraRotator.reset();
         if (camera) {
-            camera.destroy();
+            if (mp.cameras.exists(camera)) {
+                camera.destroy();
+            }
             camera = null;
         }
     }

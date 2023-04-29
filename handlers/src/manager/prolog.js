@@ -194,7 +194,9 @@ prolog.stop = function() {
     try {
         vehiclesPool.forEach(v => {
             try {
-                v.destroy();
+                if(mp.vehicles.exists(v)) {
+                    v.destroy();
+                }
             }
             catch (e) {}
         })

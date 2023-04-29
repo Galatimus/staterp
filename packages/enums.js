@@ -3,8 +3,6 @@ let methods = require('./modules/methods');
 
 let enums = exports;
 
-enums.vehicleInfo = [];
-
 enums.offsets = {
     house: 100000,
     condo: 200000,
@@ -33,10 +31,6 @@ enums.vehWinList = [
 
 enums.vehLuckyList = [
     "Stalion2", "Blista3", "Bati2", "Gauntlet2", "Dominator2", "Buffalo3", "Jester2", "Specter2", "Massacro2"
-];
-
-enums.whiteList = [
-    "RacketyBrute", "Maraboou", "Piligrimius", "VIVA_DISEDES", "m0rpeh", "BasingerA", "m0rpeh", "VIVA_DISEDES", "Dasmonster111", "SCOUTSFC1312", "Flounsen", "VioKein", "Ignat_Ioffe", "Asselom", "angelxzxzxz", "piligrimius", "pumped_facked", "Bestr4fer44", "Dangerous_Fox", "BOBBLEHEAD", "dajen71", "maxsplit1984", "TWELVE_SAI", "Big_Ti37733"
 ];
 
 enums.blackListVehicle = ['submersible', 'submersible2', 'phantom2', 'cerberus', 'cerberus2', 'cerberus3', 'hauler2', 'terbyte', 'ambulance', 'fbi', 'fbi2', 'firetruk', 'lguard', 'pbus', 'police', 'police2', 'police3', 'police4', 'policeb', 'polmav', 'policeold1', 'policeold2', 'policet', 'pranger', 'predator', 'riot', 'riot2', 'sheriff', 'sheriff2', 'akula', 'annihilator', 'buzzard', 'buzzard2', 'cargobob', 'cargobob2', 'cargobob3', 'cargobob4', 'frogger', 'frogger2', 'havok', 'hunter', 'maverick', 'savage', 'seasparrow', 'skylift', 'supervolito', 'supervolito2', 'swift', 'swift2', 'valkyrie', 'valkyrie2', 'volatus', 'bulldozer', 'cutter', 'dump', 'handler', 'apc', 'barracks', 'barracks2', 'barracks3', 'barrage', 'chernobog', 'crusader', 'halftrack', 'khanjali', 'minitank', 'rhino', 'scarab', 'scarab2', 'scarab3', 'thruster', 'trailersmall2', 'oppressor', 'oppressor2', 'blazer2', 'blazer5', 'dune3', 'dune4', 'dune5', 'insurgent', 'insurgent2', 'insurgent3', 'marshall', 'monster', 'monster3', 'monster4', 'monster5', 'bruiser', 'bruiser2', 'bruiser3', 'menacer', 'nightshark', 'rcbandito', 'technical', 'technical2', 'technical3', 'zhaba', 'alphaz1', 'avenger', 'avenger2', 'besra', 'blimp', 'blimp2', 'blimp3', 'bombushka', 'cargoplane', 'cuban800', 'dodo', 'duster', 'howard', 'hydra', 'jet', 'lazer', 'luxor', 'luxor2', 'mammatus', 'microlight', 'miljet', 'mogul', 'molotok', 'nimbus', 'nokota', 'pyro', 'rogue', 'seabreeze', 'shamal', 'starling', 'strikeforce', 'stunt', 'titan', 'tula', 'velum', 'velum2', 'vestra', 'volatol', 'limo2', 'vigilante', 'voltic2', 'armytanker', 'armytrailer', 'armytrailer2', 'baletrailer', 'boattrailer', 'cablecar', 'docktrailer', 'freighttrailer', 'graintrailer', 'proptrailer', 'raketrailer', 'tr2', 'tr3', 'tr4', 'trflat', 'tvtrailer', 'tanker', 'tanker2', 'tanker2', 'trailerlarge', 'trailerlogs', 'trailersmall', 'trailers', 'trailers2', 'trailers3', 'trailers4', 'freight', 'freightcar', 'freightcont1', 'freightcont2', 'freightgrain', 'metrotrain', 'tankercar', 'bison2', 'bison3', 'boxville5', 'Polbuzz2', 'Sherbuzz2', 'Newsmav', 'Maverick2', 'Bcfdscout', 'Lsfdscout', 'Lsfdscout2', 'Polscout', 'Polscout2', 'Sherscout', 'Sherscout2', 'Trucara', 'Umkcara', 'Polvacca', 'Polbullet', 'Polbullet2', 'Hwaybullet', 'Sherbullet', 'Shergauntlet', 'Intcept', 'Intcept2', 'Intcept3', 'Intcept4'];
@@ -493,7 +487,7 @@ enums.carShop = {
         blipColor: 16,
         name: "Mosley Auto",
         notifyPic: "CHAR_ASHLEY",
-        buyPos: [-38.85982, -1671.469, 29.52026],
+        buyPos: [-44.60222625732422, -1660.7701416015625, 29.28317642211914],
         //carPos: [-49.75442123413086, -1685.31982421875, 28.80844497680664, 306.2481994628906],
         carPos: [-1509.556640625, -2993.076416015625, -81.60472869873047, 271.43310546875],
         spawnPos: [-27.274221420288086, -1680.0699462890625, 29.016836166381836, 121.0345458984375],
@@ -518,7 +512,7 @@ enums.carShop = {
         name: "Sandres Motorcycles",
         notifyPic: "CHAR_ASHLEY",
         //buyPos: [284.79620361328125, -1163.0189208984375, 29.27297592163086],
-        buyPos: [268.2685241699219, -1155.447998046875, 29.289443969726562],
+        buyPos: [306.1496276855469, -1162.6871337890625, 29.29189109802246],
         //carPos: [262.5167236328125, -1161.56982421875, 28.536949157714844, 357.2798767089844],
         carPos: [-1509.556640625, -2993.076416015625, -81.60472869873047, 271.43310546875],
         spawnPos: [265.31744384765625, -1161.9888916015625, 28.559213638305664, 5.14251708984375],

@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/auto.css'
 import Authorization from './Pages/Authorization';
-import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
+import {HashRouter as Router, Route, Redirect} from "react-router-dom";
 import CreatePlayer from './Pages/CreatePlayer';
 import EventManager from "../../EventManager";
 import serverLogo from './img/logo.svg'
@@ -10,7 +10,7 @@ class AuthMain extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            show: true,
+            show: false,
             path: '/'
         }
     }

@@ -43,15 +43,11 @@ let lightFlags = [0, 39, 88, 49, 88, 39];
 weather.loadAll = function() {
     methods.debug('weather.loadAll');
     mysql.executeQuery(`SELECT * FROM daynight WHERE id = 1`, function (err, rows, fields) {
-
         _year = rows[0]["year"];
         _month = rows[0]["month"];
         _day = rows[0]["day"];
-        /*_hour = rows[0]["hour"]; //TODO
-        _minute = rows[0]["minute"];*/
-
-        _hour = 7;
-        _minute = 0;
+        _hour = rows[0]["hour"];
+        _minute = rows[0]["minute"];
 
         methods.debug('WEATHER', rows[0]);
 

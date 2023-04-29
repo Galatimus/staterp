@@ -36,310 +36,34 @@ let radiusBig1 = 25;
 let radiusBig2 = 120;
 
 fraction.shopList = [
-    {
-        bId: 76,
-        name: "Ammu-Nation Cypress Flats",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [808.8968, -2159.189, 28.61901, 6.53001],
-        ]
-    },
-    {
-        bId: 94,
-        name: "Robs Liquor Murrieta Heights",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [1134.14, -982.4875, 45.41582, 284.5632],
-        ]
-    },
-    {
-        bId: 30,
-        name: "Herr Kutz Devis",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [134.455, -1707.691, 28.29161, 151.1897],
-        ]
-    },
-    {
-        bId: 104,
-        name: "LTD Gasoline Davis",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [-47.89329, -1759.359, 28.42101, 87.38793],
-            [-46.6761, -1758.042, 28.42101, 58.77755],
-        ]
-    },
-    {
-        bId: 64,
-        name: "Discount Store Strawberry",
-        sumMax: 60000,
-        sumMin: 40000,
-        pos: [
-            [73.85292, -1392.154, 28.37614, 283.6447],
-            [74.91823, -1387.565, 28.37614, 185.8019],
-            [78.02972, -1387.558, 28.37614, 184.6837],
-        ]
-    },
-    {
-        bId: 89,
-        name: "24/7 Strawberry",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [24.31314, -1347.342, 28.49703, 274.6689],
-            [24.29523, -1345, 28.49703, 271.7999],
-        ]
-    },
-    {
-        bId: 40,
-        name: "The Pit Tattoo",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [-1151.652, -1424.404, 3.954463, 132.5959],
-        ]
-    },
-    {
-        bId: 33,
-        name: "Beachcombover",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [-1151.652, -1424.404, 3.954463, 132.5959],
-        ]
-    },
-    {
-        bId: 67,
-        name: "Binco Vespucci Canals",
-        sumMax: 60000,
-        sumMin: 40000,
-        pos: [
-            [-822.4609, -1071.843, 10.32811, 216.5726],
-            [-817.9464, -1070.503, 10.32811, 120.5435],
-            [-816.4236, -1073.197, 10.32811, 122.9058],
-        ]
-    },
-    /*{
-        bId: 95,
-        name: "Robs Liquor Vespucci Canals",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [-1222.079, -908.4241, 11.32635, 26.30677],
-        ]
-    },*/
-    {
-        bId: 106,
-        name: "LTD Gasoline Little Seoul",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [-706.0416, -915.4315, 18.2156, 121.0112],
-            [-705.9542, -913.6546, 18.2156, 91.24891],
-        ]
-    },
-    {
-        bId: 74,
-        name: "Ammu-Nation Little Seoul",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [-660.9584, -933.4232, 20.82923, 182.273],
-        ]
-    },
-    {
-        bId: 92,
-        name: "Liquor Chumash",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [-2966.386, 390.7784, 14.04331, 73.20607],
-        ]
-    },
-    {
-        bId: 82,
-        name: "24/7 Banham Canyon",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [-3039.08, 584.3269, 6.908932, 358.8096],
-            [-3041.149, 583.6489, 6.908932, 22.88623],
-        ]
-    },
-    {
-        bId: 83,
-        name: "24/7 Chumash",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [-3244.603, 1000.006, 11.83071, 355.5228],
-            [-3242.168, 999.9278, 11.83075, 359.23],
-        ]
-    },
-    {
-        bId: 58,
-        name: "Suburban Chumash",
-        sumMax: 60000,
-        sumMin: 40000,
-        pos: [
-            [-3170.013, 1041.548, 19.86322, 75.12622],
-            [-3169.305, 1043.154, 19.86322, 74.92207],
-            [-3168.563, 1044.739, 19.86322, 70.76829],
-        ]
-    },
-    {
-        bId: 42,
-        name: "Ink Inc Tattoo",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [-3171.197, 1073.201, 19.82917, 343.623],
-        ]
-    },
-    {
-        bId: 78,
-        name: "Ammu-Nation Chumash",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [-3173.123, 1089.66, 19.83874, 247.4527],
-        ]
-    },
-    {
-        bId: 108,
-        name: "LTD Gasoline Richman Glen",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [-1818.927, 792.9451, 137.0822, 169.9128],
-            [-1820.002, 794.2521, 137.0863, 134.8464],
-        ]
-    },
-    {
-        bId: 79,
-        name: "Ammu-Nation Great Chaparral",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [-1118.094, 2700.753, 17.55414, 225.373],
-        ]
-    },
-    {
-        bId: 65,
-        name: "Discount Store Great Chaparral",
-        sumMax: 60000,
-        sumMin: 40000,
-        pos: [
-            [-1101.912, 2712.19, 18.10786, 229.5424],
-            [-1097.746, 2714.485, 18.10786, 138.8698],
-            [-1095.678, 2712.181, 18.10786, 140.0079],
-        ]
-    },
-    {
-        bId: 86,
-        name: "24/7 Harmony",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [549.2157, 2671.359, 41.15651, 100.8311],
-            [549.5192, 2669.066, 41.15651, 100.3135],
-        ]
-    },
-    {
-        bId: 60,
-        name: "Suburban Harmony",
-        sumMax: 60000,
-        sumMin: 40000,
-        pos: [
-            [612.6832, 2764.496, 41.08812, 276.5388],
-            [612.8069, 2762.66, 41.08812, 283.3486],
-            [612.9492, 2760.931, 41.08812, 279.4291],
-        ]
-    },
-    /*{
-        bId: 96,
-        name: "Scoops Liquor Barn",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [1165.981, 2710.884, 37.15769, 180.4475],
-        ]
-    },*/
-    /*{
-        bId: 61,
-        name: "Discount Store Grand Senora Desert",
-        sumMax: 60000,
-        sumMin: 40000,
-        pos: [
-            [1197.434, 2711.755, 37.22262, 188.5901],
-            [1202.03, 2710.732, 37.22262, 101.2999],
-            [1202.06, 2707.603, 37.22262, 98.07609],
-        ]
-    },*/
-    {
-        bId: 77,
-        name: "Ammu-Nation Tataviam Mountains",
-        sumMax: 240000,
-        sumMin: 220000,
-        pos: [
-            [2566.637, 292.4502, 107.7349, 4.131579],
-        ]
-    },
-    {
-        bId: 90,
-        name: "24/7 Tataviam Mountains",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [2554.851, 380.7508, 107.623, 358.886],
-            [2557.135, 380.7416, 107.623, 357.6542],
-        ]
-    },
-    {
-        bId: 85,
-        name: "24/7 Grand Senora Desert",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [2675.927, 3280.391, 54.24115, 332.3407],
-            [2677.966, 3279.257, 54.24115, 333.0592],
-        ]
-    },
-    {
-        bId: 62,
-        name: "Discount Store Grapeseed",
-        sumMax: 60000,
-        sumMin: 40000,
-        pos: [
-            [1695.544, 4822.227, 41.0631, 106.2861],
-            [1695.11, 4817.554, 41.0631, 13.15722],
-            [1691.959, 4817.184, 41.0631, 14.44859],
-        ]
-    },
-    {
-        bId: 105,
-        name: "LTD Gasoline Grapeseed",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [1696.593, 4923.86, 41.06366, 6.185347],
-            [1697.936, 4922.814, 41.06366, 327.2919],
-        ]
-    },
-    {
-        bId: 87,
-        name: "24/7 Mount Chiliad",
-        sumMax: 80000,
-        sumMin: 60000,
-        pos: [
-            [1728.755, 6417.411, 34.03724, 245.723],
-            [1727.664, 6415.288, 34.03724, 245.5537],
-        ]
-    }
+    {bId: 76, name: "Ammu-Nation Cypress Flats", sumMax: Math.trunc(Math.random() * (50000 - 25000) + 25000), sumMin: Math.trunc(Math.random() * (10000 - 20000) + 20000), pos: [[808.8968, -2159.189, 28.61901, 6.53001]]},
+    {bId: 94, name: "Robs Liquor Murrieta Heights", sumMax: Math.trunc(Math.random() * (50000 - 25000) + 25000), sumMin: Math.trunc(Math.random() * (10000 - 20000) + 20000), pos: [[1134.14, -982.4875, 45.41582, 284.5632]]},
+    {bId: 30, name: "Herr Kutz Devis", sumMax: Math.trunc(Math.random() * (50000 - 25000) + 25000), sumMin: Math.trunc(Math.random() * (10000 - 20000) + 20000), pos: [[134.455, -1707.691, 28.29161, 151.1897]]},
+    {bId: 104, name: "LTD Gasoline Davis", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[-47.89329, -1759.359, 28.42101, 87.38793], [-46.6761, -1758.042, 28.42101, 58.77755]]},
+    {bId: 64, name: "Discount Store Strawberry", sumMax: Math.trunc(Math.random() * (60000- 30000) + 30000), sumMin: Math.trunc(Math.random() * (40000- 20000) + 20000), pos: [[73.85292, -1392.154, 28.37614, 283.6447], [74.91823, -1387.565, 28.37614, 185.8019], [78.02972, -1387.558, 28.37614, 184.6837]]},
+    {bId: 89, name: "24/7 Strawberry", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[24.31314, -1347.342, 28.49703, 274.6689], [24.29523, -1345, 28.49703, 271.7999]]},
+    {bId: 40, name: "The Pit Tattoo", sumMax: Math.trunc(Math.random() * (50000 - 25000) + 25000), sumMin: Math.trunc(Math.random() * (10000 - 20000) + 20000), pos: [[-1151.652, -1424.404, 3.954463, 132.5959]]},
+    {bId: 33, name: "Beachcombover", sumMax: Math.trunc(Math.random() * (50000 - 25000) + 25000), sumMin: Math.trunc(Math.random() * (10000 - 20000) + 20000), pos: [[-1151.652, -1424.404, 3.954463, 132.5959]]},
+    {bId: 67, name: "Binco Vespucci Canals", sumMax: Math.trunc(Math.random() * (60000- 30000) + 30000), sumMin: Math.trunc(Math.random() * (40000- 20000) + 20000), pos: [[-822.4609, -1071.843, 10.32811, 216.5726], [-817.9464, -1070.503, 10.32811, 120.5435], [-816.4236, -1073.197, 10.32811, 122.9058]]},
+    {bId: 106, name: "LTD Gasoline Little Seoul", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[-706.0416, -915.4315, 18.2156, 121.0112], [-705.9542, -913.6546, 18.2156, 91.24891]]},
+    {bId: 74, name: "Ammu-Nation Little Seoul", sumMax: Math.trunc(Math.random() * (50000 - 25000) + 25000), sumMin: Math.trunc(Math.random() * (10000 - 20000) + 20000), pos: [[-660.9584, -933.4232, 20.82923, 182.273]]}, 
+    {bId: 92, name: "Liquor Chumash", sumMax: Math.trunc(Math.random() * (80000- 40000) + 40000), sumMin: Math.trunc(Math.random() * (40000- 20000) + 20000), pos: [[-2966.386, 390.7784, 14.04331, 73.20607]]},
+    {bId: 82, name: "24/7 Banham Canyon", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[-3039.08, 584.3269, 6.908932, 358.8096], [-3041.149, 583.6489, 6.908932, 22.88623]]},
+    {bId: 83, name: "24/7 Chumash", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[-3244.603, 1000.006, 11.83071, 355.5228], [-3242.168, 999.9278, 11.83075, 359.23]]},
+    {bId: 58, name: "Suburban Chumash", sumMax: Math.trunc(Math.random() * (60000- 30000) + 30000), sumMin: Math.trunc(Math.random() * (40000- 20000) + 20000), pos: [[-3170.013, 1041.548, 19.86322, 75.12622], [-3169.305, 1043.154, 19.86322, 74.92207], [-3168.563, 1044.739, 19.86322, 70.76829]]},
+    {bId: 42, name: "Ink Inc Tattoo", sumMax: Math.trunc(Math.random() * (50000 - 25000) + 25000), sumMin: Math.trunc(Math.random() * (10000 - 20000) + 20000), pos: [[-3171.197, 1073.201, 19.82917, 343.623]]},
+    {bId: 78, name: "Ammu-Nation Chumash", sumMax: Math.trunc(Math.random() * (50000 - 25000) + 25000), sumMin: Math.trunc(Math.random() * (10000 - 20000) + 20000), pos: [[-3173.123, 1089.66, 19.83874, 247.4527]]},
+    {bId: 108, name: "LTD Gasoline Richman Glen", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[-1818.927, 792.9451, 137.0822, 169.9128], [-1820.002, 794.2521, 137.0863, 134.8464]]},
+    {bId: 79, name: "Ammu-Nation Great Chaparral", sumMax: Math.trunc(Math.random() * (50000 - 25000) + 25000), sumMin: Math.trunc(Math.random() * (10000 - 20000) + 20000), pos: [[-1118.094, 2700.753, 17.55414, 225.373]]},
+    {bId: 65, name: "Discount Store Great Chaparral", sumMax: Math.trunc(Math.random() * (60000- 30000) + 30000), sumMin: Math.trunc(Math.random() * (40000- 20000) + 20000), pos: [[-1101.912, 2712.19, 18.10786, 229.5424], [-1097.746, 2714.485, 18.10786, 138.8698], [-1095.678, 2712.181, 18.10786, 140.0079]]},
+    {bId: 86, name: "24/7 Harmony", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[549.2157, 2671.359, 41.15651, 100.8311], [549.5192, 2669.066, 41.15651, 100.3135]]},
+    {bId: 60, name: "Suburban Harmony", sumMax: Math.trunc(Math.random() * (60000- 30000) + 30000), sumMin: Math.trunc(Math.random() * (40000- 20000) + 20000), pos: [[612.6832, 2764.496, 41.08812, 276.5388], [612.8069, 2762.66, 41.08812, 283.3486], [612.9492, 2760.931, 41.08812, 279.4291]]},
+    {bId: 77, name: "Ammu-Nation Tataviam Mountains", sumMax: Math.trunc(Math.random() * (50000 - 25000) + 25000), sumMin: Math.trunc(Math.random() * (10000 - 20000) + 20000), pos: [[2566.637, 292.4502, 107.7349, 4.131579]]},
+    {bId: 90, name: "24/7 Tataviam Mountains", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[2554.851, 380.7508, 107.623, 358.886], [2557.135, 380.7416, 107.623, 357.6542]]},
+    {bId: 85, name: "24/7 Grand Senora Desert", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[2675.927, 3280.391, 54.24115, 332.3407], [2677.966, 3279.257, 54.24115, 333.0592]]},
+    {bId: 62, name: "Discount Store Grapeseed", sumMax: Math.trunc(Math.random() * (60000- 30000) + 30000), sumMin: Math.trunc(Math.random() * (40000- 20000) + 20000), pos: [[1695.544, 4822.227, 41.0631, 106.2861], [1695.11, 4817.554, 41.0631, 13.15722], [1691.959, 4817.184, 41.0631, 14.44859]]},
+    {bId: 105, name: "LTD Gasoline Grapeseed", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[1696.593, 4923.86, 41.06366, 6.185347], [1697.936, 4922.814, 41.06366, 327.2919]]},
+    {bId: 87, name: "24/7 Mount Chiliad", sumMax: Math.trunc(Math.random() * (35000 - 17500) + 17500), sumMin: Math.trunc(Math.random() * (10000- 5000) + 5000), pos: [[1728.755, 6417.411, 34.03724, 245.723], [1727.664, 6415.288, 34.03724, 245.5537]]}
 ];
 
 fraction.warVehPos = [
@@ -569,15 +293,11 @@ fraction.loadAll = function() {
             fraction.set(item['id'], 'orderDrug', 0);
 
             if (item['is_war']) {
-                //fraction.isGang
-                let color = enums.fractionColor[item['id']];
-                methods.createBlip(new mp.Vector3(item['spawn_x'], item['spawn_y'], item['spawn_z']), 310, color, 0.6, 'Титульная тер.');
-            }
-            else if (item['is_mafia']) {
-                //SKIP
-            }
-            else if (item['spawn_x'] !== 0) {
-                methods.createBlip(new mp.Vector3(item['spawn_x'], item['spawn_y'], item['spawn_z']), 565, 37, 0.6, 'Spawn орг.');
+                methods.createBlip(new mp.Vector3(item['spawn_x'], item['spawn_y'], item['spawn_z']), 84, enums.fractionColor[item['id']], 0.85, item['name']);
+            } else if (item['is_mafia']) {
+                methods.createBlip(new mp.Vector3(item['spawn_x'], item['spawn_y'], item['spawn_z']), 78, enums.fractionColor[item['id']], 0.85, item['name']);
+            } else if (item['spawn_x'] !== 0) {
+                methods.createBlip(new mp.Vector3(item['spawn_x'], item['spawn_y'], item['spawn_z']), 565, 0, 0.75, item['name']);
             }
         });
         count = rows.length;

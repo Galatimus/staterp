@@ -68,8 +68,7 @@ mp.events.add('guiReady', () => {
 
 ui.create = function() {
     uiBrowser = mp.browsers.new("http://package/game_resources/interface/index.html");
-    //uiBrowser.markAsChat();
-    //ui.callCef('authMain','{"type": "show"}');
+    ui.callCef('authMain','{"type": "show"}');
 };
 
 ui.showDialog = function(text, title = '', icon = 'none', buttons = ['Ок'], position = ui.dialogTypes.center, dtype = 1, isShowClose = true, cursor = true) {

@@ -15,8 +15,5 @@
 	"voice-chat": true,
 	"voice-chat-sample-rate": 48000,
 	"allow-cef-debugging": false,
-	"api-threading-debugging": false,
-	"settings": {
-		"mysql": ["localhost", 3306, "staterp", "root", "password", 15000, 15000, true, 500, 0, 600000]
-	}
+	"api-threading-debugging": false
 }

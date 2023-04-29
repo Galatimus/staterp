@@ -44,7 +44,7 @@ const styles = {
 export default function Header(props) {
     return (
         <div>
-            <div className="mainmenu__header__container" style={{ minHeight: props.banner ? '125px' : '', backgroundImage: props.banner ? `url('https://staterp.wixcore.net/assets/images/banners/${props.banner}.png')` : '' }}>
+            <div className="mainmenu__header__container" style={{ minHeight: props.banner ? '125px' : '', backgroundImage: props.banner ? `url('https://staterp.wixcore.net/exports/banners/${props.banner}.png')` : '' }}>
                 <span className="mainmenu__header__title">{props.headerText}</span>
             </div>
             <div style={styles.headerDataContainer}>

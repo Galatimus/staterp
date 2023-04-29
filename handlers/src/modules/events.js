@@ -48,7 +48,7 @@ import bind from "../manager/bind";
 import admin from "../admin";
 import attachItems from "../manager/attachItems";
 import achievement from "../manager/achievement";
-
+import dispenser from "./dispenser";
 
 mp.gui.chat.enabled = false;
 
@@ -787,20 +787,13 @@ mp.events.add('client:events:loginUser:success', async function() {
 
             inventory.getItemList(inventory.types.Player, await user.get('id'));
             quest.loadAllBlip();
-            chat.sendLocal('Добро пожаловать на State 99 🌎');
-            chat.sendLocal('Желаем приятной игры 🧡');
-            /*chat.sendLocal(' ');
-            chat.sendLocal(`!{${chat.clBlue}}На сервере действует конкурс`);
-            chat.sendLocal(`!{${chat.clBlue}}1. !{${chat.clWhite}}Каждый час разыгрывается VIP HARD на рандомное количество дней.`);
-            chat.sendLocal(`!{${chat.clBlue}}2. !{${chat.clWhite}}Каждые два часа игры на сервере разыгрывается редкая Маска.`);
-            chat.sendLocal(`!{${chat.clBlue}}3. !{${chat.clWhite}}Каждые 24 часа В 20:00 по МСК разыгрывается 5 транспортных средств.`);
-            chat.sendLocal(`!{${chat.clBlue}}3. !{${chat.clWhite}}Отыграв 8 часов на сервере, вы получите $30.000, но 1 раз в сутки.`);*/
-            /*chat.sendLocal('  ');
-            chat.sendLocal(`!{${chat.clBlue}}На сервере действует конкурс`);
-            chat.sendLocal(`Конкурс очень крутой, на 50 призовых мест и у тебя есть шанс победить, все подробности на сайте!`);*/
-            /*chat.sendLocal('  ');
-            chat.sendLocal(`!{${chat.clBlue}}Колесо удачи`);
-            chat.sendLocal(`Отыграв 3 часа на сервере, у вас есть возможность прокрутить колесо удачи и один из главных призов это дорогой автомобиль, маска или VIP HARD.`);*/
+
+            chat.sendLocal(`!{${chat.clOrange}} Добро пожаловать на WixCore Role Play.`);
+            chat.sendLocal(`!{${chat.clBlue}} ☰ IP сервера: !{${chat.clWhite}} roleplay.wixcore.net:22005`);
+            chat.sendLocal(`!{${chat.clBlue}} ☰ Мы Фейсбук: !{${chat.clWhite}} roleplay.wixcore.net/facebook`);
+            chat.sendLocal(`!{${chat.clBlue}} ☰ Наш Дискорд: !{${chat.clWhite}} roleplay.wixcore.net/discord`);
+            chat.sendLocal(`!{${chat.clBlue}} ☰ Донат сервера: !{${chat.clWhite}} roleplay.wixcore.net/donate`);
+            
             chat.updateSettings();
             ui.updateMenuSettings();
             ui.unloadIslandMinimap();
@@ -2238,11 +2231,6 @@ mp.events.add('client:menuList:showBusinessMenu', (data) => {
         methods.debug('Exception: events:client:showBusinessMenu');
         methods.debug(e);
     }
-});
-
-mp.events.add('client:menuList:showMeriaMainMenu', () => {
-    methods.debug('Event: client:menuList:showMeriaMainMenu');
-    menuList.showMeriaMainMenu();
 });
 
 mp.events.add('client:menuList:showMeriaIslandMainMenu', () => {
@@ -3823,6 +3811,7 @@ mp.keys.bind(0x45, true, function() {
         if (!methods.isBlockKeys()) {
             mp.events.callRemote('onKeyPress:E');
             methods.pressEToPayRespect();
+            dispenser.pressE();
         }
     }
     catch (e) {
@@ -4059,7 +4048,7 @@ mp.events.add('client:ui:saveHudDefault', (id) => {
 });
 
 mp.events.add('server:generateToken', () => {
-    mp.storage.data.token = methods.md5('state99');
+    mp.storage.data.token = methods.md5('WixCoreToken_37i42DEVjHDdYd763TvYt427djGbdB4N');
     mp.storage.flush();
 });
 
@@ -4121,6 +4110,7 @@ mp.events.add("playerEnterCheckpoint", (checkpoint) => {
 
 mp.events.add("playerReadyDone", () => {
     try {
+        user.showCustomNotify('Проект доступен лицам достигшим 18 лет.', 4, 1, 2500);
 
         mp.gui.chat.show(false);
         mp.gui.chat.activate(false);
@@ -4147,10 +4137,12 @@ mp.events.add("playerReadyDone", () => {
 
 mp.events.add('playerWeaponShot', (targetPosition, targetEntity) => {
     try {
-        if (targetEntity.getType() === 4 || targetEntity.getType() === 5)
-            mp.events.callRemote('server:playerWeaponShot', targetEntity.remoteId);
-    }
-    catch (e) {
+        if (targetEntity !== undefined) {
+            if (targetEntity.getType() === 4 || targetEntity.getType() === 5) {
+                mp.events.callRemote('server:playerWeaponShot', targetEntity.remoteId);
+            }
+        }
+    } catch (e) {
         methods.debug(e);
     }
 });
@@ -4496,12 +4488,25 @@ mp.keys.bind(70, true, function() {
     let vehicle = methods.getNearestVehicleWithCoords(position, 6);
 
     if (vehicle && mp.vehicles.exists(vehicle) && 5 > vehicle.getSpeed()) {
-        if (vehicle.isSeatFree(-1) || vehicle.getPedInSeat(-1) === player.handle || 0 === vehicle.getPedInSeat(-1))
-            return void player.taskEnterVehicle(vehicle.handle, 2500, -1, 1, 1, 0);
+        if ((methods.distanceToPos(vehicle.position, position) > 3 || user.getLastFlag() != 0) && vehicle.getVariable('locked') === true) {
+            return;
+        }
+        
+        if (vehicle.isSeatFree(-1) || vehicle.getPedInSeat(-1) === player.handle || 0 === vehicle.getPedInSeat(-1)) {
+            setTimeout(function () {
+                mp.players.local.clearTasks();
+            }, 3500);
+            return void player.taskEnterVehicle(vehicle.handle, 5000, -1, 1, 1, 0);
+        }
 
-        for (let i = 0; i < vehicle.getMaxNumberOfPassengers(); i++)
-            if (vehicle.isSeatFree(i))
-                return void player.taskEnterVehicle(vehicle.handle, 5000, i, 1, 1, 0)
+        for (let i = 0; i < vehicle.getMaxNumberOfPassengers(); i++) {
+            if (vehicle.isSeatFree(i)) {
+                setTimeout(function () {
+                    mp.players.local.clearTasks();
+                }, 3500);
+                return void player.taskEnterVehicle(vehicle.handle, 5000, i, 1, 1, 0);
+            }
+        }
     }
 });
 
